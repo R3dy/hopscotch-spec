@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.1/clock.schema.json",
+  "title": "Hopscotch v0.1 Clock",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "name",
+    "scope",
+    "unit"
+  ],
+  "properties": {
+    "type": {
+      "const": "clock"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "days",
+        "hours",
+        "turns",
+        "milestones"
+      ]
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "subject",
+          "max"
+        ],
+        "properties": {
+          "subject": {
+            "type": "string",
+            "minLength": 1
+          },
+          "max": {
+            "type": "number"
+          },
+          "milestones": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "at",
+                "effect"
+              ],
+              "properties": {
+                "at": {
+                  "type": "number"
+                },
+                "effect": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "advance": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

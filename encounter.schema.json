@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.1/encounter.schema.json",
+  "title": "Hopscotch v0.1 Encounter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "name",
+    "scope",
+    "encounterType",
+    "trigger"
+  ],
+  "properties": {
+    "type": {
+      "const": "encounter"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "encounterType": {
+      "type": "string",
+      "enum": [
+        "combat",
+        "social",
+        "exploration",
+        "puzzle",
+        "mixed"
+      ]
+    },
+    "trigger": {
+      "type": "string",
+      "minLength": 1
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "skill",
+              "dc"
+            ],
+            "properties": {
+              "skill": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dc": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "onSuccess": {
+                "type": [
+                  "string",
+                  "object"
+                ]
+              },
+              "onFail": {
+                "type": [
+                  "string",
+                  "object"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "hazards": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "rewards": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "escalation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "toEncounter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "advanceClock": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "amount"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "amount": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

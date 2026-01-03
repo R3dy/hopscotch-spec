@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.1/creature.schema.json",
+  "title": "Hopscotch v0.1 Creature (baseRef + overlay)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "name",
+    "scope",
+    "baseRef"
+  ],
+  "properties": {
+    "type": {
+      "const": "creature"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "overlay": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode"
+          ],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "add",
+                "set"
+              ]
+            },
+            "value": {
+              "type": "number"
+            },
+            "average": {
+              "type": "number"
+            },
+            "applyToFormula": {
+              "type": "boolean"
+            }
+          }
+        },
+        "ac": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "value"
+          ],
+          "properties": {
+            "mode": {
+              "const": "set"
+            },
+            "value": {
+              "type": "number"
+            }
+          }
+        },
+        "speed": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "walk": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "mode",
+                "value"
+              ],
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "enum": [
+                    "set",
+                    "add"
+                  ]
+                },
+                "value": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "abilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "STR": {
+              "$ref": "#/$defs/numPatch"
+            },
+            "DEX": {
+              "$ref": "#/$defs/numPatch"
+            },
+            "CON": {
+              "$ref": "#/$defs/numPatch"
+            },
+            "INT": {
+              "$ref": "#/$defs/numPatch"
+            },
+            "WIS": {
+              "$ref": "#/$defs/numPatch"
+            },
+            "CHA": {
+              "$ref": "#/$defs/numPatch"
+            }
+          }
+        },
+        "resistances": {
+          "$ref": "#/$defs/listPatch"
+        },
+        "immunities": {
+          "$ref": "#/$defs/listPatch"
+        },
+        "vulnerabilities": {
+          "$ref": "#/$defs/listPatch"
+        },
+        "traits": {
+          "$ref": "#/$defs/namedTextPatch"
+        },
+        "actions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "action": {
+              "$ref": "#/$defs/actionSection"
+            },
+            "bonus": {
+              "$ref": "#/$defs/actionSection"
+            },
+            "reaction": {
+              "$ref": "#/$defs/actionSection"
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "numPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "value"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "set",
+            "add"
+          ]
+        },
+        "value": {
+          "type": "number"
+        }
+      }
+    },
+    "listPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "namedTextPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "text"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "remove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "actionSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "text"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "recharge": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "remove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
