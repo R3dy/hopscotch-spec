@@ -1,0 +1,347 @@
+---
+hopscotchVersion: 0.1.0
+title: "Frostbound Blight"
+license: "Apache-2.0"
+system: "5e-compatible"
+levels: "1-3"
+tags: [mystery, arctic, disease, ruin]
+---
+
+# Frostbound Blight
+
+This adventure is an original, permissively licensed reference module designed to exercise Hopscotch v0.1 features end-to-end.
+
+## Nodes (World → Continent → Region → Location → Area)
+
+```hopscotch:world id=world.aetherra
+name: Aetherra
+summary: A vast world of fractured empires and cold frontiers.
+```
+
+```hopscotch:continent id=continent.northreach
+name: Northreach
+parent: world.aetherra
+```
+
+```hopscotch:region id=region.rimewild-frontier
+name: Rimewild Frontier
+parent: continent.northreach
+summary: Bleak tundra coast and ice-choked waters.
+```
+
+```hopscotch:location id=location.brinehook-hamlet
+name: Brinehook Hamlet
+kind: settlement
+parent: region.rimewild-frontier
+summary: A small fishing outpost where winter never feels far away.
+```
+
+```hopscotch:area id=area.brinehook.graveyard
+name: Graveyard
+parent: location.brinehook-hamlet
+readAloud: >
+  Snow drifts across weathered stones as villagers gather around a fresh grave.
+  A figure nearby stands stiff and pale—frozen in place as if winter claimed them mid-breath.
+```
+
+```hopscotch:location id=location.brinehook.eldens-cabin
+name: Elden’s Cabin
+kind: settlement
+parent: location.brinehook-hamlet
+summary: A one-room cabin at the edge of town.
+```
+
+```hopscotch:area id=area.eldens-cabin.main
+name: Main Room
+parent: location.brinehook.eldens-cabin
+readAloud: >
+  The cabin is cramped and dark. An unmade bed slumps near a cold hearth.
+  Shelves lie empty, their contents scattered across the floor as if someone searched in panic.
+```
+
+```hopscotch:location id=location.brinehook.curio-nook
+name: The Curio Nook
+kind: settlement
+parent: location.brinehook-hamlet
+summary: A cramped shop that buys odd relics from northbound explorers.
+```
+
+```hopscotch:area id=area.curio-nook.front-room
+name: Front Room
+parent: location.brinehook.curio-nook
+readAloud: >
+  Shattered shelves and splintered wood litter the floor. Figures move quietly among the debris,
+  whispering as they pry at loose boards and overturned crates.
+```
+
+```hopscotch:location id=location.coldjaw-caverns
+name: Coldjaw Caverns
+kind: dungeon
+parent: region.rimewild-frontier
+summary: A shore-side cave complex with frigid pools and trained amphibian guardians.
+```
+
+```hopscotch:map id=map.coldjaw
+name: "Map: Coldjaw Caverns"
+scope: location.coldjaw-caverns
+keys: ["C1","C2","C3","C4","C5","C6"]
+```
+
+```hopscotch:area id=area.coldjaw.c1
+name: Entrance Pool
+key: "C1"
+parent: location.coldjaw-caverns
+readAloud: >
+  Drips echo in the dark as a murky pool blocks the tunnel ahead.
+  Somewhere beyond, a wet croak reverberates through stone.
+features:
+  - hazard.coldjaw.frigid-pool
+```
+
+```hopscotch:area id=area.coldjaw.c6
+name: Boss Chamber
+key: "C6"
+parent: location.coldjaw-caverns
+readAloud: >
+  Heat rushes from a roaring fire beneath a crude mural of a many-headed wyrm.
+  A cloaked figure sits rigidly near a stone chest, blue veins pulsing beneath frostbitten skin.
+```
+
+```hopscotch:location id=location.icecamp-outpost
+name: Icecamp Outpost
+kind: outpost
+parent: region.rimewild-frontier
+summary: A fur-lined tent camp where explorers plan expeditions into thin ice fields.
+```
+
+```hopscotch:location id=location.drownvault-ruin
+name: Drownvault Ruin
+kind: dungeon
+parent: region.rimewild-frontier
+summary: A partially submerged laboratory ruin with constructs, undead, and curative stores.
+```
+
+```hopscotch:map id=map.drownvault
+name: "Map: Drownvault"
+scope: location.drownvault-ruin
+keys: ["S1","S3","S4","S10","S17","S18"]
+```
+
+## Key entities
+
+```hopscotch:npc id=npc.leader.seran-holt
+name: Seran Holt
+scope: location.brinehook-hamlet
+alignment: NG
+ancestry: elf
+role: community leader
+statblock: "veteran (variant)"
+hooks:
+  - "Wants discreet help; fears panic."
+knows:
+  - secret.second-victim
+  - secret.origin.vials
+```
+
+```hopscotch:secret id=secret.second-victim
+name: Another villager shows the blue-vein symptom
+scope: location.brinehook-hamlet
+text: >
+  Seran has seen the same cold-blue veins on a trapper who refuses help and wants to be left alone.
+reveal:
+  - by: npc.leader.seran-holt
+    method: conversation
+```
+
+```hopscotch:check id=check.eldens-footprints
+skill: Investigation
+dc: 12
+onSuccess: "Find bootprints leading toward the reluctant trapper’s cabin."
+onFail: "You learn only that someone searched the cabin recently."
+```
+
+```hopscotch:secret id=secret.origin.vials
+name: Cracked blue vials carry a freezing spore
+scope: region.rimewild-frontier
+text: >
+  The “blue glass” is not glass alone; a dust inside the vial spreads a freezing sickness when exposed.
+leadsTo:
+  - location.brinehook.curio-nook
+  - location.coldjaw-caverns
+```
+
+```hopscotch:hazard id=hazard.coldjaw.frigid-pool
+name: Frigid Pool Exhaustion
+scope: area.coldjaw.c1
+trigger: "A creature becomes fully submerged."
+effect: "DC 10 Con save or gain 1 level of exhaustion; repeat each minute submerged."
+```
+
+```hopscotch:clock id=clock.frostbound-blight
+name: Frostbound Blight Progression
+scope: region.rimewild-frontier
+unit: days
+tracks:
+  - subject: "Merchant family"
+    max: 60
+    milestones:
+      - at: 30
+        effect: "Symptoms worsen; movement slows."
+      - at: 60
+        effect: "Death."
+  - subject: "Cavern boss"
+    max: 30
+  - subject: "Reluctant trapper"
+    max: 20
+```
+
+## Creatures (SRD references + overlays)
+
+```hopscotch:creature id=creature.coldjaw.ice-frog
+name: Giant Ice Frog
+scope: area.coldjaw.c1
+baseRef: srd:giant_frog
+overlay:
+  immunities:
+    add: [cold]
+  traits:
+    add:
+      - name: "Frigid Camouflage"
+        text: "The frog has advantage on Dexterity (Stealth) checks made to hide in icy water."
+```
+
+```hopscotch:creature id=creature.boss.xyz
+name: BossXYZ
+scope: area.coldjaw.c6
+baseRef: srd:bandit_captain
+overlay:
+  hp:
+    mode: add
+    value: 30
+  actions:
+    bonus:
+      add:
+        - name: "Misty Step"
+          type: "spell-like"
+          recharge: "at-will"
+          text: "BossXYZ magically teleports up to 30 feet to an unoccupied space it can see."
+traits:
+  add:
+    - name: "Arcane Escape"
+      text: "BossXYZ can use Misty Step as a bonus action."
+```
+
+## Encounters
+
+```hopscotch:encounter id=encounter.elro.plea
+name: Seran’s Plea for Help
+scope: area.brinehook.graveyard
+encounterType: social
+trigger: "After the funeral scene."
+participants:
+  - ref: npc.leader.seran-holt
+notes: "Seran offers 100 gp for answers and emphasizes urgency."
+```
+
+```hopscotch:encounter id=encounter.cabin.search
+name: Search Elden’s Cabin
+scope: area.eldens-cabin.main
+encounterType: exploration
+trigger: "Characters investigate the cabin."
+checks:
+  - skill: Investigation
+    dc: 12
+    onSuccess: secret.origin.vials
+    onFail: "You find signs of a frantic search but no clear lead."
+```
+
+```hopscotch:encounter id=encounter.shop.raiders
+name: Raiders in the Curio Nook
+scope: area.curio-nook.front-room
+encounterType: combat
+trigger: "Characters enter the shop or are noticed."
+participants:
+  - ref: srd:bandit
+    count: 5
+rewards:
+  - loot.orders-to-caves
+```
+
+```hopscotch:loot id=loot.orders-to-caves
+name: Orders pointing to Coldjaw Caverns
+scope: area.curio-nook.front-room
+items:
+  - name: "Crumpled orders"
+    kind: "clue"
+    value: 0
+    text: "A note references a hideout north on the frozen shore and mentions the boss is “getting slow.”"
+```
+
+```hopscotch:encounter id=encounter.coldjaw.pool-guardians
+name: Pool Guardians
+scope: area.coldjaw.c1
+encounterType: combat
+trigger: "Approach within 5 feet of the pool if guardians are hidden."
+participants:
+  - ref: creature.coldjaw.ice-frog
+    count: 2
+notes: "Each fights to half HP, then flees into the water."
+```
+
+```hopscotch:encounter id=encounter.coldjaw.boss
+name: Boss Chamber Confrontation
+scope: area.coldjaw.c6
+encounterType: mixed
+trigger: "Characters enter the chamber."
+participants:
+  - ref: creature.boss.xyz
+    count: 1
+choices:
+  - text: "Attempt negotiation"
+    outcome: "Boss demands proof of help; may buy time."
+  - text: "Fight"
+    outcome: "Combat begins."
+escalation:
+  advanceClock:
+    id: clock.frostbound-blight
+    amount: 1
+```
+
+## Travel and milestones
+
+```hopscotch:travel id=travel.ship-to-icecamp
+name: Voyage to Icecamp Outpost
+from: location.brinehook-hamlet
+to: location.icecamp-outpost
+distanceOrDuration: "9 days by ship"
+environmentRules: "Extreme cold; recommend cold-weather gear."
+```
+
+```hopscotch:check id=check.find-ruin
+skill: Survival
+dc: 15
+onSuccess: "Find a trail leading to the ruin within 1d4 hours."
+onFail: "No sign today; lose a day of travel."
+```
+
+```hopscotch:travel id=travel.overland-to-drownvault
+name: Trek to Drownvault Ruin
+from: location.icecamp-outpost
+to: location.drownvault-ruin
+distanceOrDuration: "200 miles over ice and snow"
+paceRules: "Use slow/medium/fast; reduced pace if sickness slows a character."
+navCheck: check.find-ruin
+environmentRules: "Thin ice over frigid water; apply exhaustion rules."
+```
+
+```hopscotch:milestone id=milestone.level-2
+name: Advance to Level 2
+when: "After the party secures the cracked vial and returns with a plan."
+effect: "Characters reach 2nd level."
+```
+
+```hopscotch:milestone id=milestone.level-3
+name: Advance to Level 3
+when: "After returning antidote from the ruin and stabilizing the outbreak."
+effect: "Characters reach 3rd level."
+```
