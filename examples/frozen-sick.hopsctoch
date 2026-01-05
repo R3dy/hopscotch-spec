@@ -1,0 +1,369 @@
+---
+hopscotchVersion: 0.1.0
+title: "Frozen Sick"
+license: "Unspecified"
+system: "5e-compatible"
+levels: "1-3"
+tags: [mystery, arctic, disease, ruin]
+---
+
+# Frozen Sick
+
+A deadly affliction spreads through Palebank Village after tainted relics arrive from Eiselcross. The characters investigate the source, confront bandits tied to Shadycreek Run, and are sent north to seek a cure in the ruins of Salsvault.
+
+## Nodes (World -> Continent -> Region -> Location -> Area)
+
+```hopscotch:world id=world.exandria
+name: Exandria
+summary: A world of perilous frontiers and ancient ruins.
+```
+
+```hopscotch:continent id=continent.wildemount
+name: Wildemount
+parent: world.exandria
+```
+
+```hopscotch:region id=region.biting-north
+name: Biting North
+parent: continent.wildemount
+summary: The arctic expanse of the Greying Wildlands and Eiselcross.
+```
+
+```hopscotch:location id=location.palebank-village
+name: Palebank Village
+kind: settlement
+parent: region.biting-north
+summary: A fishing outpost where cold winds and colder secrets gather.
+```
+
+```hopscotch:area id=area.palebank.graveyard
+name: Graveyard
+parent: location.palebank-village
+readAloud: >
+  Snow drifts around a fresh grave as villagers gather in silence.
+  The frozen remains of Urgon Wenth stand as a grim warning.
+```
+
+```hopscotch:area id=area.palebank.urgon-cabin
+name: Urgon's Cabin
+parent: location.palebank-village
+summary: A one-room log cabin at the edge of town.
+readAloud: >
+  An unmade bed slumps near a cold hearth. A mounted beast head hangs above,
+  while shelves lie empty and their contents are strewn across the floor.
+```
+
+```hopscotch:area id=area.palebank.tulgi-cabin
+name: Tulgi's Cabin
+parent: location.palebank-village
+summary: A shuttered cabin with smoke curling from the chimney.
+readAloud: >
+  Heat rushes from the cramped interior. A dwarf wrapped in blankets shivers,
+  blue veins tracing her face and hands.
+```
+
+```hopscotch:area id=area.palebank.pelcs-curiosities
+name: Pelc's Curiosities (Front Shop)
+parent: location.palebank-village
+summary: A ransacked antique shop with broken shelves and scattered wares.
+readAloud: >
+  Cloaked figures pry at floorboards amid smashed counters and shattered glass.
+  The air smells of dust and cold ash.
+```
+
+```hopscotch:area id=area.palebank.pelcs-quarters
+name: Pelc's Curiosities (Quarters)
+parent: location.palebank-village
+summary: Verla Pelc's private room behind the shop.
+readAloud: >
+  An ice statue of an elf lies bundled in a bed, a teacup frozen at her side.
+```
+
+```hopscotch:location id=location.croaker-cave
+name: Croaker Cave
+kind: dungeon
+parent: region.biting-north
+summary: A frigid cavern complex where bandits and giant ice frogs hide out.
+```
+
+```hopscotch:area id=area.croaker.c1
+name: Entrance Pool
+key: "C1"
+parent: location.croaker-cave
+readAloud: >
+  A murky pool blocks the tunnel ahead as croaks echo from deeper in the cave.
+```
+
+```hopscotch:area id=area.croaker.c2
+name: Training Pool
+key: "C2"
+parent: location.croaker-cave
+readAloud: >
+  Bandits toss dead bats into the air while blue-skinned frogs snap them up.
+```
+
+```hopscotch:area id=area.croaker.c6
+name: Fire Chamber
+key: "C6"
+parent: location.croaker-cave
+readAloud: >
+  Smoke vents through a narrow chimney above a brazier-fed camp.
+```
+
+```hopscotch:location id=location.syrinlya-outpost
+name: Syrinlya
+kind: outpost
+parent: region.biting-north
+summary: A distant Uthodurnian outpost on the island of Foren.
+```
+
+```hopscotch:location id=location.eiselcross-foren
+name: Eiselcross (Foren)
+kind: wilderness
+parent: region.biting-north
+summary: An icy island scarred by ruins and ancient magic.
+```
+
+```hopscotch:location id=location.salsvault-ruin
+name: Salsvault
+kind: dungeon
+parent: region.biting-north
+summary: A fallen Aeorian laboratory sealed by defenses and deadly guardians.
+```
+
+```hopscotch:area id=area.salsvault.entry
+name: Salsvault Approach
+parent: location.salsvault-ruin
+readAloud: >
+  Broken stone arches rise from the ice as the ruin looms under a gray sky.
+```
+
+## Key entities
+
+```hopscotch:npc id=npc.elro-aldataur
+name: Elro Aldataur
+scope: location.palebank-village
+alignment: NG
+ancestry: elf
+role: community leader
+statblock: "veteran (variant)"
+hooks:
+  - "Wants a discreet investigation and fears a wider outbreak."
+```
+
+```hopscotch:npc id=npc.urgon-wenth
+name: Urgon Wenth
+scope: area.palebank.graveyard
+role: explorer (deceased)
+notes: "Victim of frigid woe; returned from Eiselcross with relics."
+```
+
+```hopscotch:npc id=npc.tulgi-lutan
+name: Tulgi Lutan
+scope: area.palebank.tulgi-cabin
+alignment: NE
+ancestry: dwarf
+role: trapper and thief
+statblock: "thug"
+```
+
+```hopscotch:npc id=npc.hulil-lutan
+name: Hulil Lutan
+scope: location.croaker-cave
+alignment: LE
+ancestry: dwarf
+role: bandit priestess
+notes: "Works for the Uttolot family and runs the Croaker Cave hideout."
+```
+
+```hopscotch:npc id=npc.verla-pelc
+name: Verla Pelc
+scope: area.palebank.pelcs-quarters
+role: antique dealer (deceased)
+notes: "Infected by frigid woe after the shop robbery."
+```
+
+```hopscotch:npc id=npc.mila-teno
+name: Mila Teno
+scope: area.palebank.urgon-cabin
+alignment: LG
+ancestry: elf
+role: Glassblade rookie
+statblock: "scout"
+```
+
+```hopscotch:secret id=secret.frigid-woe
+name: The blue vials carry a deadly spore
+scope: region.biting-north
+text: >
+  The blue glass vials contain spores that cause frigid woe, a disease that
+  freezes victims from within. Cracks exposed those who handled the relics.
+leadsTo:
+  - area.palebank.pelcs-curiosities
+  - location.croaker-cave
+  - location.salsvault-ruin
+```
+
+```hopscotch:secret id=secret.second-victim
+name: Another villager shows the same blue-vein symptom
+scope: location.palebank-village
+text: "Tulgi Lutan is sick and refuses help, afraid of the authorities."
+reveal:
+  - by: npc.elro-aldataur
+    method: conversation
+```
+
+```hopscotch:check id=check.urgon-footprints
+skill: Investigation
+dc: 12
+onSuccess: "Bootprints lead from Urgon's cabin to Tulgi's cabin."
+onFail: "You find signs of a frantic search but no clear lead."
+```
+
+```hopscotch:check id=check.tulgi-persuade
+skill: Persuasion
+dc: 12
+onSuccess: "Tulgi admits she robbed Pelc's Curiosities and names Croaker Cave."
+onFail: "Tulgi clams up and insists you leave."
+```
+
+```hopscotch:check id=check.bandit-intimidate
+skill: Intimidation
+dc: 10
+onSuccess: "The bandits reveal Hulil's hideout in Croaker Cave."
+onFail: "They refuse to talk."
+```
+
+```hopscotch:hazard id=hazard.croaker.frigid-pool
+name: Frigid Pool Exhaustion
+scope: area.croaker.c1
+trigger: "A creature becomes fully submerged."
+effect: "DC 10 Con save or gain 1 level of exhaustion; repeat each minute submerged."
+```
+
+```hopscotch:loot id=loot.ornate-dagger
+name: Aeorian Dagger
+scope: area.palebank.tulgi-cabin
+items:
+  - name: "Ornate dagger"
+    kind: "treasure"
+    value: 0
+    text: "+1 dagger of Aeorian make."
+```
+
+```hopscotch:loot id=loot.bandit-orders
+name: Orders to Croaker Cave
+scope: area.palebank.pelcs-curiosities
+items:
+  - name: "Crumpled orders"
+    kind: "clue"
+    value: 0
+    text: "Notes pointing to Croaker Cave and references to a sick leader."
+```
+
+```hopscotch:clock id=clock.frigid-woe
+name: Frigid Woe Progression
+scope: region.biting-north
+unit: days
+tracks:
+  - subject: "Tulgi Lutan"
+    max: 20
+  - subject: "Irven Liel and family"
+    max: 30
+  - subject: "Other exposed villagers"
+    max: 40
+```
+
+## Encounters
+
+```hopscotch:encounter id=encounter.funeral
+name: Urgon's Funeral
+scope: area.palebank.graveyard
+encounterType: social
+trigger: "The characters attend the funeral."
+participants:
+  - ref: npc.elro-aldataur
+notes: "Elro asks for help and offers 100 gp to investigate."
+```
+
+```hopscotch:encounter id=encounter.urgon-cabin
+name: Search Urgon's Cabin
+scope: area.palebank.urgon-cabin
+encounterType: exploration
+trigger: "Characters investigate the cabin."
+checks:
+  - ref: check.urgon-footprints
+rewards:
+  - secret.frigid-woe
+notes: "A receipt mentions Pelc's Curiosities and two blue vials."
+```
+
+```hopscotch:encounter id=encounter.tulgi-cabin
+name: Confront Tulgi
+scope: area.palebank.tulgi-cabin
+encounterType: social
+trigger: "Characters approach Tulgi's cabin."
+participants:
+  - ref: npc.tulgi-lutan
+checks:
+  - ref: check.tulgi-persuade
+rewards:
+  - loot.ornate-dagger
+notes: "Tulgi may fight if forced inside."
+```
+
+```hopscotch:encounter id=encounter.pelcs-curiosities
+name: Raiders in Pelc's Curiosities
+scope: area.palebank.pelcs-curiosities
+encounterType: combat
+trigger: "Characters enter the shop."
+participants:
+  - ref: srd:bandit
+    count: 5
+checks:
+  - ref: check.bandit-intimidate
+rewards:
+  - loot.bandit-orders
+```
+
+```hopscotch:encounter id=encounter.croaker-guardians
+name: Croaker Cave Guardians
+scope: area.croaker.c1
+encounterType: combat
+trigger: "Characters approach the entrance pool."
+participants:
+  - ref: srd:giant_frog
+    count: 2
+hazards:
+  - hazard.croaker.frigid-pool
+```
+
+```hopscotch:encounter id=encounter.croaker-bandits
+name: Bandits at the Training Pool
+scope: area.croaker.c2
+encounterType: combat
+trigger: "Characters are spotted by the bandits."
+participants:
+  - ref: srd:bandit
+    count: 3
+  - ref: srd:giant_frog
+    count: 2
+```
+
+```hopscotch:encounter id=encounter.salsvault-hook
+name: Journey to Salsvault
+scope: area.salsvault.entry
+encounterType: exploration
+trigger: "Characters reach the ruin in search of a cure."
+notes: "The antidote lies deeper within Salsvault."
+```
+
+## Travel
+
+```hopscotch:travel id=travel.palebank-to-syrinlya
+name: Voyage to Syrinlya
+from: location.palebank-village
+to: location.syrinlya-outpost
+distanceOrDuration: "Several days by ship"
+environmentRules: "Extreme cold and sea ice; cold-weather gear recommended."
+```
