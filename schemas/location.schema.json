@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.2/location.schema.json",
+  "title": "Hopscotch v0.2 Location",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "name",
+    "parent",
+    "kind"
+  ],
+  "properties": {
+    "type": {
+      "const": "location"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^destination\\."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "building",
+        "dwelling",
+        "landmark",
+        "camp",
+        "district",
+        "other"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

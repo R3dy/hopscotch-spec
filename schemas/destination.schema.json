@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.2/destination.schema.json",
+  "title": "Hopscotch v0.2 Destination",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "name",
+    "parent",
+    "kind"
+  ],
+  "properties": {
+    "type": {
+      "const": "destination"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^region\\."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "settlement",
+        "dungeon",
+        "outpost",
+        "wilderness",
+        "ruin",
+        "ship",
+        "other"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

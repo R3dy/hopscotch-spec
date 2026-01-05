@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Set, Tuple
 
 
-NODE_TYPES = {"world", "continent", "region", "location", "area"}
+NODE_TYPES = {"world", "continent", "region", "destination", "location", "area"}
 ENTITY_TYPES = {
     "encounter",
     "check",
@@ -22,7 +22,8 @@ ENTITY_TYPES = {
 }
 ALL_TYPES = NODE_TYPES | ENTITY_TYPES
 
-LOCATION_KINDS = {"settlement", "dungeon", "outpost", "wilderness", "ruin", "ship", "other"}
+DESTINATION_KINDS = {"settlement", "dungeon", "outpost", "wilderness", "ruin", "ship", "other"}
+LOCATION_KINDS = {"building", "dwelling", "landmark", "camp", "district", "other"}
 ENCOUNTER_TYPES = {"combat", "social", "exploration", "puzzle", "mixed"}
 CLOCK_UNITS = {"days", "hours", "turns", "milestones"}
 
@@ -30,6 +31,7 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
     "world": {"name", "summary", "tags"},
     "continent": {"name", "parent", "summary", "tags"},
     "region": {"name", "parent", "summary", "tags"},
+    "destination": {"name", "parent", "summary", "tags", "kind"},
     "location": {"name", "parent", "summary", "tags", "kind"},
     "area": {"name", "parent", "summary", "tags", "key", "readAloud", "features", "exits"},
     "encounter": {
@@ -172,6 +174,14 @@ def validate_block(block: Block) -> Tuple[List[str], List[str]]:
             errors.append(
                 f"Line {block.line_start}: {block.block_type} missing required field 'parent'."
             )
+        if block.block_type == "destination":
+            kind = block.values.get("kind", "")
+            if not kind:
+                errors.append(f"Line {block.line_start}: destination missing required field 'kind'.")
+            elif kind not in DESTINATION_KINDS:
+                errors.append(
+                    f"Line {block.line_start}: destination kind '{kind}' is not valid."
+                )
         if block.block_type == "location":
             kind = block.values.get("kind", "")
             if not kind:
@@ -180,8 +190,28 @@ def validate_block(block: Block) -> Tuple[List[str], List[str]]:
                 errors.append(
                     f"Line {block.line_start}: location kind '{kind}' is not valid."
                 )
-        if block.block_type == "area" and "parent" not in block.keys:
-            errors.append(f"Line {block.line_start}: area missing required field 'parent'.")
+        if block.block_type == "area":
+            parent = block.values.get("parent", "")
+            if not parent:
+                errors.append(f"Line {block.line_start}: area missing required field 'parent'.")
+            elif not (parent.startswith("destination.") or parent.startswith("location.")):
+                errors.append(
+                    f"Line {block.line_start}: area parent '{parent}' must be a destination.* or location.* id."
+                )
+        parent_prefixes = {
+            "continent": "world",
+            "region": "continent",
+            "destination": "region",
+            "location": "destination",
+        }
+        expected_parent_prefix = parent_prefixes.get(block.block_type)
+        if expected_parent_prefix:
+            parent = block.values.get("parent", "")
+            if parent and not parent.startswith(f"{expected_parent_prefix}."):
+                errors.append(
+                    f"Line {block.line_start}: {block.block_type} parent '{parent}' must start with "
+                    f"{expected_parent_prefix}."
+                )
     if block.block_type == "encounter":
         for field in ("name", "scope", "encounterType", "trigger"):
             if field not in block.keys:
@@ -298,7 +328,10 @@ def print_node_hierarchy(blocks: List[Block]) -> Set[str]:
             if expected_type == "continent":
                 print_level(child.block_id, "region", indent + 1)
             elif expected_type == "region":
+                print_level(child.block_id, "destination", indent + 1)
+            elif expected_type == "destination":
                 print_level(child.block_id, "location", indent + 1)
+                print_level(child.block_id, "area", indent + 1)
             elif expected_type == "location":
                 print_level(child.block_id, "area", indent + 1)
 

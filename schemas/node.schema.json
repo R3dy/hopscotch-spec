@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.2/node.schema.json",
+  "title": "Hopscotch v0.2 Node",
+  "anyOf": [
+    {
+      "$ref": "world.schema.json"
+    },
+    {
+      "$ref": "continent.schema.json"
+    },
+    {
+      "$ref": "region.schema.json"
+    },
+    {
+      "$ref": "destination.schema.json"
+    },
+    {
+      "$ref": "location.schema.json"
+    },
+    {
+      "$ref": "area.schema.json"
+    }
+  ]
+}

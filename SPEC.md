@@ -1,18 +1,18 @@
-# Hopscotch v0.1 Specification
+# Hopscotch v0.2 Specification
 
-This document defines the Hopscotch v0.1 file format.
+This document defines the Hopscotch v0.2 file format.
 
 ## 1. Scope
 
 Hopscotch is a Markdown-native, open file format for representing tabletop roleplaying adventures in a uniform, machine-parseable way. A Hopscotch file MUST be deterministically convertible to JSON for import into third-party tools (VTTs, mobile apps, pipelines).
 
-Hopscotch v0.1 is focused on:
-- A canonical world model: World → Continent → Region → Location → Area
+Hopscotch v0.2 is focused on:
+- A canonical world model: World → Continent → Region → Destination → Location → Area
 - Typed entities for common adventure components (encounters, NPCs/creatures, secrets, loot, hazards, travel, milestones, clocks)
 - Simple, explicit linking via IDs and references
 - A strict subset of semantics that is practical to implement
 
-Non-goals for v0.1:
+Non-goals for v0.2:
 - Full rules modeling for every game system
 - Legendary/lair actions and full spellcasting blocks (reserved for v0.2+)
 - Automatic extraction of structure from arbitrary prose without explicit blocks
@@ -34,7 +34,7 @@ A `.hopscotch` file is Markdown text that MAY include YAML frontmatter. Structur
 If present, frontmatter MUST be the first content in the file and delimited by `---` lines.
 
 Recommended fields:
-- `hopscotchVersion` (string, e.g. `0.1.0`)
+- `hopscotchVersion` (string, e.g. `0.2.0`)
 - `title` (string)
 - `license` (string)
 - `system` (string)
@@ -59,21 +59,22 @@ Where:
 ### 4.2 IDs
 - Every block MUST declare an `id`.
 - IDs MUST be unique within a file.
-- IDs SHOULD use a stable, dot-scoped naming scheme (e.g., `location.palebank-village`, `area.croaker-cave.c1`).
+- IDs SHOULD use a stable, dot-scoped naming scheme (e.g., `destination.palebank-village`, `area.croaker-cave.c1`).
 - IDs MUST be treated as case-sensitive strings.
 
 ### 4.3 References
 Hopscotch objects refer to other objects by ID using fields such as `parent`, `scope`, `ref`, `leadsTo`, etc.
 
-In prose, implementations MAY support inline references of the form `@{some.id}`. Inline reference parsing is OPTIONAL in v0.1.
+In prose, implementations MAY support inline references of the form `@{some.id}`. Inline reference parsing is OPTIONAL in v0.2.
 
-## 5. Node model: World → Continent → Region → Location → Area
+## 5. Node model: World → Continent → Region → Destination → Location → Area
 
 ### 5.1 Node types
 Hopscotch defines the following node types:
 - `world`
 - `continent`
 - `region`
+- `destination`
 - `location`
 - `area`
 
@@ -88,13 +89,23 @@ Nodes MAY define:
 - `summary` (string)
 - `tags` (list of strings)
 
-### 5.3 Location
-A `location` MUST define:
+### 5.3 Destination
+A `destination` MUST define:
+- `parent` (region id)
 - `kind` (enum): `settlement | dungeon | outpost | wilderness | ruin | ship | other`
 
-### 5.4 Area
+A `destination` MAY define:
+- `summary` (string)
+- `tags` (list of strings)
+
+### 5.4 Location
+A `location` MUST define:
+- `parent` (destination id)
+- `kind` (enum): `building | dwelling | landmark | camp | district | other`
+
+### 5.5 Area
 An `area` MUST define:
-- `parent` (location id)
+- `parent` (destination id OR location id)
 
 An `area` MAY define:
 - `key` (string; map key, e.g., `C1`, `S17`)
@@ -109,7 +120,7 @@ An Encounter is a bounded unit of play that presents player choice and resolves 
 
 Encounters are not limited to combat. An encounter MUST declare an `encounterType`.
 
-### 6.2 Encounter types (v0.1)
+### 6.2 Encounter types (v0.2)
 `encounterType` MUST be one of:
 - `combat`
 - `social`
@@ -234,7 +245,7 @@ Overlays MUST be structured patches. Implementations MUST apply overlays in this
 3) traits/actions (action/bonus/reaction)
 4) notes
 
-Supported v0.1 overlay sections:
+Supported v0.2 overlay sections:
 - `hp` (mode add|set)
 - `ac` (set)
 - `speed.walk` (set|add)
@@ -246,7 +257,7 @@ Supported v0.1 overlay sections:
 - `actions.reaction` (add/remove)
 
 Unknown overlay keys MUST fail validation in strict mode.
-Trait and action changes MUST be expressed under `overlay` in v0.1 (no top-level `traits`/`actions`).
+Trait and action changes MUST be expressed under `overlay` in v0.2 (no top-level `traits`/`actions`).
 
 ## 12. Clocks (Time pressure)
 

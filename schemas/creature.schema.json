@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.1/creature.schema.json",
-  "title": "Hopscotch v0.1 Creature (baseRef + overlay)",
+  "$id": "https://example.invalid/hopscotch/0.2/creature.schema.json",
+  "title": "Hopscotch v0.2 Creature (baseRef + overlay)",
   "type": "object",
   "additionalProperties": false,
   "required": [

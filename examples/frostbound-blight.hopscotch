@@ -1,5 +1,5 @@
 ---
-hopscotchVersion: 0.1.0
+hopscotchVersion: 0.2.0
 title: "Frostbound Blight"
 license: "Apache-2.0"
 system: "5e-compatible"
@@ -9,9 +9,9 @@ tags: [mystery, arctic, disease, ruin]
 
 # Frostbound Blight
 
-This adventure is an original, permissively licensed reference module designed to exercise Hopscotch v0.1 features end-to-end.
+This adventure is an original, permissively licensed reference module designed to exercise Hopscotch v0.2 features end-to-end.
 
-## Nodes (World → Continent → Region → Location → Area)
+## Nodes (World → Continent → Region → Destination → Location → Area)
 
 ```hopscotch:world id=world.aetherra
 name: Aetherra
@@ -29,7 +29,7 @@ parent: continent.northreach
 summary: A bleak and frozen tundra coast and ice-choked waters.
 ```
 
-```hopscotch:location id=location.brinehook-hamlet
+```hopscotch:destination id=destination.brinehook-hamlet
 name: Brinehook Hamlet
 kind: settlement
 parent: region.rimewild-frontier
@@ -38,7 +38,7 @@ summary: A small fishing outpost where winter never feels far away.
 
 ```hopscotch:area id=area.brinehook.graveyard
 name: Graveyard
-parent: location.brinehook-hamlet
+parent: destination.brinehook-hamlet
 readAloud: >
   Snow drifts across weathered stones as villagers gather around a fresh grave.
   A figure nearby stands stiff and pale—frozen in place as if winter claimed them mid-breath.
@@ -46,7 +46,7 @@ readAloud: >
 
 ```hopscotch:area id=area.brinehook.eldens-cabin
 name: Elden’s Cabin
-parent: location.brinehook-hamlet
+parent: destination.brinehook-hamlet
 summary: A one-room cabin at the edge of town.
 readAloud: >
   The cabin is cramped and dark. An unmade bed slumps near a cold hearth.
@@ -55,14 +55,14 @@ readAloud: >
 
 ```hopscotch:area id=area.brinehook.curio-nook
 name: The Curio Nook
-parent: location.brinehook-hamlet
+parent: destination.brinehook-hamlet
 summary: A cramped shop that buys odd relics from northbound explorers.
 readAloud: >
   Shattered shelves and splintered wood litter the floor. Figures move quietly among the debris,
   whispering as they pry at loose boards and overturned crates.
 ```
 
-```hopscotch:location id=location.coldjaw-caverns
+```hopscotch:destination id=destination.coldjaw-caverns
 name: Coldjaw Caverns
 kind: dungeon
 parent: region.rimewild-frontier
@@ -71,14 +71,14 @@ summary: A shore-side cave complex with frigid pools and trained amphibian guard
 
 ```hopscotch:map id=map.coldjaw
 name: "Map: Coldjaw Caverns"
-scope: location.coldjaw-caverns
+scope: destination.coldjaw-caverns
 keys: ["C1","C2","C3","C4","C5","C6"]
 ```
 
 ```hopscotch:area id=area.coldjaw.c1
 name: Entrance Pool
 key: "C1"
-parent: location.coldjaw-caverns
+parent: destination.coldjaw-caverns
 readAloud: >
   Drips echo in the dark as a murky pool blocks the tunnel ahead.
   Somewhere beyond, a wet croak reverberates through stone.
@@ -89,20 +89,20 @@ features:
 ```hopscotch:area id=area.coldjaw.c6
 name: Boss Chamber
 key: "C6"
-parent: location.coldjaw-caverns
+parent: destination.coldjaw-caverns
 readAloud: >
   Heat rushes from a roaring fire beneath a crude mural of a many-headed wyrm.
   A cloaked figure sits rigidly near a stone chest, blue veins pulsing beneath frostbitten skin.
 ```
 
-```hopscotch:location id=location.icecamp-outpost
+```hopscotch:destination id=destination.icecamp-outpost
 name: Icecamp Outpost
 kind: outpost
 parent: region.rimewild-frontier
 summary: A fur-lined tent camp where explorers plan expeditions into thin ice fields.
 ```
 
-```hopscotch:location id=location.drownvault-ruin
+```hopscotch:destination id=destination.drownvault-ruin
 name: Drownvault Ruin
 kind: dungeon
 parent: region.rimewild-frontier
@@ -111,7 +111,7 @@ summary: A partially submerged laboratory ruin with constructs, undead, and cura
 
 ```hopscotch:map id=map.drownvault
 name: "Map: Drownvault"
-scope: location.drownvault-ruin
+scope: destination.drownvault-ruin
 keys: ["S1","S3","S4","S10","S17","S18"]
 ```
 
@@ -119,7 +119,7 @@ keys: ["S1","S3","S4","S10","S17","S18"]
 
 ```hopscotch:npc id=npc.leader.seran-holt
 name: Seran Holt
-scope: location.brinehook-hamlet
+scope: destination.brinehook-hamlet
 alignment: NG
 ancestry: elf
 role: community leader
@@ -133,7 +133,7 @@ knows:
 
 ```hopscotch:secret id=secret.second-victim
 name: Another villager shows the blue-vein symptom
-scope: location.brinehook-hamlet
+scope: destination.brinehook-hamlet
 text: >
   Seran has seen the same cold-blue veins on a trapper who refuses help and wants to be left alone.
 reveal:
@@ -155,7 +155,7 @@ text: >
   The “blue glass” is not glass alone; a dust inside the vial spreads a freezing sickness when exposed.
 leadsTo:
   - area.brinehook.curio-nook
-  - location.coldjaw-caverns
+  - destination.coldjaw-caverns
 ```
 
 ```hopscotch:hazard id=hazard.coldjaw.frigid-pool
@@ -299,8 +299,8 @@ escalation:
 
 ```hopscotch:travel id=travel.ship-to-icecamp
 name: Voyage to Icecamp Outpost
-from: location.brinehook-hamlet
-to: location.icecamp-outpost
+from: destination.brinehook-hamlet
+to: destination.icecamp-outpost
 distanceOrDuration: "9 days by ship"
 environmentRules: "Extreme cold; recommend cold-weather gear."
 ```
@@ -314,8 +314,8 @@ onFail: "No sign today; lose a day of travel."
 
 ```hopscotch:travel id=travel.overland-to-drownvault
 name: Trek to Drownvault Ruin
-from: location.icecamp-outpost
-to: location.drownvault-ruin
+from: destination.icecamp-outpost
+to: destination.drownvault-ruin
 distanceOrDuration: "200 miles over ice and snow"
 paceRules: "Use slow/medium/fast; reduced pace if sickness slows a character."
 navCheck: check.find-ruin
