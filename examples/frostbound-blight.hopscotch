@@ -213,10 +213,10 @@ overlay:
           type: "spell-like"
           recharge: "at-will"
           text: "BossXYZ magically teleports up to 30 feet to an unoccupied space it can see."
-traits:
-  add:
-    - name: "Arcane Escape"
-      text: "BossXYZ can use Misty Step as a bonus action."
+  traits:
+    add:
+      - name: "Arcane Escape"
+        text: "BossXYZ can use Misty Step as a bonus action."
 ```
 
 ## Encounters

@@ -194,6 +194,23 @@ Item objects SHOULD include:
 - `value` (number; gp equivalent if desired)
 - `text` (string; optional)
 
+## 10.1 NPCs
+
+An `npc` block represents a notable non-player character.
+
+An `npc` MUST define:
+- `name` (string)
+- `scope` (node id)
+
+An `npc` MAY define:
+- `alignment` (string)
+- `ancestry` (string)
+- `role` (string)
+- `statblock` (string; external reference)
+- `hooks` (list of strings)
+- `notes` (string)
+- `knows` (list of refs; `secret.*`)
+
 ## 11. Creatures: SRD references + overlays (FINAL)
 
 ### 11.1 Purpose
@@ -204,6 +221,11 @@ A `creature` MUST define:
 - `name` (string)
 - `scope` (node id)
 - `baseRef` (string; e.g., `srd:bandit_captain`)
+
+A `creature` MAY define:
+- `overlay` (object; see §11.3)
+- `notes` (string)
+- `tags` (list of strings)
 
 ### 11.3 Overlay model
 Overlays MUST be structured patches. Implementations MUST apply overlays in this order:
@@ -224,6 +246,7 @@ Supported v0.1 overlay sections:
 - `actions.reaction` (add/remove)
 
 Unknown overlay keys MUST fail validation in strict mode.
+Trait and action changes MUST be expressed under `overlay` in v0.1 (no top-level `traits`/`actions`).
 
 ## 12. Clocks (Time pressure)
 
