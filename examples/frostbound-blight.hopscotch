@@ -26,7 +26,7 @@ parent: world.aetherra
 ```hopscotch:region id=region.rimewild-frontier
 name: Rimewild Frontier
 parent: continent.northreach
-summary: Bleak tundra coast and ice-choked waters.
+summary: A bleak and frozen tundra coast and ice-choked waters.
 ```
 
 ```hopscotch:location id=location.brinehook-hamlet
@@ -44,31 +44,19 @@ readAloud: >
   A figure nearby stands stiff and pale—frozen in place as if winter claimed them mid-breath.
 ```
 
-```hopscotch:location id=location.brinehook.eldens-cabin
+```hopscotch:area id=area.brinehook.eldens-cabin
 name: Elden’s Cabin
-kind: settlement
 parent: location.brinehook-hamlet
 summary: A one-room cabin at the edge of town.
-```
-
-```hopscotch:area id=area.eldens-cabin.main
-name: Main Room
-parent: location.brinehook.eldens-cabin
 readAloud: >
   The cabin is cramped and dark. An unmade bed slumps near a cold hearth.
   Shelves lie empty, their contents scattered across the floor as if someone searched in panic.
 ```
 
-```hopscotch:location id=location.brinehook.curio-nook
+```hopscotch:area id=area.brinehook.curio-nook
 name: The Curio Nook
-kind: settlement
 parent: location.brinehook-hamlet
 summary: A cramped shop that buys odd relics from northbound explorers.
-```
-
-```hopscotch:area id=area.curio-nook.front-room
-name: Front Room
-parent: location.brinehook.curio-nook
 readAloud: >
   Shattered shelves and splintered wood litter the floor. Figures move quietly among the debris,
   whispering as they pry at loose boards and overturned crates.
@@ -166,7 +154,7 @@ scope: region.rimewild-frontier
 text: >
   The “blue glass” is not glass alone; a dust inside the vial spreads a freezing sickness when exposed.
 leadsTo:
-  - location.brinehook.curio-nook
+  - area.brinehook.curio-nook
   - location.coldjaw-caverns
 ```
 
@@ -245,7 +233,7 @@ notes: "Seran offers 100 gp for answers and emphasizes urgency."
 
 ```hopscotch:encounter id=encounter.cabin.search
 name: Search Elden’s Cabin
-scope: area.eldens-cabin.main
+scope: area.brinehook.eldens-cabin
 encounterType: exploration
 trigger: "Characters investigate the cabin."
 checks:
@@ -257,7 +245,7 @@ checks:
 
 ```hopscotch:encounter id=encounter.shop.raiders
 name: Raiders in the Curio Nook
-scope: area.curio-nook.front-room
+scope: area.brinehook.curio-nook
 encounterType: combat
 trigger: "Characters enter the shop or are noticed."
 participants:
@@ -269,7 +257,7 @@ rewards:
 
 ```hopscotch:loot id=loot.orders-to-caves
 name: Orders pointing to Coldjaw Caverns
-scope: area.curio-nook.front-room
+scope: area.brinehook.curio-nook
 items:
   - name: "Crumpled orders"
     kind: "clue"
