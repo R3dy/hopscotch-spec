@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 This project aims to follow Semantic Versioning: https://semver.org/
 
+## [0.4.0] - TBD
+
+### Added
+- Added optional rule references (`ruleRef`) and `rules` attachments for destinations, locations, areas, scenes, encounters, hazards, travel, and clocks.
+- Added enhanced check resolution metadata with multi-skill, opposed checks, and advantage/disadvantage hints.
+- Added passive/active discovery `gate` blocks with optional attachments to areas, scenes, and encounters.
+- Added multi-stage `device` blocks for traps/locks with gate/check/hazard references.
+- Added lightweight `table` blocks for travel/scene/encounter attachments.
+- Added `asset` blocks with optional attachments to destinations, locations, areas, scenes, NPCs, and creatures.
+- Added clock triggers (`onMilestone`, `onExpire`) and scene entry conditions.
+- Added v0.4 schemas for new block types and a block/Entity union schema.
+
+### Changed
+- Bumped Hopscotch version references to v0.4.0 across docs and schemas.
+- Updated `examples/frozen-sick.hopsctoch` to v0.4 and expanded it to demonstrate all v0.4 features (v0.2 example retained).
+- Extended the validator to recognize v0.4 block types and fields.
+
 ## [0.3.0] - TBD
 
 ### Added

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.3/area.schema.json",
-  "title": "Hopscotch v0.3 Area",
+  "$id": "https://example.invalid/hopscotch/0.4/area.schema.json",
+  "title": "Hopscotch v0.4 Area",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -55,6 +55,48 @@
       "items": {
         "type": "string",
         "minLength": 1
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
+      }
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
+      }
+    }
+  },
+  "$defs": {
+    "refObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string"
+        }
       }
     }
   }

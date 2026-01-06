@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.4/entity.schema.json",
+  "title": "Hopscotch v0.4 Entity",
+  "anyOf": [
+    {
+      "$ref": "scene.schema.json"
+    },
+    {
+      "$ref": "link.schema.json"
+    },
+    {
+      "$ref": "encounter.schema.json"
+    },
+    {
+      "$ref": "check.schema.json"
+    },
+    {
+      "$ref": "hazard.schema.json"
+    },
+    {
+      "$ref": "secret.schema.json"
+    },
+    {
+      "$ref": "loot.schema.json"
+    },
+    {
+      "$ref": "creature.schema.json"
+    },
+    {
+      "$ref": "clock.schema.json"
+    },
+    {
+      "$ref": "travel.schema.json"
+    },
+    {
+      "$ref": "milestone.schema.json"
+    },
+    {
+      "$ref": "map.schema.json"
+    },
+    {
+      "$ref": "npc.schema.json"
+    },
+    {
+      "$ref": "ruleRef.schema.json"
+    },
+    {
+      "$ref": "gate.schema.json"
+    },
+    {
+      "$ref": "table.schema.json"
+    },
+    {
+      "$ref": "device.schema.json"
+    },
+    {
+      "$ref": "asset.schema.json"
+    }
+  ]
+}

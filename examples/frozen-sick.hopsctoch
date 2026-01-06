@@ -1,5 +1,5 @@
 ---
-hopscotchVersion: "0.3.0"
+hopscotchVersion: "0.4.0"
 title: "Frozen Sick (structured in Hopscotch v0.3)"
 license: "Unspecified (source text provided by user)"
 system: "5e-compatible"
@@ -65,6 +65,8 @@ tags:
   - cave
   - bandits
   - frogs
+assets:
+  - ref: asset.map.croaker-cave
 ```
 
 ```hopscotch:location id=location.jolly-dwarf-inn
@@ -200,6 +202,8 @@ key: C1
 readAloud: "The slow dripping of water sounds out where it falls from stalactites down into a murky pool that fills the rough tunnel ahead. Every few moments, a loud croaking sounds out from somewhere in the darkness beyond."
 features:
   - hazard.croaker-cave.frigid-pool-exhaustion
+gates:
+  - ref: gate.croaker-cave.c1.ice-frog
 ```
 
 ```hopscotch:area id=area.croaker-cave.c2
@@ -245,6 +249,8 @@ key: C6
 readAloud: "A warm rush of heat comes from a massive fire burning in the center of this cavern, its smoke venting up through a narrow stone chimney. The flames illuminate a rough painting of a five-headed dragon that dominates the north wall. A bedroll is spread out beneath the mural. Near the crackling blaze, a dwarf bundled in a heavy cloak sits on a stone chest beside an elf whose face is covered in dragon tattoos. The dwarf’s face is streaked with pulsing blue veins."
 features:
   - hazard.croaker-cave.campfire
+devices:
+  - ref: device.croaker-cave.stone-chest
 ```
 
 # --- Syrinlya areas ---
@@ -411,6 +417,8 @@ notes: "Seeks help investigating Urgon's death and Tulgi's illness; offers 100 g
 knows:
   - secret.frigid-woe-name
   - secret.cure-milky-liquid
+assets:
+  - ref: asset.portrait.elro-aldataur
 ```
 
 ```hopscotch:npc id=npc.mila-teno
@@ -759,6 +767,12 @@ onFail: "Trap is not noticed."
 ```hopscotch:check id=check.hulil.deception-ally-claim
 skill: Deception
 dc: 0
+resolution:
+  type: opposed
+  skill: Deception
+  opposedBy:
+    ref: npc.hulil-lutan
+    skill: Insight
 onSuccess: "Opposed check vs Hulil's Insight; on success she believes the party are allies (use opposed mechanics at table)."
 onFail: "Hulil suspects deception and attacks if challenged."
 ```
@@ -787,8 +801,121 @@ onFail: "Trigger exposure; save vs contracting frigid woe."
 ```hopscotch:check id=check.salsvault.finding
 skill: Survival
 dc: 15
+resolution:
+  type: dc
+  skill: Survival
+  dc: 15
+  alternatives: ["Nature", "Investigation"]
+  advantageWhen:
+    - hasSecret: secret.salsvault-location
 onSuccess: "Find trail of an ice mephit leading to Salsvault (after 1d4 hours), or directly if success by 5+."
 onFail: "No signs found that day."
+```
+
+---
+
+## Rule References
+
+```hopscotch:ruleRef id=rule.srd.exhaustion
+source: srd
+name: "Exhaustion"
+section: "Conditions"
+notes: "Reference for exhaustion levels caused by exposure."
+tags: ["condition"]
+```
+
+```hopscotch:ruleRef id=rule.srd.frigid-water
+source: srd
+name: "Frigid Water"
+section: "Environmental Hazards"
+notes: "Reference for frigid-water exposure."
+tags: ["environment"]
+```
+
+```hopscotch:ruleRef id=rule.dmg.thin-ice
+source: dmg
+name: "Thin Ice"
+section: "DMG Chapter 5"
+notes: "Pointer for thin-ice travel adjudication."
+tags: ["travel"]
+```
+
+---
+
+## Gates
+
+```hopscotch:gate id=gate.croaker-cave.c1.ice-frog
+type: passive
+skill: Perception
+threshold: 13
+onSuccess:
+  reveal:
+    - creature.giant-ice-frog
+  notes: "A blue shape shifts under the murky water."
+```
+
+```hopscotch:gate id=gate.croaker-cave.c6.chest-glint
+type: passive
+skill: Perception
+threshold: 14
+onSuccess:
+  reveal:
+    - device.croaker-cave.stone-chest
+  notes: "Fine powder sparkles in the stone dragon's mouth."
+```
+
+---
+
+## Devices
+
+```hopscotch:device id=device.croaker-cave.stone-chest
+name: "Stone Dragon Chest"
+scope: area.croaker-cave.c6
+stages:
+  - id: notice
+    gateRef: gate.croaker-cave.c6.chest-glint
+  - id: disarm
+    checkRef: check.stone-chest.disarm-powder
+    onSuccess:
+      notes: "The powder is safely removed."
+    onFail:
+      notes: "The powder disperses into the air."
+      reveal:
+        - hazard.croaker-cave.chest-powder
+```
+
+---
+
+## Tables
+
+```hopscotch:table id=table.reduced-travel-speeds
+title: "Reduced Travel Speeds"
+headers: ["Pace", "Miles/Day", "Notes"]
+rows:
+  - ["Slow", "18", "Disadvantage on navigation checks"]
+  - ["Normal", "24", "No modifier"]
+  - ["Fast", "30", "Disadvantage on Perception checks"]
+```
+
+---
+
+## Assets
+
+```hopscotch:asset id=asset.map.croaker-cave
+kind: image
+uri: "assets/maps/croaker-cave-dm.png"
+title: "Croaker Cave (DM Map)"
+roles: ["map-dm"]
+visibility: dm
+```
+
+```hopscotch:asset id=asset.portrait.elro-aldataur
+kind: image
+uri: "assets/portraits/elro-aldataur.png"
+title: "Elro Aldataur"
+roles: ["portrait"]
+visibility: both
+alt: "A composed elf with weathered traveling gear."
 ```
 
 ---
@@ -830,6 +957,15 @@ damage: "1d6 bludgeoning"
 disarm: check.croaker.pit-trap-spot
 ```
 
+```hopscotch:hazard id=hazard.croaker-cave.chest-powder
+name: Frigid Powder Trap
+scope: area.croaker-cave.c6
+trigger: "The stone chest is opened or the powder is disturbed."
+effect: "DC 12 Con save or contract frigid woe; on success, resist the powder."
+save: "Constitution"
+dc: 12
+```
+
 ```hopscotch:hazard id=hazard.croaker-cave.campfire
 name: Campfire Heat
 scope: area.croaker-cave.c6
@@ -845,6 +981,9 @@ trigger: "A creature starts its turn in frigid seawater."
 effect: "DC 10 CON save or gain 1 level of exhaustion."
 save: "Constitution"
 dc: 10
+rules:
+  - ref: rule.srd.frigid-water
+  - ref: rule.srd.exhaustion
 ```
 
 ```hopscotch:hazard id=hazard.salsvault.s5.flame-ceiling
@@ -1135,6 +1274,10 @@ tracks:
     milestones:
       - at: 20
         effect: "May die if not cured."
+onMilestone:
+  - at: 10
+    trigger:
+      ref: scene.frigid-woe.warning
 ```
 
 ---
@@ -1159,6 +1302,10 @@ paceRules: "Party chooses fast/medium/slow; if any PC speed <25 ft due to frigid
 navCheck: check.salsvault.finding
 randomEncountersRef: "Use 'Encounters in Eiselcross' (external reference) as desired."
 environmentRules: "Extreme cold; thin ice over frigid water in Thin Sheets (DMG rules)."
+tables:
+  - ref: table.reduced-travel-speeds
+rules:
+  - ref: rule.dmg.thin-ice
 ```
 
 ---
@@ -1180,6 +1327,24 @@ effect: "Advance characters to 3rd level."
 ---
 
 ## Scenes
+
+```hopscotch:scene id=scene.frigid-woe.warning
+title: "Frigid Woe Worsens"
+summary: "The illness takes a sharp turn for the worse unless the party accelerates their search."
+location: location.jolly-dwarf-inn
+```
+
+```hopscotch:scene id=scene.salsvault.entry
+title: "Salsvault Revealed"
+summary: "The ruin emerges from the ice-choked fog."
+location: area.salsvault.s1
+conditions:
+  enterIf:
+    - hasSecret: secret.salsvault-location
+  skipIf:
+    - not:
+        hasSecret: secret.salsvault-location
+```
 
 ```hopscotch:scene id=scene.elro-first-contact
 title: "Meeting Elro"

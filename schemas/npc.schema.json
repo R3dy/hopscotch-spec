@@ -1,19 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/destination.schema.json",
-  "title": "Hopscotch v0.4 Destination",
+  "$id": "https://example.invalid/hopscotch/0.4/npc.schema.json",
+  "title": "Hopscotch v0.4 NPC",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
     "name",
-    "parent",
-    "kind"
+    "scope"
   ],
   "properties": {
     "type": {
-      "const": "destination"
+      "const": "npc"
     },
     "id": {
       "type": "string",
@@ -23,36 +22,36 @@
       "type": "string",
       "minLength": 1
     },
-    "parent": {
+    "scope": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^region\\."
+      "minLength": 1
     },
-    "kind": {
-      "type": "string",
-      "enum": [
-        "settlement",
-        "dungeon",
-        "outpost",
-        "wilderness",
-        "ruin",
-        "ship",
-        "other"
-      ]
-    },
-    "summary": {
+    "alignment": {
       "type": "string"
     },
-    "tags": {
+    "ancestry": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "statblock": {
+      "type": "string"
+    },
+    "hooks": {
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "rules": {
+    "notes": {
+      "type": "string"
+    },
+    "knows": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/refObject"
+        "type": "string",
+        "minLength": 1
       }
     },
     "assets": {

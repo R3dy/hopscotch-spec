@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.3/encounter.schema.json",
-  "title": "Hopscotch v0.3 Encounter",
+  "$id": "https://example.invalid/hopscotch/0.4/encounter.schema.json",
+  "title": "Hopscotch v0.4 Encounter",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -86,6 +86,9 @@
                 "type": "integer",
                 "minimum": 0
               },
+              "resolution": {
+                "$ref": "#/$defs/checkResolution"
+              },
               "onSuccess": {
                 "type": [
                   "string",
@@ -108,6 +111,24 @@
       "items": {
         "type": "string",
         "minLength": 1
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
+      }
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
+      }
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
       }
     },
     "choices": {
@@ -158,6 +179,173 @@
     },
     "notes": {
       "type": "string"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refObject"
+      }
+    }
+  },
+  "$defs": {
+    "refObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "hasSecretCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hasSecret"
+      ],
+      "properties": {
+        "hasSecret": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "notCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "not"
+      ],
+      "properties": {
+        "not": {
+          "$ref": "#/$defs/hasSecretCondition"
+        }
+      }
+    },
+    "clockAtLeastCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clockAtLeast"
+      ],
+      "properties": {
+        "clockAtLeast": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "track",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "track": {
+              "type": "string",
+              "minLength": 1
+            },
+            "days": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "simpleCondition": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/hasSecretCondition"
+        },
+        {
+          "$ref": "#/$defs/notCondition"
+        },
+        {
+          "$ref": "#/$defs/clockAtLeastCondition"
+        }
+      ]
+    },
+    "checkResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "skill"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "dc",
+            "opposed"
+          ]
+        },
+        "skill": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dc": {
+          "type": "number",
+          "minimum": 0
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "opposedBy": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ref": {
+              "type": "string",
+              "minLength": 1
+            },
+            "skill": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "advantageWhen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/simpleCondition"
+          }
+        },
+        "disadvantageWhen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/simpleCondition"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "dc"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "dc"
+            ]
+          }
+        }
+      ]
     }
   }
 }

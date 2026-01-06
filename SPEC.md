@@ -1,20 +1,21 @@
-# Hopscotch v0.3 Specification
+# Hopscotch v0.4 Specification
 
-This document defines the Hopscotch v0.3 file format.
+This document defines the Hopscotch v0.4 file format.
 
 ## 1. Scope
 
 Hopscotch is a Markdown-native, open file format for representing tabletop roleplaying adventures in a uniform, machine-parseable way. A Hopscotch file MUST be deterministically convertible to JSON for import into third-party tools (VTTs, mobile apps, pipelines).
 
-Hopscotch v0.3 is focused on:
+Hopscotch v0.4 is focused on:
 - A canonical world model: World → Continent → Region → Destination → Location → Area
 - Typed entities for common adventure components (scenes, encounters, NPCs/creatures, secrets, loot, hazards, travel, milestones, clocks)
 - Simple, explicit linking via IDs and references
+- Optional intent structure for rules pointers, discovery gates, devices, tables, assets, and lightweight scene/clock conditions
 - A strict subset of semantics that is practical to implement
 
-Non-goals for v0.3:
+Non-goals for v0.4:
 - Full rules modeling for every game system
-- Legendary/lair actions and full spellcasting blocks (reserved for v0.3+)
+- Legendary/lair actions and full spellcasting blocks (reserved for v0.4+)
 - Automatic extraction of structure from arbitrary prose without explicit blocks
 
 ## 2. Normative language
@@ -34,7 +35,7 @@ A `.hopscotch` file is Markdown text that MAY include YAML frontmatter. Structur
 If present, frontmatter MUST be the first content in the file and delimited by `---` lines.
 
 Recommended fields:
-- `hopscotchVersion` (string, e.g. `0.3.0`)
+- `hopscotchVersion` (string, e.g. `0.4.0`)
 - `title` (string)
 - `license` (string)
 - `system` (string)
@@ -65,7 +66,25 @@ Where:
 ### 4.3 References
 Hopscotch objects refer to other objects by ID using fields such as `parent`, `scope`, `ref`, `leadsTo`, etc.
 
-In prose, implementations MAY support inline references of the form `@{some.id}`. Inline reference parsing is OPTIONAL in v0.3.
+In prose, implementations MAY support inline references of the form `@{some.id}`. Inline reference parsing is OPTIONAL in v0.4.
+
+### 4.4 Reference objects
+Some fields take a list of ref objects rather than raw id strings.
+
+A ref object MUST define:
+- `ref` (string; an id)
+
+A ref object MAY define:
+- `note` (string; short context or label)
+
+### 4.5 Common attachment fields
+Several blocks MAY attach optional lists of ref objects to express intent without adding rules simulation:
+
+- `rules` → list of `ruleRef.*` objects (see §10)
+- `assets` → list of `asset.*` objects (see §17)
+- `gates` → list of `gate.*` objects (see §11)
+- `devices` → list of `device.*` objects (see §15)
+- `tables` → list of `table.*` objects (see §16)
 
 ## 5. Node model: World → Continent → Region → Destination → Location → Area
 
@@ -97,11 +116,17 @@ A `destination` MUST define:
 A `destination` MAY define:
 - `summary` (string)
 - `tags` (list of strings)
+- `rules` (list of refs to `ruleRef.*`)
+- `assets` (list of refs to `asset.*`)
 
 ### 5.4 Location
 A `location` MUST define:
 - `parent` (destination id)
 - `kind` (enum): `building | dwelling | landmark | camp | district | other`
+
+A `location` MAY define:
+- `rules` (list of refs to `ruleRef.*`)
+- `assets` (list of refs to `asset.*`)
 
 ### 5.5 Area
 An `area` MUST define:
@@ -112,6 +137,10 @@ An `area` MAY define:
 - `readAloud` (string)
 - `features` (list of refs; hazards/rules)
 - `exits` (list of refs)
+- `rules` (list of refs to `ruleRef.*`)
+- `assets` (list of refs to `asset.*`)
+- `gates` (list of refs to `gate.*`)
+- `devices` (list of refs to `device.*`)
 
 ## 6. Scenes (Narrative Moments)
 
@@ -131,7 +160,12 @@ A `scene` MAY define:
 - `timing` (string; recommended: `early | mid | late`)
 - `tone` (string; e.g., `tense`, `mysterious`)
 - `dialogue` (list of dialogue blocks; see §6.4)
-- `outcomes` (object; see §6.6)
+- `conditions` (object; see §6.6)
+- `outcomes` (object; see §6.7)
+- `rules` (list of refs to `ruleRef.*`)
+- `gates` (list of refs to `gate.*`)
+- `tables` (list of refs to `table.*`)
+- `assets` (list of refs to `asset.*`)
 
 ### 6.4 Dialogue blocks
 Scenes MAY define `dialogue` as a list of dialogue blocks. Each block MUST define:
@@ -159,7 +193,35 @@ Examples:
 - `party.asks_about_bodies && party.is_polite`
 - `party.accuse_elro || party.threaten_elro`
 
-### 6.6 Scene outcomes
+### 6.6 Scene conditions (state-based)
+Scenes MAY declare optional gating rules under `conditions`:
+
+- `enterIf` (list of simple conditions; all must be satisfied)
+- `skipIf` (list of simple conditions; if any is satisfied, skip the scene)
+
+Simple conditions MUST be one of:
+- `{ hasSecret: "secret.id" }`
+- `{ not: { hasSecret: "secret.id" } }`
+- `{ clockAtLeast: { id: "clock.id", track: "subject", days: <number> } }`
+
+Conditions are intent signals for DMs/tools, not executable rules.
+
+Example scene conditions:
+
+```text
+```hopscotch:scene id=scene.salsvault.entry
+title: "Enter Salsvault"
+summary: The party reaches the submerged ruin.
+conditions:
+  enterIf:
+    - hasSecret: secret.salsvault.location
+  skipIf:
+    - not:
+        hasSecret: secret.salsvault.location
+```
+```
+
+### 6.7 Scene outcomes
 Scenes MAY declare outcomes under `outcomes.possible[]`. Each outcome MUST define:
 - `id` (string)
 - `description` (string)
@@ -200,7 +262,7 @@ outcomes:
 ```
 ```
 
-### 6.7 DM usability rationale
+### 6.8 DM usability rationale
 Scenes keep read-aloud text, DM guidance, and branching dialogue in one place without requiring a full quest engine. The outcomes and conditions are lightweight hints that help DMs and tooling understand narrative flow while preserving table flexibility.
 
 ## 7. Links
@@ -244,7 +306,7 @@ An Encounter is a bounded unit of play that presents player choice and resolves 
 
 Encounters are not limited to combat. An encounter MUST declare an `encounterType`.
 
-### 8.2 Encounter types (v0.3)
+### 8.2 Encounter types (v0.4)
 `encounterType` MUST be one of:
 - `combat`
 - `social`
@@ -264,11 +326,15 @@ An `encounter` MAY define:
 - `participants` (list of refs; `npc.*`, `creature.*`, or external `baseRef`s)
 - `checks` (list; inline checks or refs to `check.*`)
 - `hazards` (list; refs to `hazard.*`)
+- `gates` (list of refs to `gate.*`)
+- `devices` (list of refs to `device.*`)
+- `tables` (list of refs to `table.*`)
 - `choices` (list of decision objects)
 - `outcomes` (list of result objects)
 - `rewards` (list; refs to `loot.*`, `item.*`, `secret.*`)
 - `escalation` (object; see §8.5)
 - `notes` (string)
+- `rules` (list of refs to `ruleRef.*`)
 
 ### 8.5 Escalation semantics
 An encounter MAY escalate to:
@@ -277,7 +343,7 @@ An encounter MAY escalate to:
 
 ## 9. Checks
 
-A `check` represents a single DC gate.
+A `check` represents a single resolution point. v0.4 adds optional structured resolution while preserving the v0.3 `skill` + `dc` fields.
 
 A `check` MUST define:
 - `skill` (string; e.g., `Investigation`, `Persuasion`, `Survival`)
@@ -285,7 +351,118 @@ A `check` MUST define:
 - `onSuccess` (string or ref)
 - `onFail` (string or ref)
 
-## 10. Hazards
+A `check` MAY define:
+- `resolution` (object; see §9.1)
+
+### 9.1 Enhanced resolution (optional)
+If present, `resolution` MUST define:
+- `type` (enum): `dc | opposed`
+- `skill` (string; primary skill)
+
+If `type: dc`, `resolution` MUST define:
+- `dc` (number)
+
+If `type: opposed`, `resolution` MAY define:
+- `opposedBy` (object): `{ ref?, skill? }`
+
+`resolution` MAY also define:
+- `alternatives` (list of strings; alternative skills)
+- `advantageWhen` (list of simple conditions; see §6.6)
+- `disadvantageWhen` (list of simple conditions; see §6.6)
+
+Example check with structured resolution:
+
+```text
+```hopscotch:check id=check.thin-ice.crossing
+skill: Survival
+dc: 13
+resolution:
+  type: dc
+  skill: Survival
+  dc: 13
+  alternatives: ["Perception", "Investigation"]
+  advantageWhen:
+    - hasSecret: secret.locals.warned
+onSuccess: "You plot a safe route across the ice."
+onFail: "The ice cracks beneath you."
+```
+```
+
+## 10. Rule references (ruleRef)
+
+A `ruleRef` block is a lightweight pointer to external rules text. It is a reference, not embedded rules content.
+
+A `ruleRef` MUST define:
+- `id` (prefix `rule.`)
+- `source` (enum): `srd | phb | dmg | custom | other`
+- `name` (string)
+
+A `ruleRef` MAY define:
+- `uri` (string; URL or relative path)
+- `section` (string; e.g., `DMG Chapter 5`)
+- `notes` (short string; MUST NOT embed long copyrighted text)
+- `tags` (list of strings)
+
+The following blocks MAY define `rules` as a list of ref objects to `ruleRef.*`:
+- `destination`, `location`, `area`, `scene`, `encounter`, `hazard`, `travel`, `clock`
+
+Example rule reference and usage:
+
+```text
+```hopscotch:ruleRef id=rule.dmg.thin-ice
+source: dmg
+name: "Thin Ice"
+section: "DMG Chapter 5"
+notes: "Use as a pointer for thin-ice travel checks."
+```
+
+```hopscotch:travel id=travel.thin-ice
+name: "Thin Ice Crossing"
+from: destination.syrinlya
+to: destination.thin-sheets
+distanceOrDuration: "4 hours"
+rules:
+  - ref: rule.dmg.thin-ice
+```
+```
+
+## 11. Gates (Passive/Active discovery)
+
+A `gate` represents a passive or active discovery threshold (e.g., passive Perception or an active check).
+
+A `gate` MUST define:
+- `id` (prefix `gate.`)
+- `type` (enum): `passive | active`
+- `skill` (string)
+- `threshold` (number)
+
+A `gate` MAY define:
+- `opposedBySkill` (string)
+- `onSuccess` (object)
+- `onFail` (object)
+
+`onSuccess` and `onFail` MUST allow at least:
+- `reveal` (list of ids: secrets, devices, or other entities)
+- `notes` (string)
+
+The following blocks MAY define `gates` as a list of ref objects to `gate.*`:
+- `area`, `scene`, `encounter`
+
+Example passive gate:
+
+```text
+```hopscotch:gate id=gate.ice-frog.glimmer
+type: passive
+skill: Perception
+threshold: 13
+onSuccess:
+  reveal:
+    - creature.croaker.ice-frog
+  notes: "A faint movement under the ice draws your attention."
+```
+```
+
+## 12. Hazards
 
 A `hazard` represents an environmental or mechanical danger.
 
@@ -300,8 +477,9 @@ A `hazard` MAY define:
 - `dc` (integer)
 - `damage` (string, e.g., `1d6 fire`)
 - `disarm` (ref to `check.*`)
+- `rules` (list of refs to `ruleRef.*`)
 
-## 11. Secrets (Clues)
+## 13. Secrets (Clues)
 
 A `secret` represents discoverable information.
 
@@ -314,7 +492,7 @@ A `secret` MAY define:
 - `reveal` (list of reveal objects: `{by, method, checkRef?, dc?, when?}`)
 - `leadsTo` (list of refs)
 
-## 12. Loot and items
+## 14. Loot and items
 
 A `loot` block represents a reward package or discovery.
 
@@ -329,7 +507,7 @@ Item objects SHOULD include:
 - `value` (number; gp equivalent if desired)
 - `text` (string; optional)
 
-### 12.1 NPCs
+### 14.1 NPCs
 
 An `npc` block represents a notable non-player character.
 
@@ -345,31 +523,136 @@ An `npc` MAY define:
 - `hooks` (list of strings)
 - `notes` (string)
 - `knows` (list of refs; `secret.*`)
+- `assets` (list of refs to `asset.*`)
 
-## 13. Creatures: SRD references + overlays (FINAL)
+## 15. Devices
 
-### 13.1 Purpose
+A `device` represents a multi-step interactive object (trap, lock, chest) without simulating full rules.
+
+A `device` MUST define:
+- `id` (prefix `device.`)
+- `name` (string)
+
+A `device` MAY define:
+- `scope` (string; area/location/destination id)
+- `stages` (list of stage objects)
+
+Each stage object MUST allow:
+- `id` (string)
+- `gateRef` (ref to `gate.*`)
+- `checkRef` (ref to `check.*`)
+- `hazardRef` (ref to `hazard.*`)
+- `onSuccess` (object)
+- `onFail` (object)
+
+The following blocks MAY define `devices` as a list of ref objects to `device.*`:
+- `area`, `encounter`
+
+Example device with stages:
+
+```text
+```hopscotch:device id=device.tulgi-chest
+name: "Tulgi's Ironbound Chest"
+scope: area.tulgi-cabin.interior
+stages:
+  - id: notice
+    gateRef: gate.tulgi-chest.glint
+  - id: disarm
+    checkRef: check.tulgi-chest.tools
+    onSuccess:
+      notes: "The poison needle is disabled."
+    onFail:
+      notes: "The needle triggers as the lock opens."
+      reveal:
+        - hazard.tulgi-chest.needle
+```
+```
+
+## 16. Tables
+
+A `table` is a lightweight tabular data block.
+
+A `table` MUST define:
+- `id` (prefix `table.`)
+- `headers` (list of strings)
+- `rows` (list of list of strings)
+
+A `table` MAY define:
+- `title` (string)
+- `notes` (string)
+
+The following blocks MAY define `tables` as a list of ref objects to `table.*`:
+- `travel`, `scene`, `encounter`
+
+Example table:
+
+```text
+```hopscotch:table id=table.reduced-travel-speeds
+title: "Reduced Travel Speeds"
+headers: ["Pace", "Miles/Day", "Notes"]
+rows:
+  - ["Slow", "18", "Disadvantage on navigation checks"]
+  - ["Normal", "24", "No modifier"]
+  - ["Fast", "30", "Disadvantage on Perception checks"]
+```
+```
+
+## 17. Assets
+
+An `asset` block represents media attached to adventure content.
+
+An `asset` MUST define:
+- `id` (prefix `asset.`)
+- `kind` (enum): `image`
+- `uri` (string; URL or relative path)
+
+An `asset` MAY define:
+- `title` (string)
+- `roles` (list of strings; e.g., `portrait`, `token`, `map-dm`, `map-player`, `handout`)
+- `visibility` (enum): `player | dm | both` (default `both`)
+- `alt` (string)
+- `credit` (object): `{ author?, license?, source? }`
+
+The following blocks MAY define `assets` as a list of ref objects to `asset.*`:
+- `destination`, `location`, `area`, `scene`, `npc`, `creature`
+
+Example asset usage:
+
+```text
+```hopscotch:asset id=asset.map.croaker
+kind: image
+uri: "assets/maps/croaker-cave.png"
+title: "Croaker Cave (DM)"
+roles: ["map-dm"]
+visibility: dm
+```
+```
+
+## 18. Creatures: SRD references + overlays (FINAL)
+
+### 18.1 Purpose
 Hopscotch supports referencing canonical stat blocks (e.g., SRD) while allowing adventure-specific modifications via overlays (deltas).
 
-### 13.2 Required fields
+### 18.2 Required fields
 A `creature` MUST define:
 - `name` (string)
 - `scope` (node id)
 - `baseRef` (string; e.g., `srd:bandit_captain`)
 
 A `creature` MAY define:
-- `overlay` (object; see §13.3)
+- `overlay` (object; see §18.3)
 - `notes` (string)
 - `tags` (list of strings)
+- `assets` (list of refs to `asset.*`)
 
-### 13.3 Overlay model
+### 18.3 Overlay model
 Overlays MUST be structured patches. Implementations MUST apply overlays in this order:
 1) scalar stats (hp/ac/speed/abilities)
 2) lists (resistances/immunities/vulnerabilities)
 3) traits/actions (action/bonus/reaction)
 4) notes
 
-Supported v0.3 overlay sections:
+Supported v0.4 overlay sections:
 - `hp` (mode add|set)
 - `ac` (set)
 - `speed.walk` (set|add)
@@ -381,20 +664,23 @@ Supported v0.3 overlay sections:
 - `actions.reaction` (add/remove)
 
 Unknown overlay keys MUST fail validation in strict mode.
-Trait and action changes MUST be expressed under `overlay` in v0.3 (no top-level `traits`/`actions`).
+Trait and action changes MUST be expressed under `overlay` in v0.4 (no top-level `traits`/`actions`).
 
-## 14. Clocks (Time pressure)
+## 19. Clocks (Time pressure)
 
-### 14.1 Definition
+### 19.1 Definition
 A `clock` models time pressure (e.g., disease progression, deadlines). Advancing a clock is a first-class event.
 
-### 14.2 Required fields
+### 19.2 Required fields
 A `clock` MUST define:
 - `name` (string)
 - `scope` (node id)
 - `unit` (enum): `days | hours | turns | milestones`
 
-### 14.3 Tracks
+A `clock` MAY define:
+- `rules` (list of refs to `ruleRef.*`)
+
+### 19.3 Tracks
 A clock MAY define `tracks`, each with:
 - `subject` (string)
 - `max` (number)
@@ -402,10 +688,33 @@ A clock MAY define `tracks`, each with:
 
 Implementations MAY visualize tracks as countdowns or progress bars.
 
-### 14.4 Advancing clocks
+### 19.4 Triggers (optional)
+A clock MAY define:
+- `onExpire` (list of refs to `scene.*`, `encounter.*`, or `milestone.*`)
+- `onMilestone` (list of `{ at, trigger }` objects, where `trigger` is a ref)
+
+Example clock triggers:
+
+```text
+```hopscotch:clock id=clock.frostbite
+name: "Frostbite Escalation"
+scope: region.biting-north
+unit: days
+tracks:
+  - subject: "Expedition"
+    max: 10
+onMilestone:
+  - at: 5
+    trigger: scene.expedition.warned
+onExpire:
+  - milestone.expedition.failed
+```
+```
+
+### 19.5 Advancing clocks
 Clocks MAY define an `advance` section describing automatic advancement events. Encounters MAY advance clocks via `escalation.advanceClock`.
 
-## 15. Travel
+## 20. Travel
 
 A `travel` block models a bounded travel segment.
 
@@ -420,8 +729,10 @@ A `travel` MAY define:
 - `navCheck` (ref to `check.*`)
 - `randomEncountersRef` (string or ref)
 - `environmentRules` (string)
+- `tables` (list of refs to `table.*`)
+- `rules` (list of refs to `ruleRef.*`)
 
-## 16. Milestones (Advancement)
+## 21. Milestones (Advancement)
 
 A `milestone` block represents an explicit adventure milestone.
 
@@ -430,7 +741,7 @@ A `milestone` MUST define:
 - `when` (string or ref)
 - `effect` (string; e.g., `Advance to level 2`)
 
-## 17. JSON projection (normative)
+## 22. JSON projection (normative)
 
 A Hopscotch file MUST be convertible into a JSON document with, at minimum:
 - `metadata`

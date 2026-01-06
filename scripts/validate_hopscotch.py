@@ -21,6 +21,11 @@ ENTITY_TYPES = {
     "milestone",
     "map",
     "npc",
+    "ruleRef",
+    "gate",
+    "table",
+    "device",
+    "asset",
 }
 ALL_TYPES = NODE_TYPES | ENTITY_TYPES
 
@@ -29,14 +34,30 @@ LOCATION_KINDS = {"building", "dwelling", "landmark", "camp", "district", "other
 ENCOUNTER_TYPES = {"combat", "social", "exploration", "puzzle", "mixed"}
 CLOCK_UNITS = {"days", "hours", "turns", "milestones"}
 LINK_TYPES = {"narrative_branch", "narrative_linear", "mechanical"}
+RULE_SOURCES = {"srd", "phb", "dmg", "custom", "other"}
+GATE_TYPES = {"passive", "active"}
+ASSET_KINDS = {"image"}
 
 ALLOWED_FIELDS: Dict[str, Set[str]] = {
     "world": {"name", "summary", "tags"},
     "continent": {"name", "parent", "summary", "tags"},
     "region": {"name", "parent", "summary", "tags"},
-    "destination": {"name", "parent", "summary", "tags", "kind"},
-    "location": {"name", "parent", "summary", "tags", "kind"},
-    "area": {"name", "parent", "summary", "tags", "key", "readAloud", "features", "exits"},
+    "destination": {"name", "parent", "summary", "tags", "kind", "rules", "assets"},
+    "location": {"name", "parent", "summary", "tags", "kind", "rules", "assets"},
+    "area": {
+        "name",
+        "parent",
+        "summary",
+        "tags",
+        "key",
+        "readAloud",
+        "features",
+        "exits",
+        "rules",
+        "assets",
+        "gates",
+        "devices",
+    },
     "scene": {
         "title",
         "summary",
@@ -47,6 +68,11 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "tone",
         "dialogue",
         "outcomes",
+        "conditions",
+        "rules",
+        "gates",
+        "tables",
+        "assets",
     },
     "link": {"from", "to", "linkType", "notes", "tags"},
     "encounter": {
@@ -57,18 +83,22 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "participants",
         "checks",
         "hazards",
+        "gates",
+        "devices",
+        "tables",
         "choices",
         "outcomes",
         "rewards",
         "escalation",
         "notes",
+        "rules",
     },
-    "check": {"skill", "dc", "onSuccess", "onFail"},
-    "hazard": {"name", "scope", "trigger", "effect", "save", "dc", "damage", "disarm"},
+    "check": {"skill", "dc", "onSuccess", "onFail", "resolution"},
+    "hazard": {"name", "scope", "trigger", "effect", "save", "dc", "damage", "disarm", "rules"},
     "secret": {"name", "scope", "text", "reveal", "leadsTo"},
     "loot": {"name", "scope", "items"},
-    "creature": {"name", "scope", "baseRef", "overlay", "notes", "tags"},
-    "clock": {"name", "scope", "unit", "tracks", "advance"},
+    "creature": {"name", "scope", "baseRef", "overlay", "notes", "tags", "assets"},
+    "clock": {"name", "scope", "unit", "tracks", "advance", "rules", "onExpire", "onMilestone"},
     "travel": {
         "name",
         "from",
@@ -78,6 +108,8 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "navCheck",
         "randomEncountersRef",
         "environmentRules",
+        "tables",
+        "rules",
     },
     "milestone": {"name", "when", "effect"},
     "map": {"name", "scope", "keys"},
@@ -91,7 +123,13 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "hooks",
         "notes",
         "knows",
+        "assets",
     },
+    "ruleRef": {"source", "name", "uri", "section", "notes", "tags"},
+    "gate": {"type", "skill", "threshold", "opposedBySkill", "onSuccess", "onFail"},
+    "table": {"title", "headers", "rows", "notes"},
+    "device": {"name", "scope", "stages"},
+    "asset": {"kind", "uri", "title", "roles", "visibility", "alt", "credit"},
 }
 
 
@@ -246,12 +284,12 @@ def validate_scene_dialogue(block: Block) -> List[str]:
                 conditions_indent = None
                 has_if = False
                 has_says = False
-            after_dash = stripped[2:].strip()
-            if after_dash.startswith("type:"):
-                value = after_dash[len("type:") :].strip()
-                if value == "conditional":
-                    item_type = "conditional"
-            continue
+                after_dash = stripped[2:].strip()
+                if after_dash.startswith("type:"):
+                    value = after_dash[len("type:") :].strip()
+                    if value == "conditional":
+                        item_type = "conditional"
+                continue
 
         if item_indent is None:
             continue
@@ -289,6 +327,11 @@ def validate_block(
         if block.block_type in {"scene", "link"}:
             errors.append(
                 f"Line {block.line_start}: {block.block_type} blocks require hopscotchVersion >= 0.3.0."
+            )
+    if hopscotch_version and hopscotch_version < (0, 4, 0):
+        if block.block_type in {"ruleRef", "gate", "table", "device", "asset"}:
+            errors.append(
+                f"Line {block.line_start}: {block.block_type} blocks require hopscotchVersion >= 0.4.0."
             )
     if not block.block_id:
         errors.append(f"Line {block.line_start}: Block missing id.")
@@ -448,6 +491,71 @@ def validate_block(
                 errors.append(
                     f"Line {block.line_start}: map missing required field '{field}'."
                 )
+    if block.block_type == "ruleRef":
+        for field in ("source", "name"):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: ruleRef missing required field '{field}'."
+                )
+        if not block.block_id.startswith("rule."):
+            errors.append(
+                f"Line {block.line_start}: ruleRef id '{block.block_id}' must start with rule."
+            )
+        source = block.values.get("source", "")
+        if source and source not in RULE_SOURCES:
+            errors.append(
+                f"Line {block.line_start}: ruleRef source '{source}' is not valid."
+            )
+    if block.block_type == "gate":
+        for field in ("type", "skill", "threshold"):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: gate missing required field '{field}'."
+                )
+        if not block.block_id.startswith("gate."):
+            errors.append(
+                f"Line {block.line_start}: gate id '{block.block_id}' must start with gate."
+            )
+        gate_type = block.values.get("type", "")
+        if gate_type and gate_type not in GATE_TYPES:
+            errors.append(
+                f"Line {block.line_start}: gate type '{gate_type}' is not valid."
+            )
+    if block.block_type == "table":
+        for field in ("headers", "rows"):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: table missing required field '{field}'."
+                )
+        if not block.block_id.startswith("table."):
+            errors.append(
+                f"Line {block.line_start}: table id '{block.block_id}' must start with table."
+            )
+    if block.block_type == "device":
+        for field in ("name",):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: device missing required field '{field}'."
+                )
+        if not block.block_id.startswith("device."):
+            errors.append(
+                f"Line {block.line_start}: device id '{block.block_id}' must start with device."
+            )
+    if block.block_type == "asset":
+        for field in ("kind", "uri"):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: asset missing required field '{field}'."
+                )
+        if not block.block_id.startswith("asset."):
+            errors.append(
+                f"Line {block.line_start}: asset id '{block.block_id}' must start with asset."
+            )
+        kind = block.values.get("kind", "")
+        if kind and kind not in ASSET_KINDS:
+            errors.append(
+                f"Line {block.line_start}: asset kind '{kind}' is not valid."
+            )
     return errors, warnings
 
 

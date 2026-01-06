@@ -1,33 +1,46 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/continent.schema.json",
-  "title": "Hopscotch v0.4 Continent",
+  "$id": "https://example.invalid/hopscotch/0.4/ruleRef.schema.json",
+  "title": "Hopscotch v0.4 Rule Reference",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
-    "name",
-    "parent"
+    "source",
+    "name"
   ],
   "properties": {
     "type": {
-      "const": "continent"
+      "const": "ruleRef"
     },
     "id": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "pattern": "^rule\\."
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "srd",
+        "phb",
+        "dmg",
+        "custom",
+        "other"
+      ]
     },
     "name": {
       "type": "string",
       "minLength": 1
     },
-    "parent": {
+    "uri": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^world\\."
+      "minLength": 1
     },
-    "summary": {
+    "section": {
+      "type": "string"
+    },
+    "notes": {
       "type": "string"
     },
     "tags": {

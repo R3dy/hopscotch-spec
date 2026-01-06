@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.4/device.schema.json",
+  "title": "Hopscotch v0.4 Device",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "name"
+  ],
+  "properties": {
+    "type": {
+      "const": "device"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^device\\."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/deviceStage"
+      }
+    }
+  },
+  "$defs": {
+    "deviceStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gateRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checkRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hazardRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "onSuccess": {
+          "$ref": "#/$defs/deviceOutcome"
+        },
+        "onFail": {
+          "$ref": "#/$defs/deviceOutcome"
+        }
+      }
+    },
+    "deviceOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reveal": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

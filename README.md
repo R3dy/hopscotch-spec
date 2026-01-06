@@ -1,8 +1,8 @@
-# Hopscotch Specification (v0.3)
+# Hopscotch Specification (v0.4)
 
 Hopscotch is an open, Markdown-native file format for representing tabletop roleplaying adventures in a uniform, machine-parseable way.
 
-Design goals for v0.3:
+Design goals for v0.4:
 - Human-readable Markdown with strict, typed blocks for structure
 - Deterministic 1:1 projection to JSON for importing into third-party apps (VTTs, mobile, tooling)
 - Full support for typical published-adventure components:
@@ -11,12 +11,13 @@ Design goals for v0.3:
   - Narrative scenes with dialogue, conditions, and outcomes
   - NPCs/creatures, secrets/clues, loot/items, hazards, checks, maps, travel segments, milestones
   - Time pressure via clocks (e.g., disease progression)
+  - Optional intent structure for rule references, discovery gates, devices, lightweight tables, and assets
   - Explicit links between scenes, encounters, and locations
 
 Repository contents:
-- `SPEC.md` — Normative Hopscotch v0.3 specification
-- `schemas/` — JSON Schemas for key entities (v0.3)
-- `examples/` — A permissively licensed reference adventure in `.hopscotch`
+- `SPEC.md` — Normative Hopscotch v0.4 specification
+- `schemas/` — JSON Schemas for key entities (v0.4)
+- `examples/` — Reference adventures in `.hopscotch`
 - `CHANGELOG.md` — Version history
 
 ## License
@@ -25,7 +26,7 @@ This repository is licensed under the Apache License 2.0. See `LICENSE`.
 
 ## Status
 
-Hopscotch v0.3 is a draft specification intended to be practical and implementable. Backwards-incompatible changes may occur until v1.0.0.
+Hopscotch v0.4 is a draft specification intended to be practical and implementable. Backwards-incompatible changes may occur until v1.0.0.
 
 ## Quick start
 
@@ -42,4 +43,4 @@ summary: A travelable destination represented in Hopscotch.
 ```
 ```
 
-See `examples/frostbound-blight.hopscotch` for an end-to-end sample that exercises most v0.2 features, or `examples/frozen-sick.hopsctoch` for v0.3 scenes.
+See `examples/frostbound-blight.hopscotch` for an end-to-end sample that exercises most v0.2 features, or `examples/frozen-sick.hopsctoch` for v0.4 scenes and attachments.

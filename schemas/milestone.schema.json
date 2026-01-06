@@ -1,17 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/world.schema.json",
-  "title": "Hopscotch v0.4 World",
+  "$id": "https://example.invalid/hopscotch/0.4/milestone.schema.json",
+  "title": "Hopscotch v0.4 Milestone",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
-    "name"
+    "name",
+    "when",
+    "effect"
   ],
   "properties": {
     "type": {
-      "const": "world"
+      "const": "milestone"
     },
     "id": {
       "type": "string",
@@ -21,14 +23,15 @@
       "type": "string",
       "minLength": 1
     },
-    "summary": {
-      "type": "string"
+    "when": {
+      "type": [
+        "string",
+        "object"
+      ]
     },
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "effect": {
+      "type": "string",
+      "minLength": 1
     }
   }
 }

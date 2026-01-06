@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.4/gate.schema.json",
+  "title": "Hopscotch v0.4 Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "skill",
+    "threshold"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^gate\\."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "passive",
+        "active"
+      ]
+    },
+    "skill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "threshold": {
+      "type": "number"
+    },
+    "opposedBySkill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "onSuccess": {
+      "$ref": "#/$defs/gateOutcome"
+    },
+    "onFail": {
+      "$ref": "#/$defs/gateOutcome"
+    }
+  },
+  "$defs": {
+    "gateOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reveal": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

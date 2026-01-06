@@ -1,17 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/world.schema.json",
-  "title": "Hopscotch v0.4 World",
+  "$id": "https://example.invalid/hopscotch/0.4/map.schema.json",
+  "title": "Hopscotch v0.4 Map",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
-    "name"
+    "name",
+    "scope",
+    "keys"
   ],
   "properties": {
     "type": {
-      "const": "world"
+      "const": "map"
     },
     "id": {
       "type": "string",
@@ -21,13 +23,15 @@
       "type": "string",
       "minLength": 1
     },
-    "summary": {
-      "type": "string"
+    "scope": {
+      "type": "string",
+      "minLength": 1
     },
-    "tags": {
+    "keys": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       }
     }
   }

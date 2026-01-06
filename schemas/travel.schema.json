@@ -1,19 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/destination.schema.json",
-  "title": "Hopscotch v0.4 Destination",
+  "$id": "https://example.invalid/hopscotch/0.4/travel.schema.json",
+  "title": "Hopscotch v0.4 Travel",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
     "name",
-    "parent",
-    "kind"
+    "from",
+    "to",
+    "distanceOrDuration"
   ],
   "properties": {
     "type": {
-      "const": "destination"
+      "const": "travel"
     },
     "id": {
       "type": "string",
@@ -23,39 +24,41 @@
       "type": "string",
       "minLength": 1
     },
-    "parent": {
+    "from": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^region\\."
+      "minLength": 1
     },
-    "kind": {
+    "to": {
       "type": "string",
-      "enum": [
-        "settlement",
-        "dungeon",
-        "outpost",
-        "wilderness",
-        "ruin",
-        "ship",
-        "other"
-      ]
+      "minLength": 1
     },
-    "summary": {
+    "distanceOrDuration": {
+      "type": "string",
+      "minLength": 1
+    },
+    "paceRules": {
       "type": "string"
     },
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "navCheck": {
+      "type": "string",
+      "minLength": 1
     },
-    "rules": {
+    "randomEncountersRef": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "environmentRules": {
+      "type": "string"
+    },
+    "tables": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/refObject"
       }
     },
-    "assets": {
+    "rules": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/refObject"

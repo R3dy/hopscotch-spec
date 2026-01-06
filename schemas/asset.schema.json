@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.4/asset.schema.json",
+  "title": "Hopscotch v0.4 Asset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "id",
+    "kind",
+    "uri"
+  ],
+  "properties": {
+    "type": {
+      "const": "asset"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^asset\\."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "image"
+      ]
+    },
+    "uri": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "player",
+        "dm",
+        "both"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "credit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

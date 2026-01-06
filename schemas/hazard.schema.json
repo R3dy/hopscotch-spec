@@ -1,19 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/destination.schema.json",
-  "title": "Hopscotch v0.4 Destination",
+  "$id": "https://example.invalid/hopscotch/0.4/hazard.schema.json",
+  "title": "Hopscotch v0.4 Hazard",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
     "name",
-    "parent",
-    "kind"
+    "scope",
+    "trigger",
+    "effect"
   ],
   "properties": {
     "type": {
-      "const": "destination"
+      "const": "hazard"
     },
     "id": {
       "type": "string",
@@ -23,39 +24,33 @@
       "type": "string",
       "minLength": 1
     },
-    "parent": {
+    "scope": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^region\\."
+      "minLength": 1
     },
-    "kind": {
+    "trigger": {
       "type": "string",
-      "enum": [
-        "settlement",
-        "dungeon",
-        "outpost",
-        "wilderness",
-        "ruin",
-        "ship",
-        "other"
-      ]
+      "minLength": 1
     },
-    "summary": {
+    "effect": {
+      "type": "string",
+      "minLength": 1
+    },
+    "save": {
       "type": "string"
     },
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "dc": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "damage": {
+      "type": "string"
+    },
+    "disarm": {
+      "type": "string",
+      "minLength": 1
     },
     "rules": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/refObject"
-      }
-    },
-    "assets": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/refObject"
