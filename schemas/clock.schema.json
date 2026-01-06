@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.2/clock.schema.json",
-  "title": "Hopscotch v0.2 Clock",
+  "$id": "https://example.invalid/hopscotch/0.3/clock.schema.json",
+  "title": "Hopscotch v0.3 Clock",
   "type": "object",
   "additionalProperties": false,
   "required": [

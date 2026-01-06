@@ -1,0 +1,15 @@
+---
+hopscotchVersion: "0.3.0"
+title: "Scene validation fixture"
+---
+
+```hopscotch:scene id=scene.test
+title: "Test Scene"
+summary: "A scene used for validation."
+dialogue:
+  - speaker: npc.test
+    type: conditional
+    conditions:
+      - if: party.is_ready && !party.is_afraid
+        says: "Let's go."
+```

@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 This project aims to follow Semantic Versioning: https://semver.org/
 
+## [0.3.0] - TBD
+
+### Added
+- Added `scene` blocks with dialogue, conditional talking points, and outcomes.
+- Added `link` blocks for explicit narrative/mechanical edges.
+- Added v0.3 JSON Schemas for scenes and links.
+- Added v0.3 validation rules and tests for scene version gating.
+
+### Changed
+- Bumped Hopscotch version references to v0.3.0 across docs and schemas.
+
 ## [0.2.0] - TBD
 
 ### Added

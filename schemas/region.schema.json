@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.2/region.schema.json",
-  "title": "Hopscotch v0.2 Region",
+  "$id": "https://example.invalid/hopscotch/0.3/region.schema.json",
+  "title": "Hopscotch v0.3 Region",
   "type": "object",
   "additionalProperties": false,
   "required": [

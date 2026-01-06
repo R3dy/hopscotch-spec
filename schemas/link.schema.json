@@ -1,52 +1,52 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.3/location.schema.json",
-  "title": "Hopscotch v0.3 Location",
+  "$id": "https://example.invalid/hopscotch/0.3/link.schema.json",
+  "title": "Hopscotch v0.3 Link",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
-    "name",
-    "parent",
-    "kind"
+    "from",
+    "to",
+    "linkType"
   ],
   "properties": {
     "type": {
-      "const": "location"
+      "const": "link"
     },
     "id": {
       "type": "string",
       "minLength": 1
     },
-    "name": {
+    "from": {
       "type": "string",
       "minLength": 1
     },
-    "parent": {
-      "type": "string",
-      "minLength": 1,
-      "pattern": "^destination\\."
+    "to": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
     },
-    "kind": {
+    "linkType": {
       "type": "string",
       "enum": [
-        "building",
-        "dwelling",
-        "landmark",
-        "camp",
-        "district",
-        "other"
+        "narrative_branch",
+        "narrative_linear",
+        "mechanical"
       ]
-    },
-    "summary": {
-      "type": "string"
     },
     "tags": {
       "type": "array",
       "items": {
         "type": "string"
       }
+    },
+    "notes": {
+      "type": "string"
     }
   }
 }

@@ -1,0 +1,13 @@
+---
+hopscotchVersion: "0.3.0"
+title: "Scene validation fixture"
+---
+
+```hopscotch:scene id=scene.invalid-conditional
+title: "Invalid Conditional"
+summary: "Conditional dialogue missing conditions should fail."
+dialogue:
+  - speaker: npc.test
+    type: conditional
+    text: "This should not be valid."
+```

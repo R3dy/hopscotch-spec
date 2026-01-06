@@ -1,0 +1,8 @@
+---
+hopscotchVersion: "0.3.0"
+title: "Scene validation fixture"
+---
+
+```hopscotch:scene id=scene.missing-title
+summary: "Missing title should fail."
+```

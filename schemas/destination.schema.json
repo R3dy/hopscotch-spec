@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.2/destination.schema.json",
-  "title": "Hopscotch v0.2 Destination",
+  "$id": "https://example.invalid/hopscotch/0.3/destination.schema.json",
+  "title": "Hopscotch v0.3 Destination",
   "type": "object",
   "additionalProperties": false,
   "required": [

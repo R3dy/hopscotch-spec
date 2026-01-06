@@ -3,11 +3,13 @@ import argparse
 import re
 import sys
 from dataclasses import dataclass
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 
 NODE_TYPES = {"world", "continent", "region", "destination", "location", "area"}
 ENTITY_TYPES = {
+    "scene",
+    "link",
     "encounter",
     "check",
     "hazard",
@@ -26,6 +28,7 @@ DESTINATION_KINDS = {"settlement", "dungeon", "outpost", "wilderness", "ruin", "
 LOCATION_KINDS = {"building", "dwelling", "landmark", "camp", "district", "other"}
 ENCOUNTER_TYPES = {"combat", "social", "exploration", "puzzle", "mixed"}
 CLOCK_UNITS = {"days", "hours", "turns", "milestones"}
+LINK_TYPES = {"narrative_branch", "narrative_linear", "mechanical"}
 
 ALLOWED_FIELDS: Dict[str, Set[str]] = {
     "world": {"name", "summary", "tags"},
@@ -34,6 +37,18 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
     "destination": {"name", "parent", "summary", "tags", "kind"},
     "location": {"name", "parent", "summary", "tags", "kind"},
     "area": {"name", "parent", "summary", "tags", "key", "readAloud", "features", "exits"},
+    "scene": {
+        "title",
+        "summary",
+        "location",
+        "participants",
+        "tags",
+        "timing",
+        "tone",
+        "dialogue",
+        "outcomes",
+    },
+    "link": {"from", "to", "linkType", "notes", "tags"},
     "encounter": {
         "name",
         "scope",
@@ -87,6 +102,7 @@ class Block:
     keys: Set[str]
     values: Dict[str, str]
     line_start: int
+    content_lines: List[str]
 
 
 def parse_blocks(lines: List[str]) -> Tuple[List[Block], List[str]]:
@@ -96,6 +112,7 @@ def parse_blocks(lines: List[str]) -> Tuple[List[Block], List[str]]:
     while i < len(lines):
         line = lines[i]
         if line.startswith("```hopscotch:"):
+            block_start_line = i + 1
             info = line.strip()[len("```hopscotch:") :]
             info_parts = info.split()
             if not info_parts:
@@ -118,7 +135,7 @@ def parse_blocks(lines: List[str]) -> Tuple[List[Block], List[str]]:
                 errors.append(f"Line {i+1}: Unterminated hopscotch block for id {block_id}.")
                 break
             keys, values = parse_top_level_keys(content_lines)
-            blocks.append(Block(block_type, block_id, keys, values, i + 1))
+            blocks.append(Block(block_type, block_id, keys, values, block_start_line, content_lines))
         i += 1
     return blocks, errors
 
@@ -145,12 +162,134 @@ def parse_top_level_keys(lines: List[str]) -> Tuple[Set[str], Dict[str, str]]:
     return keys, values
 
 
-def validate_block(block: Block) -> Tuple[List[str], List[str]]:
+def parse_frontmatter_version(lines: List[str]) -> Optional[Tuple[int, int, int]]:
+    if not lines or not lines[0].startswith("---"):
+        return None
+    for i in range(1, len(lines)):
+        line = lines[i].rstrip("\n")
+        if line.startswith("---"):
+            break
+        if not line.strip() or line.startswith(" "):
+            continue
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        if key.strip() != "hopscotchVersion":
+            continue
+        raw = value.strip().strip("'\"")
+        match = re.match(r"^(\d+)\.(\d+)\.(\d+)", raw)
+        if not match:
+            return None
+        return (int(match.group(1)), int(match.group(2)), int(match.group(3)))
+    return None
+
+
+def validate_scene_dialogue(block: Block) -> List[str]:
+    errors: List[str] = []
+    dialogue_indent = None
+    start_idx = 0
+    for idx, raw in enumerate(block.content_lines):
+        line = raw.rstrip("\n")
+        if not line.strip():
+            continue
+        indent = len(line) - len(line.lstrip(" "))
+        if line.strip() == "dialogue:":
+            dialogue_indent = indent
+            start_idx = idx + 1
+            break
+
+    if dialogue_indent is None:
+        return errors
+
+    item_indent = None
+    item_type = None
+    conditions_seen = False
+    conditions_indent = None
+    has_if = False
+    has_says = False
+
+    def finalize_item() -> None:
+        nonlocal item_type, conditions_seen, conditions_indent, has_if, has_says
+        if item_type == "conditional":
+            if not conditions_seen:
+                errors.append(
+                    f"Line {block.line_start}: conditional dialogue missing conditions."
+                )
+            elif not (has_if and has_says):
+                errors.append(
+                    f"Line {block.line_start}: conditional dialogue missing if/says."
+                )
+        item_type = None
+        conditions_seen = False
+        conditions_indent = None
+        has_if = False
+        has_says = False
+
+    for idx in range(start_idx, len(block.content_lines)):
+        raw = block.content_lines[idx]
+        line = raw.rstrip("\n")
+        if not line.strip():
+            continue
+        indent = len(line) - len(line.lstrip(" "))
+        stripped = line.strip()
+
+        if indent <= dialogue_indent:
+            finalize_item()
+            break
+
+        if stripped.startswith("- "):
+            if item_indent is None or indent == item_indent:
+                finalize_item()
+                item_indent = indent
+                item_type = None
+                conditions_seen = False
+                conditions_indent = None
+                has_if = False
+                has_says = False
+            after_dash = stripped[2:].strip()
+            if after_dash.startswith("type:"):
+                value = after_dash[len("type:") :].strip()
+                if value == "conditional":
+                    item_type = "conditional"
+            continue
+
+        if item_indent is None:
+            continue
+
+        if stripped.startswith("type:"):
+            value = stripped[len("type:") :].strip()
+            if value == "conditional":
+                item_type = "conditional"
+            continue
+
+        if item_type == "conditional":
+            if stripped == "conditions:":
+                conditions_seen = True
+                conditions_indent = indent
+                continue
+            if conditions_seen and conditions_indent is not None and indent > conditions_indent:
+                if stripped.startswith("- if:") or stripped.startswith("if:"):
+                    has_if = True
+                if stripped.startswith("says:"):
+                    has_says = True
+
+    finalize_item()
+    return errors
+
+
+def validate_block(
+    block: Block, hopscotch_version: Optional[Tuple[int, int, int]]
+) -> Tuple[List[str], List[str]]:
     errors: List[str] = []
     warnings: List[str] = []
     if block.block_type not in ALL_TYPES:
         errors.append(f"Line {block.line_start}: Unknown block type '{block.block_type}'.")
         return errors, warnings
+    if hopscotch_version and hopscotch_version < (0, 3, 0):
+        if block.block_type in {"scene", "link"}:
+            errors.append(
+                f"Line {block.line_start}: {block.block_type} blocks require hopscotchVersion >= 0.3.0."
+            )
     if not block.block_id:
         errors.append(f"Line {block.line_start}: Block missing id.")
 
@@ -212,6 +351,29 @@ def validate_block(block: Block) -> Tuple[List[str], List[str]]:
                     f"Line {block.line_start}: {block.block_type} parent '{parent}' must start with "
                     f"{expected_parent_prefix}."
                 )
+    if block.block_type == "scene":
+        for field in ("title", "summary"):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: scene missing required field '{field}'."
+                )
+        location = block.values.get("location", "")
+        if location and not (location.startswith("location.") or location.startswith("area.")):
+            errors.append(
+                f"Line {block.line_start}: scene location '{location}' must be a location.* or area.* id."
+            )
+        errors.extend(validate_scene_dialogue(block))
+    if block.block_type == "link":
+        for field in ("from", "to", "linkType"):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: link missing required field '{field}'."
+                )
+        link_type = block.values.get("linkType", "")
+        if link_type and link_type not in LINK_TYPES:
+            errors.append(
+                f"Line {block.line_start}: linkType '{link_type}' is not valid."
+            )
     if block.block_type == "encounter":
         for field in ("name", "scope", "encounterType", "trigger"):
             if field not in block.keys:
@@ -358,6 +520,7 @@ def main() -> int:
         print(f"ERROR: Could not read {args.path}: {exc}", file=sys.stderr)
         return 2
 
+    hopscotch_version = parse_frontmatter_version(lines)
     blocks, parse_errors = parse_blocks(lines)
     errors = list(parse_errors)
     warnings: List[str] = []
@@ -370,7 +533,7 @@ def main() -> int:
                     f"Line {block.line_start}: Duplicate id '{block.block_id}'."
                 )
             seen_ids.add(block.block_id)
-        block_errors, block_warnings = validate_block(block)
+        block_errors, block_warnings = validate_block(block, hopscotch_version)
         errors.extend(block_errors)
         warnings.extend(block_warnings)
 

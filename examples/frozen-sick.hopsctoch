@@ -1,6 +1,6 @@
 ---
-hopscotchVersion: "0.2.0"
-title: "Frozen Sick (structured in Hopscotch v0.2)"
+hopscotchVersion: "0.3.0"
+title: "Frozen Sick (structured in Hopscotch v0.3)"
 license: "Unspecified (source text provided by user)"
 system: "5e-compatible"
 levels: "1-3"
@@ -15,7 +15,7 @@ tags:
 
 # Frozen Sick
 
-This file represents the provided **Frozen Sick** adventure text using Hopscotch v0.2 typed blocks.
+This file represents the provided **Frozen Sick** adventure text using Hopscotch v0.3 typed blocks.
 
 Notes:
 - Any Markdown outside typed blocks may be ignored by strict parsers (per spec). Key prose is therefore duplicated into `readAloud`, `trigger`, and `notes` fields where practical.
@@ -631,7 +631,7 @@ overlay:
   hp:
     mode: set
     value: 12
-notes: "Tiny construct; attack is 1d4+1 piercing; CR 1/8. (Not fully modelable in v0.2 overlay; see notes in analysis section.)"
+notes: "Tiny construct; attack is 1d4+1 piercing; CR 1/8. (Not fully modelable in v0.3 overlay; see notes in analysis section.)"
 ```
 
 ```hopscotch:creature id=creature.rug-of-smothering
@@ -1175,6 +1175,114 @@ effect: "Advance characters to 2nd level."
 name: Reach Level 3
 when: "At the conclusion of the adventure (after delivering antidote / resolving outcome)."
 effect: "Advance characters to 3rd level."
+```
+
+---
+
+## Scenes
+
+```hopscotch:scene id=scene.elro-first-contact
+title: "Meeting Elro"
+summary: >
+  The party meets Elro at Pelc's Curiosities and can learn about the stolen
+  vials and the sickness gripping Palebank.
+location: location.pelcs-curiosities
+participants:
+  - npc.elro-aldataur
+tags:
+  - social
+  - investigation
+timing: early
+tone: tense
+dialogue:
+  - speaker: npc.elro-aldataur
+    type: read_aloud
+    text: |
+      “I wish I had better news for you,” Elro says, glancing at the shattered
+      shelves. “Whatever stole those vials did more than ruin my shop.”
+  - speaker: npc.elro-aldataur
+    type: dm_guidance
+    text: >
+      Elro is anxious but composed. He wants the party to investigate without
+      alarming the townsfolk, and he downplays how frightened he is.
+  - speaker: npc.elro-aldataur
+    type: conditional
+    conditions:
+      - if: party.press_for_details
+        says: |
+          “The frost in their veins looked like ice spells gone wrong. I’ve
+          seen it once before, far to the north.”
+      - if: party.accuse_elro
+        says: |
+          Elro bristles. “You think I’d endanger my own town for a few vials?”
+      - if: party_show_empathy
+        says: |
+          “Thank you… most won’t even listen anymore. I need someone brave to
+          see this through.”
+outcomes:
+  possible:
+    - id: outcome.elro-trust
+      description: Elro trusts the party and shares rumors about Eiselcross.
+      unlocks:
+        - scene.elro-rumors
+    - id: outcome.elro-hostile
+      description: Elro withholds information until the party earns his trust.
+      blocks:
+        - scene.elro-rumors
+```
+
+```hopscotch:scene id=scene.elro-rumors
+title: "Elro's Rumors"
+summary: >
+  Elro shares what he knows about the stolen vials, Croaker Cave, and rumors of
+  a strange ruin on Eiselcross.
+location: location.jolly-dwarf-inn
+participants:
+  - npc.elro-aldataur
+tags:
+  - social
+  - exposition
+timing: early
+tone: urgent
+dialogue:
+  - speaker: npc.elro-aldataur
+    type: read_aloud
+    text: |
+      “The bandits fled north, toward Croaker Cave. And the last time I saw
+      that frost was in Eiselcross—near an old Aeorian vault.”
+  - speaker: npc.elro-aldataur
+    type: dm_guidance
+    text: >
+      If the party already suspects the bandits, emphasize the urgency. If they
+      seem hesitant, remind them Tulgi is worsening by the day.
+```
+
+---
+
+## Links
+
+```hopscotch:link id=link.scene.elro-first-to-rumors
+from: scene.elro-first-contact
+to:
+  - scene.elro-rumors
+linkType: narrative_branch
+notes: "Elro only opens up if the party earns his trust."
+```
+
+```hopscotch:link id=link.scene.elro-to-pelcs
+from: scene.elro-first-contact
+to:
+  - location.pelcs-curiosities
+linkType: narrative_linear
+notes: "Scene occurs inside Pelc's Curiosities."
+```
+
+```hopscotch:link id=link.scene.elro-to-bandits
+from: scene.elro-first-contact
+to:
+  - encounter.pelcs.bandits
+linkType: mechanical
+notes: "Escalates into a confrontation if the bandits return mid-scene."
 ```
 
 ---

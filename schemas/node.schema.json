@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.2/node.schema.json",
-  "title": "Hopscotch v0.2 Node",
+  "$id": "https://example.invalid/hopscotch/0.3/node.schema.json",
+  "title": "Hopscotch v0.3 Node",
   "anyOf": [
     {
       "$ref": "world.schema.json"
