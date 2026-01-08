@@ -1229,12 +1229,15 @@ timing: early
 tone: somber
 dialogue:
   - type: read_aloud
-    text: "Snow falls as the villagers gather around Urgon Wenth's frozen remains. The sun sinks low behind the grave, and the air bites at your cheeks."
+    text: "Snow gently falls from the sky and wind bites your cheeks as you stand in the graveyard of Palebank Village, a fishing outpost of Uthodurn that is home to several hundred dwarves and elves. The sun is low in the sky, sinking behind the fresh grave of Urgon Wenth, an old dwarf who caught a curse or disease that turned him into an ice statue. The folk of the village have gathered to pay their final respects to Urgon's frozen remains."
   - type: read_aloud
-    speaker: npc.elro-aldataur
-    text: "\"Thank you for attending Urgon's service. I fear Palebank Village is in danger, and I hope you can help us.\""
+    text: "A gruff voice speaks softly from behind you. \"Thank you for attending Urgon's service.\" You turn and meet the gaze of Elro Aldataur, a weathered elf, retired ranger, and the leader of the village. \"I'm sorry to speak of dark tidings under such circumstances, but I believe that Palebank Village might be in danger, and I'm hoping you can help us.\""
   - type: dm_guidance
-    text: "Elro explains that Urgon returned from Eiselcross with a strange affliction. Tulgi Lutan now shows the same blue-veined sickness."
+    text: "Elro explains: Urgon returned from Eiselcross two months ago, fell ill days later, and the priests could not cure him; his body turned to ice. Until yesterday, the village thought the affliction was isolated, but Tulgi Lutan now shows the same blue-veined sickness and refuses help."
+  - type: dm_guidance
+    text: "Elro asks the party to investigate the cause and offers 100 gp. He suggests starting at Urgon's cabin or by speaking with Tulgi."
+  - type: dm_guidance
+    text: "Tulgi is distrustful of village authorities, which is why Elro needs independent adventurers."
 outcomes:
   possible:
     - id: outcome.accepts-investigation
@@ -1253,9 +1256,13 @@ timing: early
 tone: investigative
 dialogue:
   - type: read_aloud
-    text: "The cabin is cramped and dark. An unmade bed sits by a cold hearth, and a table of dirty dishes stands beside shelves emptied onto the floor."
+    text: "This cramped, dark cabin might have been a cozy place when its owner was alive. Now an unmade bed stands near a cold fireplace, its mantle hung with the head of some snarling white beast with gray horns. On the other side of the room, a small table strewn with dirty dishes and set with a dwarf-sized chair stands before two empty shelves whose contents are scattered across the floor: kitchen utensils, dried foodstuffs, adventuring gear, and a few books."
   - type: dm_guidance
-    text: "Tracks indicate someone ransacked the place. A receipt names Pelc's Curiosities as the buyer of Aeorian relics. The cabin holds loot.urgon-gear."
+    text: "The cabin was recently trashed; a DC 12 Investigation check finds the intruder's footprints leading back to Tulgi's cabin. Urgon's adventuring gear is loot.urgon-gear."
+  - type: dm_guidance
+    text: "Mounted Head: DC 15 Nature identifies a yeti trophy. Strange Receipt: DC 10 Investigation finds a receipt listing relics sold to Pelc's Curiosities, including two blue glass vials (unlock secret.pelc-receipt and secret.frigid-woe-vials)."
+  - type: dm_guidance
+    text: "Locals know Pelc's Curiosities was robbed two months ago."
 outcomes:
   possible:
     - id: outcome.found-receipt
@@ -1277,9 +1284,17 @@ timing: early
 tone: tense
 dialogue:
   - type: read_aloud
-    text: "Heat and smoke fill the small cabin. A dwarf wrapped in blankets shivers by the brazier, blue veins threading her face and hands."
+    text: "This snow-covered cabin looks peaceful and quiet from the outside. Its windows are shuttered, and a steady stream of smoke piping out of the chimney indicates a roaring fire within."
+  - type: read_aloud
+    text: "The heat in this small cabin hits like a hammer blow. A table set with neatly stacked dishes, tools, and utensils stands at the center of the room. The smell of a simmering soup comes from a pot hanging inside a roaring fireplace. Another fire burns in an iron brazier at the opposite end of the room, filling the cabin with a smoky haze. Shivering at the end of a bed near the brazier is a dwarf wrapped in blankets. Bulging blue veins streak her face, neck, and hands."
   - type: dm_guidance
-    text: "Tulgi may fight if forced, but can be pressured into explaining the theft and pointing toward Croaker Cave. If combat breaks out, use encounter.palebank.tulgi. She carries loot.tulgi-dagger."
+    text: "Entry: roof is 12 feet high (DC 10 Athletics to climb). Door is locked (AC 15, 18 hp; DC 12 thieves' tools to pick; DC 15 Athletics to force). Windows are shuttered and latched (DC 12 thieves' tools to unlatch)."
+  - type: dm_guidance
+    text: "The interior is brightly lit but lightly obscured by smoke. If the party knocks, Tulgi refuses to open unless a DC 12 Charisma (Deception, Intimidation, or Persuasion) check succeeds. If they break in, she attacks with two wolves (use encounter.palebank.tulgi). Hazard: hazard.tulgi.fire."
+  - type: dm_guidance
+    text: "Tulgi moves at 10 feet and is defensive. A DC 12 Charisma (Intimidation or Persuasion) check reveals: she and Hulil work for the Uttolots; they stole Urgon's relics after the sale to Pelc; she kept an ornate dagger and Hulil took the rest to Croaker Cave (unlock secret.tulgi-uttolot and secret.hulil-croaker)."
+  - type: dm_guidance
+    text: "Tulgi carries loot.tulgi-dagger. DC 15 Arcana or History identifies it as an Aeorian relic."
 outcomes:
   possible:
     - id: outcome.tulgi-confesses
@@ -1299,9 +1314,19 @@ timing: early
 tone: grim
 dialogue:
   - type: read_aloud
-    text: "The shop is smashed and looted. Five cloaked elves sift through debris as broken shelves and wares cover the floor."
+    text: "The dark cabin before you has a sign over its door which reads, \"Pelc's Curiosities,\" with the image of a curving dragon used to make the letter P. Though the shop appears closed, the front door is slightly ajar."
+  - type: read_aloud
+    text: "Five cloaked elves appear to have ransacked the shop and are searching through the broken debris on the floor. The furniture, shelves, and front counter have been smashed, and the shop's wares now litter the floor."
+  - type: read_aloud
+    text: "What appears to be an ice statue of an elf is bundled beneath the blankets of a bed along the east wall of the room. A small table loaded with dirty teacups and a kettle stands next to the bed."
   - type: dm_guidance
-    text: "Captured bandits reveal Hulil's involvement and her sickness. In the back room, Verla Pelc lies frozen beneath blankets. Use encounter.palebank.bandits for the fight."
+    text: "The shop is a one-story, two-room cabin with shuttered windows; a back shutter can be forced with DC 12 Athletics. A passive Perception 11 hears whispered voices and footsteps. A group DC 10 Stealth check can surprise the bandits. Use encounter.palebank.bandits."
+  - type: dm_guidance
+    text: "The front shop is difficult terrain. The bandits are elves with darkvision 60 feet, advantage on saves vs being charmed, and immunity to sleep magic."
+  - type: dm_guidance
+    text: "If a bandit is captured, a DC 10 Intimidation check reveals: they work for Hulil Lutan (Uttolots), Tulgi robbed the shop two months ago, Hulil is sick, and she is hiding in Croaker Cave (unlock secret.hulil-croaker)."
+  - type: dm_guidance
+    text: "Verla Pelc is already dead of frigid woe in the back room (unlock secret.verla-dead)."
 outcomes:
   possible:
     - id: outcome.bandit-leads
@@ -1325,6 +1350,8 @@ tone: ominous
 dialogue:
   - type: read_aloud
     text: "A plume of smoke vents from the ground beyond the cave mouth. Tracks show frequent comings and goings, but no guards watch the entrance."
+  - type: dm_guidance
+    text: "Croaker Cave lies due north of Palebank Village on the Frigid Depths shoreline. The chimney is too small to climb; the main entrance is the only way in."
 ```
 
 ```hopscotch:scene id=scene.croaker.hideout
@@ -1340,6 +1367,10 @@ tone: violent
 dialogue:
   - type: dm_guidance
     text: "Hulil's bandits and their trained frogs defend the hideout. Use encounter.croaker.hulil and related Croaker Cave encounters as needed."
+  - type: dm_guidance
+    text: "Giant ice frogs are immune to cold and may hide in pools; a Perception check contested by their Stealth can spot them. A DC 15 Animal Handling check can calm a frog unless it is harmed."
+  - type: dm_guidance
+    text: "Recovered relics and the blue vials are loot.croaker.relics."
 outcomes:
   possible:
     - id: outcome.reclaim-vials
@@ -1442,9 +1473,15 @@ timing: late
 tone: unsettling
 dialogue:
   - type: read_aloud
-    text: "A white-skinned figure with red eyes moves between stone tables, adjusting bubbling mixtures with care."
+    text: "Six long stone tables are set with steel and glass laboratory equipment in this chamber, whose walls are lined with shelves holding all manner of strange knickknacks and tools. An armed humanoid with white skin and red eyes moves from table to table, adjusting bubbling mixtures and carefully adding reagents."
   - type: dm_guidance
-    text: "Ferol can be deceived or persuaded to share the key and location of the curative lab. Use encounter.salsvault.ferol if the scene turns hostile."
+    text: "Ferol Sal is a wight who speaks archaic Draconic and Elven, not Common. He demands to know why the party is here and is obsessed with crafting a god-killing disease."
+  - type: dm_guidance
+    text: "If the party claims to help, run a Charisma (Deception) check opposed by Ferol's Insight; mention his note from S10 for advantage. A DC 15 Persuasion check can convince him to hand over the chest key and reveal the curative lab (unlock secret.antidote-cache)."
+  - type: dm_guidance
+    text: "Ferol carries keys for doors and chests. Shelves and tables can provide alchemist's supplies. Forcibly moving a creature into a table can expose them to frigid woe."
+  - type: dm_guidance
+    text: "If negotiations fail, use encounter.salsvault.ferol."
 outcomes:
   possible:
     - id: outcome.antidote-location
@@ -1463,9 +1500,11 @@ timing: late
 tone: tense
 dialogue:
   - type: read_aloud
-    text: "A cold wind howls through a collapsed wall. Kelp sways in frigid water, hiding movement below."
+    text: "A cold wind howls through the collapsed east wall of this huge chamber, whose far side is completely submerged under frigid seawater. A dense bed of kelp grows up from the submerged floor, obscuring any sight of what lies below. Broken glass and the remains of shattered tables cover the floor in the dry section of the room."
   - type: dm_guidance
-    text: "Giant crabs lurk beneath the kelp. Use encounter.salsvault.giant-crabs and hazard.salsvault.frigid-water. The chest holds doses of frigid woe antidote."
+    text: "Giant crabs lurk beneath the kelp; passive Perception 14 spots them or they attack with surprise. The water is 5 feet deep and difficult terrain; use hazard.salsvault.frigid-water."
+  - type: dm_guidance
+    text: "The kelp is difficult terrain. A passive Perception 11 notices the submerged chest, which is locked and holds loot.salsvault.antidote."
 outcomes:
   possible:
     - id: outcome.antidote-secured
@@ -1483,6 +1522,8 @@ tone: relieved
 dialogue:
   - type: dm_guidance
     text: "The Buyer arranges teleportation of the antidote to Palebank Village. If the party returns by ship, use travel.salsvault-to-syrinlya and travel.syrinlya-to-palebank."
+  - type: dm_guidance
+    text: "Use Eiselcross random encounters on the return trip if desired."
 ```
 
 ```hopscotch:scene id=scene.conclusion
@@ -1496,6 +1537,8 @@ tone: hopeful
 dialogue:
   - type: dm_guidance
     text: "If the antidote arrives promptly, Irven's family survives and Elro pays the reward. Otherwise, they perish. Resolve against clock.frigid-woe."
+  - type: dm_guidance
+    text: "The Buyer pays out a 200 gp reward on Elro's behalf once the antidote is delivered."
 ```
 
 ```hopscotch:milestone id=milestone.level-3
