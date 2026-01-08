@@ -43,4 +43,4 @@ summary: A travelable destination represented in Hopscotch.
 ```
 ```
 
-See `examples/frostbound-blight.hopscotch` for an end-to-end sample that exercises most v0.2 features, or `examples/frozen-sick.hopsctoch` for v0.4 scenes and attachments.
+See `examples/frostbound-blight.hopscotch` for an end-to-end sample that exercises most v0.2 features, or `examples/frozen-sick.hopscotch` for v0.4 scenes and attachments.

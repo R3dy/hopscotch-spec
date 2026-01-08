@@ -18,7 +18,7 @@ This project aims to follow Semantic Versioning: https://semver.org/
 
 ### Changed
 - Bumped Hopscotch version references to v0.4.0 across docs and schemas.
-- Updated `examples/frozen-sick.hopsctoch` to v0.4 and expanded it to demonstrate all v0.4 features (v0.2 example retained).
+- Updated `examples/frozen-sick.hopscotch` to v0.4 and expanded it to demonstrate all v0.4 features (v0.2 example retained).
 - Extended the validator to recognize v0.4 block types and fields.
 
 ## [0.3.0] - TBD

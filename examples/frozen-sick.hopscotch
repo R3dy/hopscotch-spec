@@ -1,0 +1,1507 @@
+---
+hopscotchVersion: "0.4.0"
+title: "Frozen Sick"
+system: "D&D 5E"
+levels: "1-3"
+tags:
+  - adventure
+  - arctic
+  - mystery
+  - dungeon
+license: "WotC - Explorer's Guide to Wildemount (summary conversion)"
+---
+
+```hopscotch:world id=world.exandria
+type: world
+id: world.exandria
+name: Exandria
+summary: A high-fantasy world with ancient ruins, divine conflicts, and perilous frontiers.
+```
+
+```hopscotch:continent id=continent.wildemount
+type: continent
+id: continent.wildemount
+name: Wildemount
+parent: world.exandria
+summary: A war-torn continent of empires, frontiers, and hidden dangers.
+```
+
+```hopscotch:region id=region.biting-north
+type: region
+id: region.biting-north
+name: Biting North
+parent: continent.wildemount
+summary: The arctic reaches of the Greying Wildlands and Eiselcross.
+tags:
+  - arctic
+  - wilderness
+```
+
+```hopscotch:destination id=destination.palebank-village
+type: destination
+id: destination.palebank-village
+name: Palebank Village
+parent: region.biting-north
+kind: settlement
+summary: A small Uthodurnian fishing village on the edge of the Frigid Depths.
+tags:
+  - settlement
+  - mystery
+```
+
+```hopscotch:destination id=destination.croaker-cave
+type: destination
+id: destination.croaker-cave
+name: Croaker Cave
+parent: region.biting-north
+kind: dungeon
+summary: A cave complex north of Palebank Village, lair of giant ice frogs and bandits.
+tags:
+  - dungeon
+  - bandits
+```
+
+```hopscotch:destination id=destination.syrinlya
+type: destination
+id: destination.syrinlya
+name: Syrinlya
+parent: region.biting-north
+kind: outpost
+summary: Uthodurn's outpost on the island of Foren in Eiselcross.
+tags:
+  - outpost
+```
+
+```hopscotch:destination id=destination.salsvault
+type: destination
+id: destination.salsvault
+name: Salsvault
+parent: region.biting-north
+kind: ruin
+summary: A crashed Aeorian laboratory buried in the ice of Eiselcross.
+tags:
+  - ruin
+  - dungeon
+```
+
+```hopscotch:destination id=destination.eiselcross-wilds
+type: destination
+id: destination.eiselcross-wilds
+name: Eiselcross Wilds
+parent: region.biting-north
+kind: wilderness
+summary: The ice-scarred land and seas between Palebank Village and Salsvault.
+tags:
+  - wilderness
+```
+
+```hopscotch:location id=location.palebank.graveyard
+type: location
+id: location.palebank.graveyard
+name: Palebank Graveyard
+parent: destination.palebank-village
+kind: landmark
+summary: A snow-covered burial ground where Urgon Wenth is laid to rest.
+```
+
+```hopscotch:location id=location.palebank.urgon-cabin
+type: location
+id: location.palebank.urgon-cabin
+name: Urgon's Cabin
+parent: destination.palebank-village
+kind: dwelling
+summary: A cramped cabin recently searched for clues about Urgon's illness.
+```
+
+```hopscotch:location id=location.palebank.tulgi-cabin
+type: location
+id: location.palebank.tulgi-cabin
+name: Tulgi's Cabin
+parent: destination.palebank-village
+kind: dwelling
+summary: A smoky cabin where Tulgi Lutan hides her sickness and secrets.
+```
+
+```hopscotch:location id=location.palebank.pelc-curiosities
+type: location
+id: location.palebank.pelc-curiosities
+name: Pelc's Curiosities
+parent: destination.palebank-village
+kind: building
+summary: A ransacked antique shop tied to stolen Aeorian relics.
+```
+
+```hopscotch:location id=location.palebank.commonhouse
+type: location
+id: location.palebank.commonhouse
+name: Palebank Commonhouse
+parent: destination.palebank-village
+kind: building
+summary: A communal hall where villagers gather for news and aid.
+```
+
+```hopscotch:location id=location.croaker-cave.entrance
+type: location
+id: location.croaker-cave.entrance
+name: Croaker Cave Entrance
+parent: destination.croaker-cave
+kind: landmark
+summary: A smoke-vented cave mouth on the Frigid Depths shoreline.
+```
+
+```hopscotch:location id=location.croaker-cave.main
+type: location
+id: location.croaker-cave.main
+name: Croaker Cave Hideout
+parent: destination.croaker-cave
+kind: other
+summary: The bandit hideout ruled by Hulil Lutan and guarded by ice frogs.
+```
+
+```hopscotch:location id=location.syrinlya.outpost
+type: location
+id: location.syrinlya.outpost
+name: Syrinlya Outpost
+parent: destination.syrinlya
+kind: district
+summary: A wind-scoured outpost with explorers, docks, and a resident Buyer.
+```
+
+```hopscotch:location id=location.salsvault.entry
+type: location
+id: location.salsvault.entry
+name: Salsvault Entry
+parent: destination.salsvault
+kind: landmark
+summary: The breached entrance to the submerged Aeorian ruin.
+```
+
+```hopscotch:location id=location.eiselcross.sea-route
+type: location
+id: location.eiselcross.sea-route
+name: Sea Route to Syrinlya
+parent: destination.eiselcross-wilds
+kind: landmark
+summary: A bitter voyage across the frigid seas to Foren.
+```
+
+```hopscotch:location id=location.eiselcross.ice-trek
+type: location
+id: location.eiselcross.ice-trek
+name: Ice Trek to Salsvault
+parent: destination.eiselcross-wilds
+kind: landmark
+summary: A wind-lashed trek across Eiselcross toward the ruin.
+```
+
+```hopscotch:area id=area.croaker.c1
+type: area
+id: area.croaker.c1
+name: Cave Mouth
+parent: destination.croaker-cave
+key: C1
+summary: An icy tunnel slopes down into Croaker Cave.
+readAloud: "The cave mouth yawns open in the shoreline ice, a thin plume of smoke seeping from somewhere deeper within."
+features:
+  - encounter.croaker.ice-frogs
+```
+
+```hopscotch:area id=area.croaker.c2
+type: area
+id: area.croaker.c2
+name: Frog Pools
+parent: destination.croaker-cave
+key: C2
+summary: Murky pools where giant ice frogs lie in wait.
+readAloud: "Black water fills shallow pools, its surface glassy and still despite the cave's chill."
+features:
+  - encounter.croaker.ice-frogs
+```
+
+```hopscotch:area id=area.croaker.c3
+type: area
+id: area.croaker.c3
+name: Bandit Camp
+parent: destination.croaker-cave
+key: C3
+summary: A smoky campsite used by Uttolot bandits.
+readAloud: "A fire crackles beside bedrolls and crates. Dwarven voices echo from the shadows."
+features:
+  - encounter.croaker.bandits
+```
+
+```hopscotch:area id=area.croaker.c4
+type: area
+id: area.croaker.c4
+name: Old Croaker's Den
+parent: destination.croaker-cave
+key: C4
+summary: The lair of the largest ice frog in the cave.
+readAloud: "A hulking blue frog lounges on a stone ledge, its throat pulsing as it watches the tunnel."
+features:
+  - encounter.croaker.old-croaker
+```
+
+```hopscotch:area id=area.croaker.c5
+type: area
+id: area.croaker.c5
+name: Hulil's Shrine
+parent: destination.croaker-cave
+key: C5
+summary: A rough shrine and quarters for Hulil Lutan.
+readAloud: "A crude shrine to Tiamat dominates the chamber, candles flickering across a bedroll and weapon rack."
+features:
+  - encounter.croaker.hulil
+```
+
+```hopscotch:area id=area.croaker.c6
+type: area
+id: area.croaker.c6
+name: Storage Niche
+parent: destination.croaker-cave
+key: C6
+summary: A cramped niche with stolen supplies and relics.
+readAloud: "Crates and sacks are stacked beside damp stone, their contents wrapped against the cold."
+features:
+  - loot.croaker.relics
+```
+
+```hopscotch:area id=area.salsvault.s1
+type: area
+id: area.salsvault.s1
+name: Entry Hall
+parent: destination.salsvault
+key: S1
+summary: A cracked hall of rune-etched stone leading deeper into Salsvault.
+readAloud: "Frost coats broken stone tiles. Ancient runes glimmer faintly in the walls."
+```
+
+```hopscotch:area id=area.salsvault.s2
+type: area
+id: area.salsvault.s2
+name: Shattered Antechamber
+parent: destination.salsvault
+key: S2
+summary: A collapsed chamber with rubble and broken equipment.
+readAloud: "Broken tables and shattered glass crunch underfoot, half-buried in drifted ice."
+```
+
+```hopscotch:area id=area.salsvault.s3
+type: area
+id: area.salsvault.s3
+name: Rune Door
+parent: destination.salsvault
+key: S3
+summary: A locked doorway marked with archaic Draconic warnings.
+readAloud: "A stone door bears faded Draconic script: 'Authorized personnel only.'"
+```
+
+```hopscotch:area id=area.salsvault.s4
+type: area
+id: area.salsvault.s4
+name: Frigid Woe Laboratory
+parent: destination.salsvault
+key: S4
+summary: A ruined lab with trapped chests and a flame-control lever.
+readAloud: "Smashed stone tables litter the floor. Two sealed chests are set into the wall beside a lever."
+features:
+  - hazard.salsvault.trapped-chest
+  - loot.salsvault.frigid-woe-vials-s4
+```
+
+```hopscotch:area id=area.salsvault.s5
+type: area
+id: area.salsvault.s5
+name: Disease Storage
+parent: destination.salsvault
+key: S5
+summary: A storage chamber that can be filled with a searing wall of flame.
+readAloud: "Eight chests sit along the far wall, their lids rimed with frost."
+features:
+  - hazard.salsvault.flame-jet
+  - loot.salsvault.frigid-woe-vials-s5
+```
+
+```hopscotch:area id=area.salsvault.s6
+type: area
+id: area.salsvault.s6
+name: North Hall
+parent: destination.salsvault
+key: S6
+summary: A long corridor patrolled by undead.
+readAloud: "Tattered-robed figures shuffle through the frost, scraping stone with dead hands."
+features:
+  - encounter.salsvault.zombies-north
+```
+
+```hopscotch:area id=area.salsvault.s7
+type: area
+id: area.salsvault.s7
+name: Unoccupied Dorm
+parent: destination.salsvault
+key: S7
+summary: A dormitory with intact footlockers and empty beds.
+readAloud: "Four built-in beds line the walls, each with a footlocker beneath."
+```
+
+```hopscotch:area id=area.salsvault.s8
+type: area
+id: area.salsvault.s8
+name: Ruined Dorm
+parent: destination.salsvault
+key: S8
+summary: A dark, rubble-choked dorm with a hidden animated rug.
+readAloud: "Broken stone furniture lies in heaps, leaving the room in shadow."
+features:
+  - encounter.salsvault.rug-of-smothering
+```
+
+```hopscotch:area id=area.salsvault.s9
+type: area
+id: area.salsvault.s9
+name: Zombie Dorm
+parent: destination.salsvault
+key: S9
+summary: A dormitory occupied by four zombies.
+readAloud: "Four shambling corpses drift in circles between the beds."
+features:
+  - encounter.salsvault.zombies-dorm
+```
+
+```hopscotch:area id=area.salsvault.s10
+type: area
+id: area.salsvault.s10
+name: Ferol Sal's Chamber
+parent: destination.salsvault
+key: S10
+summary: An orderly personal chamber guarded by undead serpents.
+readAloud: "This room is immaculate, with a crisp bed and a stone desk. A sealed chest is set into the floor."
+features:
+  - encounter.salsvault.undead-snakes
+  - loot.salsvault.ferol-treasure
+```
+
+```hopscotch:area id=area.salsvault.s11
+type: area
+id: area.salsvault.s11
+name: Kitchen
+parent: destination.salsvault
+key: S11
+summary: A ruined kitchen where animated knives take flight.
+readAloud: "Rusty utensils and frost-rimed food cover the floor. The air smells of old smoke."
+features:
+  - encounter.salsvault.animated-knives
+```
+
+```hopscotch:area id=area.salsvault.s12
+type: area
+id: area.salsvault.s12
+name: Dining Hall
+parent: destination.salsvault
+key: S12
+summary: A dining hall with broken furnishings and wandering zombies.
+readAloud: "Broken tables are piled along the wall as two zombies drift aimlessly near the center."
+features:
+  - encounter.salsvault.zombies-dining
+```
+
+```hopscotch:area id=area.salsvault.s13
+type: area
+id: area.salsvault.s13
+name: Drowned Library
+parent: destination.salsvault
+key: S13
+summary: A flooded library where a giant octopus lairs.
+readAloud: "Water laps through a gaping breach in the wall, soaking ruined books and cracked shelves."
+features:
+  - hazard.salsvault.frigid-water
+  - encounter.salsvault.giant-octopus
+  - loot.salsvault.drowned-library
+```
+
+```hopscotch:area id=area.salsvault.s14
+type: area
+id: area.salsvault.s14
+name: South Hall
+parent: destination.salsvault
+key: S14
+summary: A corridor patrolled by well-preserved undead.
+readAloud: "Footsteps splash faintly as three zombies wander the hall."
+features:
+  - encounter.salsvault.zombies-south
+```
+
+```hopscotch:area id=area.salsvault.s15
+type: area
+id: area.salsvault.s15
+name: Animated Weapon Storage
+parent: destination.salsvault
+key: S15
+summary: A locked armory with ruined weapons and surviving flying swords.
+readAloud: "Broken blades and cracked spears lie among toppled weapon racks."
+features:
+  - encounter.salsvault.flying-swords
+```
+
+```hopscotch:area id=area.salsvault.s16
+type: area
+id: area.salsvault.s16
+name: Golem Laboratory
+parent: destination.salsvault
+key: S16
+summary: A locked chamber containing a damaged flesh golem.
+readAloud: "A red X is painted across the door. Violent thuds echo from within."
+features:
+  - encounter.salsvault.flesh-golem
+```
+
+```hopscotch:area id=area.salsvault.s17
+type: area
+id: area.salsvault.s17
+name: Ferol's Laboratory
+parent: destination.salsvault
+key: S17
+summary: A working laboratory staffed by the undead Aeorian mage Ferol Sal.
+readAloud: "Six stone tables are set with glass apparatus. An armed humanoid with white skin and red eyes adjusts bubbling mixtures."
+features:
+  - encounter.salsvault.ferol
+```
+
+```hopscotch:area id=area.salsvault.s18
+type: area
+id: area.salsvault.s18
+name: Curative Laboratory
+parent: destination.salsvault
+key: S18
+summary: A flooded chamber where the frigid woe antidote is stored.
+readAloud: "A cold wind howls through a collapsed wall. Kelp sways in frigid water, hiding movement below."
+features:
+  - hazard.salsvault.frigid-water
+  - encounter.salsvault.giant-crabs
+  - loot.salsvault.antidote
+```
+
+```hopscotch:npc id=npc.elro-aldataur
+type: npc
+id: npc.elro-aldataur
+name: Elro Aldataur
+scope: destination.palebank-village
+alignment: neutral good
+ancestry: wood elf
+role: village leader
+statblock: veteran
+hooks:
+  - Wants the party to uncover the source of a deadly illness.
+```
+
+```hopscotch:npc id=npc.urgon-wenth
+type: npc
+id: npc.urgon-wenth
+name: Urgon Wenth
+scope: destination.palebank-village
+alignment: neutral
+ancestry: dwarf
+role: deceased explorer
+hooks:
+  - Brought back Aeorian relics that spread frigid woe.
+```
+
+```hopscotch:npc id=npc.mila-teno
+type: npc
+id: npc.mila-teno
+name: Mila Teno
+scope: destination.palebank-village
+alignment: lawful good
+ancestry: wood elf
+role: Glassblade guard
+statblock: scout
+```
+
+```hopscotch:npc id=npc.tulgi-lutan
+type: npc
+id: npc.tulgi-lutan
+name: Tulgi Lutan
+scope: destination.palebank-village
+alignment: neutral evil
+ancestry: mountain dwarf
+role: Uttolot thief and trapper
+statblock: thug
+hooks:
+  - Sick with frigid woe and hiding stolen relics.
+```
+
+```hopscotch:npc id=npc.hulil-lutan
+type: npc
+id: npc.hulil-lutan
+name: Hulil Lutan
+scope: destination.croaker-cave
+alignment: lawful evil
+ancestry: dwarf
+role: Uttolot priestess of Tiamat
+hooks:
+  - Leading bandits in Croaker Cave while seeking a cure.
+```
+
+```hopscotch:npc id=npc.verla-pelc
+type: npc
+id: npc.verla-pelc
+name: Verla Pelc
+scope: destination.palebank-village
+alignment: neutral
+ancestry: elf
+role: antique dealer
+hooks:
+  - Infected by the relics and found frozen in her quarters.
+```
+
+```hopscotch:npc id=npc.irven-liel
+type: npc
+id: npc.irven-liel
+name: Irven Liel
+scope: destination.palebank-village
+alignment: neutral
+ancestry: human
+role: merchant
+hooks:
+  - Purchased the vials and unknowingly infected his family.
+```
+
+```hopscotch:npc id=npc.ferol-sal
+type: npc
+id: npc.ferol-sal
+name: Ferol Sal
+scope: destination.salsvault
+alignment: neutral evil
+ancestry: human
+role: undead Aeorian mage
+statblock: wight
+hooks:
+  - Guards the curative lab while obsessed with god-killing disease.
+```
+
+```hopscotch:creature id=creature.bandit
+type: creature
+id: creature.bandit
+name: Bandit
+scope: region.biting-north
+baseRef: srd:bandit
+notes: "Uttolot thugs in Palebank and Croaker Cave."
+```
+
+```hopscotch:creature id=creature.wolf
+type: creature
+id: creature.wolf
+name: Wolf
+scope: destination.palebank-village
+baseRef: srd:wolf
+notes: "Tulgi's pets, Iro and Jira."
+```
+
+```hopscotch:creature id=creature.giant-ice-frog
+type: creature
+id: creature.giant-ice-frog
+name: Giant Ice Frog
+scope: destination.croaker-cave
+baseRef: srd:giant-frog
+overlay:
+  immunities:
+    add:
+      - cold
+notes: "Croaker Cave frogs are immune to cold damage."
+```
+
+```hopscotch:creature id=creature.zombie
+type: creature
+id: creature.zombie
+name: Zombie
+scope: destination.salsvault
+baseRef: srd:zombie
+notes: "Tattered Aeorian undead roaming the halls."
+```
+
+```hopscotch:creature id=creature.flying-sword
+type: creature
+id: creature.flying-sword
+name: Flying Sword
+scope: destination.salsvault
+baseRef: srd:flying-sword
+notes: "Animated weapons left in Salsvault."
+```
+
+```hopscotch:creature id=creature.flying-knife
+type: creature
+id: creature.flying-knife
+name: Animated Kitchen Knife
+scope: destination.salsvault
+baseRef: srd:flying-sword
+overlay:
+  hp:
+    mode: set
+    value: 12
+notes: "Tiny animated knives; use flying sword statistics with reduced size."
+```
+
+```hopscotch:creature id=creature.flesh-golem-damaged
+type: creature
+id: creature.flesh-golem-damaged
+name: Damaged Flesh Golem
+scope: destination.salsvault
+baseRef: srd:flesh-golem
+overlay:
+  hp:
+    mode: set
+    value: 5
+notes: "Berserk, missing an arm, cannot Multiattack."
+```
+
+```hopscotch:creature id=creature.giant-crab
+type: creature
+id: creature.giant-crab
+name: Giant Crab
+scope: destination.salsvault
+baseRef: srd:giant-crab
+notes: "Lurks beneath kelp in the curative laboratory."
+```
+
+```hopscotch:creature id=creature.giant-octopus
+type: creature
+id: creature.giant-octopus
+name: Giant Octopus
+scope: destination.salsvault
+baseRef: srd:giant-octopus
+notes: "Dwells in the drowned library."
+```
+
+```hopscotch:creature id=creature.rug-of-smothering
+type: creature
+id: creature.rug-of-smothering
+name: Rug of Smothering
+scope: destination.salsvault
+baseRef: srd:rug-of-smothering
+```
+
+```hopscotch:creature id=creature.undead-snake-swarm
+type: creature
+id: creature.undead-snake-swarm
+name: Swarm of Undead Snakes
+scope: destination.salsvault
+baseRef: srd:swarm-of-poisonous-snakes
+overlay:
+  immunities:
+    add:
+      - poison
+  traits:
+    add:
+      - name: Undead Nature
+        text: "The swarm does not require air, food, drink, or sleep."
+notes: "Immune to poison damage and the poisoned condition."
+```
+
+```hopscotch:hazard id=hazard.tulgi.fire
+type: hazard
+id: hazard.tulgi.fire
+name: Cabin Fire Hazards
+scope: location.palebank.tulgi-cabin
+trigger: A creature touches the brazier or fireplace, or starts its turn adjacent.
+effect: The heat sears exposed skin.
+damage: "2 (1d4) fire"
+```
+
+```hopscotch:hazard id=hazard.salsvault.flame-jet
+type: hazard
+id: hazard.salsvault.flame-jet
+name: Salsvault Flame Jets
+scope: area.salsvault.s5
+trigger: The lever in S4 is down and a creature enters or starts its turn in S5.
+effect: Jets of flame burst from the ceiling.
+save: Dexterity
+dc: 12
+damage: "4 (1d8) fire"
+disarm: "Push the lever in S4 to the up position."
+```
+
+```hopscotch:hazard id=hazard.salsvault.trapped-chest
+type: hazard
+id: hazard.salsvault.trapped-chest
+name: Frigid Woe Chest Trap
+scope: area.salsvault.s4
+trigger: A creature fails to pick or force a disease chest in S4.
+effect: A beam of cold lashes out from the chest.
+damage: "4 (1d8) cold"
+```
+
+```hopscotch:hazard id=hazard.salsvault.frigid-water
+type: hazard
+id: hazard.salsvault.frigid-water
+name: Frigid Seawater
+scope: destination.salsvault
+trigger: A creature enters flooded areas of Salsvault.
+effect: The freezing water saps strength and slows movement.
+```
+
+```hopscotch:encounter id=encounter.palebank.tulgi
+type: encounter
+id: encounter.palebank.tulgi
+name: Tulgi's Desperation
+scope: location.palebank.tulgi-cabin
+encounterType: combat
+trigger: The party forces entry or negotiations collapse.
+participants:
+  - ref: npc.tulgi-lutan
+  - ref: creature.wolf
+    count: 2
+hazards:
+  - hazard.tulgi.fire
+```
+
+```hopscotch:encounter id=encounter.palebank.bandits
+type: encounter
+id: encounter.palebank.bandits
+name: Pelc's Curiosities Bandits
+scope: location.palebank.pelc-curiosities
+encounterType: combat
+trigger: The party enters the front shop.
+participants:
+  - ref: creature.bandit
+    count: 5
+```
+
+```hopscotch:encounter id=encounter.croaker.ice-frogs
+type: encounter
+id: encounter.croaker.ice-frogs
+name: Croaker Cave Ice Frogs
+scope: destination.croaker-cave
+encounterType: combat
+trigger: The party approaches the frog pools or lairs.
+participants:
+  - ref: creature.giant-ice-frog
+    count: 3
+```
+
+```hopscotch:encounter id=encounter.croaker.old-croaker
+type: encounter
+id: encounter.croaker.old-croaker
+name: Old Croaker
+scope: destination.croaker-cave
+encounterType: combat
+trigger: The party enters Old Croaker's den.
+participants:
+  - ref: creature.giant-ice-frog
+    count: 1
+```
+
+```hopscotch:encounter id=encounter.croaker.bandits
+type: encounter
+id: encounter.croaker.bandits
+name: Uttolot Bandit Camp
+scope: destination.croaker-cave
+encounterType: combat
+trigger: The party enters the bandit camp.
+participants:
+  - ref: creature.bandit
+    count: 6
+```
+
+```hopscotch:encounter id=encounter.croaker.hulil
+type: encounter
+id: encounter.croaker.hulil
+name: Hulil's Last Stand
+scope: destination.croaker-cave
+encounterType: combat
+trigger: The party confronts Hulil in her shrine.
+participants:
+  - ref: npc.hulil-lutan
+  - ref: creature.bandit
+    count: 2
+  - ref: creature.giant-ice-frog
+    count: 1
+```
+
+```hopscotch:encounter id=encounter.salsvault.zombies-north
+type: encounter
+id: encounter.salsvault.zombies-north
+name: North Hall Zombies
+scope: destination.salsvault
+encounterType: combat
+trigger: The party enters the north hall.
+participants:
+  - ref: creature.zombie
+    count: 3
+```
+
+```hopscotch:encounter id=encounter.salsvault.zombies-dorm
+type: encounter
+id: encounter.salsvault.zombies-dorm
+name: Zombie Dorm
+scope: destination.salsvault
+encounterType: combat
+trigger: The party enters the zombie dormitory.
+participants:
+  - ref: creature.zombie
+    count: 4
+```
+
+```hopscotch:encounter id=encounter.salsvault.zombies-dining
+type: encounter
+id: encounter.salsvault.zombies-dining
+name: Dining Hall Zombies
+scope: destination.salsvault
+encounterType: combat
+trigger: The party enters the dining hall.
+participants:
+  - ref: creature.zombie
+    count: 2
+```
+
+```hopscotch:encounter id=encounter.salsvault.zombies-south
+type: encounter
+id: encounter.salsvault.zombies-south
+name: South Hall Zombies
+scope: destination.salsvault
+encounterType: combat
+trigger: The party enters the south hall.
+participants:
+  - ref: creature.zombie
+    count: 3
+```
+
+```hopscotch:encounter id=encounter.salsvault.rug-of-smothering
+type: encounter
+id: encounter.salsvault.rug-of-smothering
+name: Animated Rug
+scope: destination.salsvault
+encounterType: combat
+trigger: The party searches the ruined dorm.
+participants:
+  - ref: creature.rug-of-smothering
+    count: 1
+```
+
+```hopscotch:encounter id=encounter.salsvault.undead-snakes
+type: encounter
+id: encounter.salsvault.undead-snakes
+name: Chest of Undead Snakes
+scope: destination.salsvault
+encounterType: combat
+trigger: The party opens Ferol Sal's chest.
+participants:
+  - ref: creature.undead-snake-swarm
+    count: 1
+```
+
+```hopscotch:encounter id=encounter.salsvault.animated-knives
+type: encounter
+id: encounter.salsvault.animated-knives
+name: Animated Kitchen Knives
+scope: destination.salsvault
+encounterType: combat
+trigger: The party enters the kitchen.
+participants:
+  - ref: creature.flying-knife
+    count: 4
+```
+
+```hopscotch:encounter id=encounter.salsvault.flying-swords
+type: encounter
+id: encounter.salsvault.flying-swords
+name: Animated Weapon Storage
+scope: destination.salsvault
+encounterType: combat
+trigger: The party enters the weapon storage.
+participants:
+  - ref: creature.flying-sword
+    count: 5
+```
+
+```hopscotch:encounter id=encounter.salsvault.flesh-golem
+type: encounter
+id: encounter.salsvault.flesh-golem
+name: Damaged Flesh Golem
+scope: destination.salsvault
+encounterType: combat
+trigger: The party opens the golem laboratory.
+participants:
+  - ref: creature.flesh-golem-damaged
+    count: 1
+```
+
+```hopscotch:encounter id=encounter.salsvault.giant-octopus
+type: encounter
+id: encounter.salsvault.giant-octopus
+name: Drowned Library Octopus
+scope: destination.salsvault
+encounterType: combat
+trigger: The party enters the drowned library.
+participants:
+  - ref: creature.giant-octopus
+    count: 1
+```
+
+```hopscotch:encounter id=encounter.salsvault.ferol
+type: encounter
+id: encounter.salsvault.ferol
+name: Ferol Sal's Bargain
+scope: area.salsvault.s17
+encounterType: mixed
+trigger: The party meets Ferol Sal in his laboratory.
+participants:
+  - ref: npc.ferol-sal
+```
+
+```hopscotch:encounter id=encounter.salsvault.giant-crabs
+type: encounter
+id: encounter.salsvault.giant-crabs
+name: Curative Laboratory Crabs
+scope: destination.salsvault
+encounterType: combat
+trigger: The party wades into the curative laboratory.
+participants:
+  - ref: creature.giant-crab
+    count: 4
+```
+
+```hopscotch:loot id=loot.urgon-gear
+type: loot
+id: loot.urgon-gear
+name: Urgon's Adventuring Gear
+scope: location.palebank.urgon-cabin
+items:
+  - name: "Silvered maul"
+    kind: weapon
+  - name: "Splint armor (dwarf-sized)"
+    kind: armor
+  - name: "Fur-lined cold-weather gear"
+    kind: gear
+  - name: "Grappling hook"
+    kind: gear
+  - name: "Hooded lantern"
+    kind: gear
+```
+
+```hopscotch:loot id=loot.tulgi-dagger
+type: loot
+id: loot.tulgi-dagger
+name: Aeorian Dagger
+scope: location.palebank.tulgi-cabin
+items:
+  - name: "+1 dagger"
+    kind: weapon
+    text: "Relic of Aeor taken by Tulgi Lutan."
+```
+
+```hopscotch:loot id=loot.croaker.relics
+type: loot
+id: loot.croaker.relics
+name: Stolen Aeorian Relics
+scope: destination.croaker-cave
+items:
+  - name: "Scroll case"
+    kind: relic
+  - name: "Jade statuette"
+    kind: relic
+  - name: "Quiver of 20 arrows"
+    kind: gear
+  - name: "Silver ring set with jasper"
+    kind: jewelry
+  - name: "Two blue glass vials"
+    kind: relic
+    text: "Frigid woe spores cling to the glass."
+```
+
+```hopscotch:loot id=loot.salsvault.frigid-woe-vials-s4
+type: loot
+id: loot.salsvault.frigid-woe-vials-s4
+name: Frigid Woe Vials (S4)
+scope: area.salsvault.s4
+items:
+  - name: "Two vials of frigid woe"
+    kind: relic
+```
+
+```hopscotch:loot id=loot.salsvault.frigid-woe-vials-s5
+type: loot
+id: loot.salsvault.frigid-woe-vials-s5
+name: Frigid Woe Vials (S5)
+scope: area.salsvault.s5
+items:
+  - name: "Eight chests, each with three vials of frigid woe"
+    kind: relic
+```
+
+```hopscotch:loot id=loot.salsvault.ferol-treasure
+type: loot
+id: loot.salsvault.ferol-treasure
+name: Ferol Sal's Coinage
+scope: area.salsvault.s10
+items:
+  - name: "1,006 sp"
+    kind: currency
+  - name: "45 ep"
+    kind: currency
+  - name: "201 gp"
+    kind: currency
+```
+
+```hopscotch:loot id=loot.salsvault.drowned-library
+type: loot
+id: loot.salsvault.drowned-library
+name: Drowned Library Scrolls
+scope: area.salsvault.s13
+items:
+  - name: "Scroll case with two spell scrolls of detect magic"
+    kind: scroll
+```
+
+```hopscotch:loot id=loot.salsvault.antidote
+type: loot
+id: loot.salsvault.antidote
+name: Frigid Woe Antidote
+scope: area.salsvault.s18
+items:
+  - name: "Twenty doses of frigid woe antidote"
+    kind: potion
+  - name: "Ersatz eye"
+    kind: wondrous item
+```
+
+```hopscotch:travel id=travel.palebank-to-syrinlya
+type: travel
+id: travel.palebank-to-syrinlya
+name: Palebank to Syrinlya
+from: destination.palebank-village
+to: destination.syrinlya
+distanceOrDuration: "Several days by ship"
+environmentRules: "Arctic seas, biting winds, and limited visibility."
+```
+
+```hopscotch:travel id=travel.syrinlya-to-salsvault
+type: travel
+id: travel.syrinlya-to-salsvault
+name: Syrinlya to Salsvault
+from: destination.syrinlya
+to: destination.salsvault
+distanceOrDuration: "Overland trek across Foren"
+environmentRules: "Blizzards, crevasses, and shifting ice."
+```
+
+```hopscotch:travel id=travel.salsvault-to-syrinlya
+type: travel
+id: travel.salsvault-to-syrinlya
+name: Salsvault to Syrinlya
+from: destination.salsvault
+to: destination.syrinlya
+distanceOrDuration: "Return trek across Foren"
+environmentRules: "Exhaustion and winter hazards increase on the way back."
+```
+
+```hopscotch:travel id=travel.syrinlya-to-palebank
+type: travel
+id: travel.syrinlya-to-palebank
+name: Syrinlya to Palebank
+from: destination.syrinlya
+to: destination.palebank-village
+distanceOrDuration: "Several days by ship"
+environmentRules: "Ice floes and sudden storms threaten passage."
+```
+
+```hopscotch:clock id=clock.frigid-woe
+type: clock
+id: clock.frigid-woe
+name: Frigid Woe Countdown
+scope: destination.palebank-village
+unit: milestones
+tracks:
+  - subject: "Irven Liel's family"
+    max: 4
+    milestones:
+      - at: 2
+        effect: "The family's symptoms worsen and mobility slows."
+      - at: 4
+        effect: "The family succumbs without the antidote."
+advance:
+  guidance: "Advance by 1 milestone after each major travel leg or long delay in Palebank."
+```
+
+```hopscotch:secret id=secret.frigid-woe-vials
+type: secret
+id: secret.frigid-woe-vials
+name: Frigid woe hides in the blue vials
+scope: destination.palebank-village
+text: The blue glass vials are contaminated with frigid woe spores.
+reveal:
+  - by: Search Urgon's cabin or Pelc's Curiosities
+    method: Investigation
+    dc: 10
+```
+
+```hopscotch:secret id=secret.pelc-receipt
+type: secret
+id: secret.pelc-receipt
+name: Urgon sold relics to Pelc's Curiosities
+scope: destination.palebank-village
+text: A receipt in Urgon's cabin lists relics sold to Pelc's Curiosities.
+reveal:
+  - by: Search Urgon's cabin
+    method: Investigation
+    dc: 10
+```
+
+```hopscotch:secret id=secret.tulgi-uttolot
+type: secret
+id: secret.tulgi-uttolot
+name: Tulgi and Hulil work for the Uttolots
+scope: destination.palebank-village
+text: The sisters are Uttolot agents sent to steal Eiselcross relics.
+reveal:
+  - by: Question Tulgi
+    method: Persuasion or Intimidation
+    dc: 12
+```
+
+```hopscotch:secret id=secret.hulil-croaker
+type: secret
+id: secret.hulil-croaker
+name: Hulil hides in Croaker Cave
+scope: destination.croaker-cave
+text: Hulil Lutan holds the stolen relics in Croaker Cave.
+reveal:
+  - by: Question Tulgi or captured bandits
+    method: Intimidation or Persuasion
+    dc: 10
+```
+
+```hopscotch:secret id=secret.verla-dead
+type: secret
+id: secret.verla-dead
+name: Verla Pelc died of frigid woe
+scope: destination.palebank-village
+text: Verla Pelc is already frozen to death in her quarters.
+reveal:
+  - by: Search Pelc's Curiosities
+    method: Investigation
+    dc: 10
+```
+
+```hopscotch:secret id=secret.irven-infected
+type: secret
+id: secret.irven-infected
+name: Irven Liel and family are infected
+scope: destination.palebank-village
+text: The merchant who bought the vials has infected his family.
+reveal:
+  - by: Return to Palebank after Croaker Cave
+    method: Roleplay
+```
+
+```hopscotch:secret id=secret.salsvault-location
+type: secret
+id: secret.salsvault-location
+name: Salsvault lies on Foren in Eiselcross
+scope: destination.syrinlya
+text: Urgon's notes and Syrinlya scouts can point the party to Salsvault.
+reveal:
+  - by: Speak with Syrinlya's Buyer
+    method: Roleplay
+```
+
+```hopscotch:secret id=secret.antidote-cache
+type: secret
+id: secret.antidote-cache
+name: The antidote is in the curative lab
+scope: destination.salsvault
+text: The frigid woe antidote is locked in a chest in the curative laboratory.
+reveal:
+  - by: Parley with Ferol Sal
+    method: Persuasion or Deception
+    dc: 15
+```
+
+```hopscotch:scene id=scene.palebank.funeral
+type: scene
+id: scene.palebank.funeral
+title: "Funeral in the Snow"
+summary: The party attends Urgon Wenth's funeral and meets Elro Aldataur.
+location: location.palebank.graveyard
+participants:
+  - npc.elro-aldataur
+  - npc.urgon-wenth
+timing: early
+tone: somber
+dialogue:
+  - type: read_aloud
+    text: "Snow falls as the villagers gather around Urgon Wenth's frozen remains. The sun sinks low behind the grave, and the air bites at your cheeks."
+  - type: read_aloud
+    speaker: npc.elro-aldataur
+    text: "\"Thank you for attending Urgon's service. I fear Palebank Village is in danger, and I hope you can help us.\""
+  - type: dm_guidance
+    text: "Elro explains that Urgon returned from Eiselcross with a strange affliction. Tulgi Lutan now shows the same blue-veined sickness."
+outcomes:
+  possible:
+    - id: outcome.accepts-investigation
+      description: The party agrees to investigate Urgon's death and Tulgi's illness.
+```
+
+```hopscotch:scene id=scene.palebank.urgon-cabin
+type: scene
+id: scene.palebank.urgon-cabin
+title: "Urgon's Cabin"
+summary: The party searches Urgon's home and finds signs of a recent break-in.
+location: location.palebank.urgon-cabin
+participants:
+  - npc.mila-teno
+timing: early
+tone: investigative
+dialogue:
+  - type: read_aloud
+    text: "The cabin is cramped and dark. An unmade bed sits by a cold hearth, and a table of dirty dishes stands beside shelves emptied onto the floor."
+  - type: dm_guidance
+    text: "Tracks indicate someone ransacked the place. A receipt names Pelc's Curiosities as the buyer of Aeorian relics. The cabin holds loot.urgon-gear."
+outcomes:
+  possible:
+    - id: outcome.found-receipt
+      description: The party finds the receipt for relics sold to Pelc's Curiosities.
+      unlocks:
+        - secret.pelc-receipt
+        - secret.frigid-woe-vials
+```
+
+```hopscotch:scene id=scene.palebank.tulgi-cabin
+type: scene
+id: scene.palebank.tulgi-cabin
+title: "Tulgi's Sickness"
+summary: The party confronts Tulgi Lutan, who resists but may reveal the theft.
+location: location.palebank.tulgi-cabin
+participants:
+  - npc.tulgi-lutan
+timing: early
+tone: tense
+dialogue:
+  - type: read_aloud
+    text: "Heat and smoke fill the small cabin. A dwarf wrapped in blankets shivers by the brazier, blue veins threading her face and hands."
+  - type: dm_guidance
+    text: "Tulgi may fight if forced, but can be pressured into explaining the theft and pointing toward Croaker Cave. If combat breaks out, use encounter.palebank.tulgi. She carries loot.tulgi-dagger."
+outcomes:
+  possible:
+    - id: outcome.tulgi-confesses
+      description: Tulgi admits stealing the relics and names Hulil as the keeper.
+      unlocks:
+        - secret.tulgi-uttolot
+        - secret.hulil-croaker
+```
+
+```hopscotch:scene id=scene.palebank.pelc-curiosities
+type: scene
+id: scene.palebank.pelc-curiosities
+title: "Pelc's Curiosities"
+summary: The party finds the shop ransacked by bandits and discovers Verla Pelc frozen.
+location: location.palebank.pelc-curiosities
+timing: early
+tone: grim
+dialogue:
+  - type: read_aloud
+    text: "The shop is smashed and looted. Five cloaked elves sift through debris as broken shelves and wares cover the floor."
+  - type: dm_guidance
+    text: "Captured bandits reveal Hulil's involvement and her sickness. In the back room, Verla Pelc lies frozen beneath blankets. Use encounter.palebank.bandits for the fight."
+outcomes:
+  possible:
+    - id: outcome.bandit-leads
+      description: Captured bandits confirm Hulil's hideout in Croaker Cave.
+      unlocks:
+        - secret.hulil-croaker
+    - id: outcome.verla-found
+      description: Verla Pelc is found dead of frigid woe.
+      unlocks:
+        - secret.verla-dead
+```
+
+```hopscotch:scene id=scene.croaker.approach
+type: scene
+id: scene.croaker.approach
+title: "Approach to Croaker Cave"
+summary: Tracks and smoke mark a guarded cave on the Frigid Depths shoreline.
+location: location.croaker-cave.entrance
+timing: mid
+tone: ominous
+dialogue:
+  - type: read_aloud
+    text: "A plume of smoke vents from the ground beyond the cave mouth. Tracks show frequent comings and goings, but no guards watch the entrance."
+```
+
+```hopscotch:scene id=scene.croaker.hideout
+type: scene
+id: scene.croaker.hideout
+title: "Hulil's Hideout"
+summary: The party confronts bandits and Hulil Lutan amid giant ice frogs.
+location: location.croaker-cave.main
+participants:
+  - npc.hulil-lutan
+timing: mid
+tone: violent
+dialogue:
+  - type: dm_guidance
+    text: "Hulil's bandits and their trained frogs defend the hideout. Use encounter.croaker.hulil and related Croaker Cave encounters as needed."
+outcomes:
+  possible:
+    - id: outcome.reclaim-vials
+      description: The party recovers the blue vials of frigid woe.
+      unlocks:
+        - secret.frigid-woe-vials
+```
+
+```hopscotch:scene id=scene.palebank.irven-infected
+type: scene
+id: scene.palebank.irven-infected
+title: "The Next Victims"
+summary: Irven Liel and his family are revealed to be infected.
+location: location.palebank.commonhouse
+participants:
+  - npc.irven-liel
+timing: mid
+tone: urgent
+dialogue:
+  - type: dm_guidance
+    text: "The party learns that Irven Liel bought the vials and his household now shows the same blue-veined illness. Start clock.frigid-woe if not already tracking."
+outcomes:
+  possible:
+    - id: outcome.need-cure
+      description: The party realizes a cure is required soon.
+      unlocks:
+        - secret.irven-infected
+```
+
+```hopscotch:scene id=scene.travel.to-syrinlya
+type: scene
+id: scene.travel.to-syrinlya
+title: "Voyage to Eiselcross"
+summary: The party sails north toward Syrinlya to seek a cure.
+location: location.eiselcross.sea-route
+timing: mid
+tone: cold
+dialogue:
+  - type: dm_guidance
+    text: "Elro urges the party to reach the Uthodurnian outpost on Foren. The voyage is harsh but direct. Use travel.palebank-to-syrinlya."
+```
+
+```hopscotch:scene id=scene.syrinlya.arrival
+type: scene
+id: scene.syrinlya.arrival
+title: "Syrinlya's Buyer"
+summary: The party arrives at the outpost and learns how to reach Salsvault.
+location: location.syrinlya.outpost
+timing: mid
+tone: businesslike
+dialogue:
+  - type: dm_guidance
+    text: "The Buyer confirms Urgon's route and points the party to Salsvault on Foren."
+outcomes:
+  possible:
+    - id: outcome.salsvault-located
+      description: The party secures the location of Salsvault.
+      unlocks:
+        - secret.salsvault-location
+```
+
+```hopscotch:scene id=scene.travel.to-salsvault
+type: scene
+id: scene.travel.to-salsvault
+title: "Across the Ice"
+summary: The party treks across Eiselcross toward the buried ruins.
+location: location.eiselcross.ice-trek
+timing: mid
+tone: perilous
+dialogue:
+  - type: dm_guidance
+    text: "Use Eiselcross hazards and encounters as desired. The party follows Urgon's path to the crash site. Use travel.syrinlya-to-salsvault."
+```
+
+```hopscotch:scene id=scene.salsvault.entry
+type: scene
+id: scene.salsvault.entry
+title: "Enter Salsvault"
+summary: The party breaks into the Aeorian ruin.
+location: location.salsvault.entry
+timing: late
+tone: eerie
+dialogue:
+  - type: read_aloud
+    text: "The ruin yawns open in the ice, its stone halls choked with frost and silence."
+conditions:
+  enterIf:
+    - hasSecret: secret.salsvault-location
+```
+
+```hopscotch:scene id=scene.salsvault.ferol
+type: scene
+id: scene.salsvault.ferol
+title: "Ferol Sal's Bargain"
+summary: The party confronts the undead mage and learns of the curative lab.
+location: area.salsvault.s17
+participants:
+  - npc.ferol-sal
+timing: late
+tone: unsettling
+dialogue:
+  - type: read_aloud
+    text: "A white-skinned figure with red eyes moves between stone tables, adjusting bubbling mixtures with care."
+  - type: dm_guidance
+    text: "Ferol can be deceived or persuaded to share the key and location of the curative lab. Use encounter.salsvault.ferol if the scene turns hostile."
+outcomes:
+  possible:
+    - id: outcome.antidote-location
+      description: Ferol reveals the curative laboratory and its chest.
+      unlocks:
+        - secret.antidote-cache
+```
+
+```hopscotch:scene id=scene.salsvault.curative-lab
+type: scene
+id: scene.salsvault.curative-lab
+title: "The Curative Laboratory"
+summary: The party retrieves the antidote from the flooded chamber.
+location: area.salsvault.s18
+timing: late
+tone: tense
+dialogue:
+  - type: read_aloud
+    text: "A cold wind howls through a collapsed wall. Kelp sways in frigid water, hiding movement below."
+  - type: dm_guidance
+    text: "Giant crabs lurk beneath the kelp. Use encounter.salsvault.giant-crabs and hazard.salsvault.frigid-water. The chest holds doses of frigid woe antidote."
+outcomes:
+  possible:
+    - id: outcome.antidote-secured
+      description: The party secures enough antidote to save Palebank Village.
+```
+
+```hopscotch:scene id=scene.return.to-syrinlya
+type: scene
+id: scene.return.to-syrinlya
+title: "Return to Syrinlya"
+summary: The antidote is delivered to the Buyer for teleportation.
+location: location.syrinlya.outpost
+timing: late
+tone: relieved
+dialogue:
+  - type: dm_guidance
+    text: "The Buyer arranges teleportation of the antidote to Palebank Village. If the party returns by ship, use travel.salsvault-to-syrinlya and travel.syrinlya-to-palebank."
+```
+
+```hopscotch:scene id=scene.conclusion
+type: scene
+id: scene.conclusion
+title: "A Cold Curse Lifted"
+summary: Palebank Village is saved if the antidote arrives in time.
+location: location.palebank.commonhouse
+timing: late
+tone: hopeful
+dialogue:
+  - type: dm_guidance
+    text: "If the antidote arrives promptly, Irven's family survives and Elro pays the reward. Otherwise, they perish. Resolve against clock.frigid-woe."
+```
+
+```hopscotch:milestone id=milestone.level-3
+type: milestone
+id: milestone.level-3
+name: Reach Level 3
+when: After delivering the antidote to Palebank Village.
+effect: The party advances to 3rd level.
+```
