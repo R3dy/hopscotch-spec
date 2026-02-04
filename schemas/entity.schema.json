@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/entity.schema.json",
-  "title": "Hopscotch v0.4 Entity",
+  "$id": "https://example.invalid/hopscotch/0.5/entity.schema.json",
+  "title": "Hopscotch v0.5 Entity",
   "anyOf": [
     {
       "$ref": "scene.schema.json"

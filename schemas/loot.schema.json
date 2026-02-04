@@ -1,15 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/loot.schema.json",
-  "title": "Hopscotch v0.4 Loot",
+  "$id": "https://example.invalid/hopscotch/0.5/loot.schema.json",
+  "title": "Hopscotch v0.5 Loot",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "type",
     "id",
     "name",
-    "scope",
-    "items"
+    "scope"
+  ],
+  "anyOf": [
+    { "required": ["items"] },
+    { "required": ["text"] }
   ],
   "properties": {
     "type": {
@@ -26,6 +29,16 @@
     "scope": {
       "type": "string",
       "minLength": 1
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "items": {
       "type": "array",

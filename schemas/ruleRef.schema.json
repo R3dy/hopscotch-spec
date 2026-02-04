@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/ruleRef.schema.json",
-  "title": "Hopscotch v0.4 Rule Reference",
+  "$id": "https://example.invalid/hopscotch/0.5/ruleRef.schema.json",
+  "title": "Hopscotch v0.5 Rule Reference",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 This project aims to follow Semantic Versioning: https://semver.org/
 
+## [0.5.0] - 2026-02-03
+
+### Added
+- Added extended NPC characterization fields: `disposition` (enemy/neutral/ally), `faction`, `description`, `voice`, `mannerisms`, `emotionalBaseline`, `breakingPoint`, `personality` (array), `motivations` (array), `hides` (array), and `tags`.
+- Added new scene dialogue types: `likely_actions` (with `action`/`response` fields) and `mechanics` (for rules guidance).
+- Added `subItems` support for `dm_guidance` dialogue blocks.
+- Added optional `scope` field to `check` blocks for location context.
+- Added optional `description` field to `clock` blocks.
+- Added optional `text` field to `loot` blocks as alternative to `items` array.
+- Added optional `tags` field to `loot` and `secret` blocks.
+- Added support for mixed string/ref entries in NPC `knows` and `hides` fields.
+
+### Changed
+- Bumped Hopscotch version references to v0.5.0 across docs and schemas.
+- Made `items` field optional in `loot` blocks (either `items` or `text` must be present).
+
 ## [0.4.0] - TBD
 
 ### Added

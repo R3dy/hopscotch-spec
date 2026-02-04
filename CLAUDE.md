@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Hopscotch is an open, Markdown-native file format for representing tabletop roleplaying (TTRPG) adventures. Files use `.hopscotch` extension and contain Markdown with typed blocks that can be deterministically converted to JSON for VTTs and other tools.
 
-**Current Version**: v0.4.0 (draft, pre-1.0)
+**Current Version**: v0.5.0 (pre-1.0)
 
 ## Commands
 

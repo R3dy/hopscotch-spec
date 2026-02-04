@@ -37,6 +37,7 @@ LINK_TYPES = {"narrative_branch", "narrative_linear", "mechanical"}
 RULE_SOURCES = {"srd", "phb", "dmg", "custom", "other"}
 GATE_TYPES = {"passive", "active"}
 ASSET_KINDS = {"image"}
+NPC_DISPOSITIONS = {"enemy", "neutral", "ally"}
 
 ALLOWED_FIELDS: Dict[str, Set[str]] = {
     "world": {"name", "summary", "tags"},
@@ -93,12 +94,12 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "notes",
         "rules",
     },
-    "check": {"skill", "dc", "onSuccess", "onFail", "resolution"},
+    "check": {"skill", "dc", "scope", "onSuccess", "onFail", "resolution"},
     "hazard": {"name", "scope", "trigger", "effect", "save", "dc", "damage", "disarm", "rules"},
-    "secret": {"name", "scope", "text", "reveal", "leadsTo"},
-    "loot": {"name", "scope", "items"},
+    "secret": {"name", "scope", "text", "reveal", "leadsTo", "tags"},
+    "loot": {"name", "scope", "items", "text", "tags"},
     "creature": {"name", "scope", "baseRef", "overlay", "notes", "tags", "assets"},
-    "clock": {"name", "scope", "unit", "tracks", "advance", "rules", "onExpire", "onMilestone"},
+    "clock": {"name", "scope", "unit", "description", "tracks", "advance", "rules", "onExpire", "onMilestone"},
     "travel": {
         "name",
         "from",
@@ -118,11 +119,22 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "scope",
         "alignment",
         "ancestry",
+        "disposition",
+        "faction",
+        "description",
+        "voice",
+        "mannerisms",
+        "emotionalBaseline",
+        "breakingPoint",
+        "personality",
+        "motivations",
         "role",
         "statblock",
         "hooks",
         "notes",
         "knows",
+        "hides",
+        "tags",
         "assets",
     },
     "ruleRef": {"source", "name", "uri", "section", "notes", "tags"},

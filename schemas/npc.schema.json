@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/npc.schema.json",
-  "title": "Hopscotch v0.4 NPC",
+  "$id": "https://example.invalid/hopscotch/0.5/npc.schema.json",
+  "title": "Hopscotch v0.5 NPC",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -32,6 +32,40 @@
     "ancestry": {
       "type": "string"
     },
+    "disposition": {
+      "type": "string",
+      "enum": ["enemy", "neutral", "ally"]
+    },
+    "faction": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "voice": {
+      "type": "string"
+    },
+    "mannerisms": {
+      "type": "string"
+    },
+    "emotionalBaseline": {
+      "type": "string"
+    },
+    "breakingPoint": {
+      "type": "string"
+    },
+    "personality": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "motivations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "role": {
       "type": "string"
     },
@@ -50,8 +84,35 @@
     "knows": {
       "type": "array",
       "items": {
-        "type": "string",
-        "minLength": 1
+        "oneOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "$ref": "#/$defs/refObject"
+          }
+        ]
+      }
+    },
+    "hides": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "$ref": "#/$defs/refObject"
+          }
+        ]
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "assets": {

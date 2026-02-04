@@ -1,21 +1,21 @@
-# Hopscotch v0.4 Specification
+# Hopscotch v0.5 Specification
 
-This document defines the Hopscotch v0.4 file format.
+This document defines the Hopscotch v0.5 file format.
 
 ## 1. Scope
 
 Hopscotch is a Markdown-native, open file format for representing tabletop roleplaying adventures in a uniform, machine-parseable way. A Hopscotch file MUST be deterministically convertible to JSON for import into third-party tools (VTTs, mobile apps, pipelines).
 
-Hopscotch v0.4 is focused on:
+Hopscotch v0.5 is focused on:
 - A canonical world model: World → Continent → Region → Destination → Location → Area
 - Typed entities for common adventure components (scenes, encounters, NPCs/creatures, secrets, loot, hazards, travel, milestones, clocks)
 - Simple, explicit linking via IDs and references
 - Optional intent structure for rules pointers, discovery gates, devices, tables, assets, and lightweight scene/clock conditions
 - A strict subset of semantics that is practical to implement
 
-Non-goals for v0.4:
+Non-goals for v0.5:
 - Full rules modeling for every game system
-- Legendary/lair actions and full spellcasting blocks (reserved for v0.4+)
+- Legendary/lair actions and full spellcasting blocks (reserved for v0.5+)
 - Automatic extraction of structure from arbitrary prose without explicit blocks
 
 ## 2. Normative language
@@ -66,7 +66,7 @@ Where:
 ### 4.3 References
 Hopscotch objects refer to other objects by ID using fields such as `parent`, `scope`, `ref`, `leadsTo`, etc.
 
-In prose, implementations MAY support inline references of the form `@{some.id}`. Inline reference parsing is OPTIONAL in v0.4.
+In prose, implementations MAY support inline references of the form `@{some.id}`. Inline reference parsing is OPTIONAL in v0.5.
 
 ### 4.4 Reference objects
 Some fields take a list of ref objects rather than raw id strings.
@@ -169,7 +169,7 @@ A `scene` MAY define:
 
 ### 6.4 Dialogue blocks
 Scenes MAY define `dialogue` as a list of dialogue blocks. Each block MUST define:
-- `type` (enum): `read_aloud | dm_guidance | conditional`
+- `type` (enum): `read_aloud | dm_guidance | conditional | likely_actions | mechanics`
 
 Each block MAY define:
 - `speaker` (string or ref to an NPC/creature id)
@@ -177,7 +177,10 @@ Each block MAY define:
 Additional requirements by type:
 - `read_aloud` MUST define `text` (markdown string; spoken aloud)
 - `dm_guidance` MUST define `text` (markdown string; DM-facing)
+- `dm_guidance` MAY define `subItems` (list of strings; bullet points for guidance)
 - `conditional` MUST define `conditions` (list of conditional talking points)
+- `likely_actions` MUST define `action` (string; what the party might do) and `response` (string; how to respond)
+- `mechanics` MUST define `text` (markdown string; rules or mechanical guidance)
 
 Each `conditions` entry MUST define:
 - `if` (string expression; see §6.5)
@@ -306,7 +309,7 @@ An Encounter is a bounded unit of play that presents player choice and resolves 
 
 Encounters are not limited to combat. An encounter MUST declare an `encounterType`.
 
-### 8.2 Encounter types (v0.4)
+### 8.2 Encounter types (v0.5)
 `encounterType` MUST be one of:
 - `combat`
 - `social`
@@ -343,7 +346,7 @@ An encounter MAY escalate to:
 
 ## 9. Checks
 
-A `check` represents a single resolution point. v0.4 adds optional structured resolution while preserving the v0.3 `skill` + `dc` fields.
+A `check` represents a single resolution point. v0.5 adds optional structured resolution while preserving the v0.3 `skill` + `dc` fields.
 
 A `check` MUST define:
 - `skill` (string; e.g., `Investigation`, `Persuasion`, `Survival`)
@@ -352,6 +355,7 @@ A `check` MUST define:
 - `onFail` (string or ref)
 
 A `check` MAY define:
+- `scope` (node id; where the check applies)
 - `resolution` (object; see §9.1)
 
 ### 9.1 Enhanced resolution (optional)
@@ -499,7 +503,13 @@ A `loot` block represents a reward package or discovery.
 A `loot` MUST define:
 - `name` (string)
 - `scope` (node id)
+
+A `loot` MUST define at least one of:
 - `items` (list of item objects)
+- `text` (string; description of the loot)
+
+A `loot` MAY define:
+- `tags` (list of strings)
 
 Item objects SHOULD include:
 - `name` (string)
@@ -516,13 +526,24 @@ An `npc` MUST define:
 - `scope` (node id)
 
 An `npc` MAY define:
-- `alignment` (string)
-- `ancestry` (string)
+- `alignment` (string; e.g., `LE`, `CG`, `N`)
+- `ancestry` (string; e.g., `human`, `elf`, `dwarf`)
+- `disposition` (enum): `enemy | neutral | ally`
+- `faction` (string)
+- `description` (string; character description and background)
+- `voice` (string; how the NPC speaks)
+- `mannerisms` (string; behavioral quirks)
+- `emotionalBaseline` (string; default emotional state)
+- `breakingPoint` (string; what makes the NPC snap or change behavior)
+- `personality` (list of strings; personality traits)
+- `motivations` (list of strings; what drives the NPC)
 - `role` (string)
 - `statblock` (string; external reference)
 - `hooks` (list of strings)
 - `notes` (string)
-- `knows` (list of refs; `secret.*`)
+- `knows` (list; strings or refs to `secret.*`)
+- `hides` (list; strings or refs to secrets the NPC conceals)
+- `tags` (list of strings)
 - `assets` (list of refs to `asset.*`)
 
 ## 15. Devices
@@ -652,7 +673,7 @@ Overlays MUST be structured patches. Implementations MUST apply overlays in this
 3) traits/actions (action/bonus/reaction)
 4) notes
 
-Supported v0.4 overlay sections:
+Supported v0.5 overlay sections:
 - `hp` (mode add|set)
 - `ac` (set)
 - `speed.walk` (set|add)
@@ -664,7 +685,7 @@ Supported v0.4 overlay sections:
 - `actions.reaction` (add/remove)
 
 Unknown overlay keys MUST fail validation in strict mode.
-Trait and action changes MUST be expressed under `overlay` in v0.4 (no top-level `traits`/`actions`).
+Trait and action changes MUST be expressed under `overlay` in v0.5 (no top-level `traits`/`actions`).
 
 ## 19. Clocks (Time pressure)
 
@@ -678,6 +699,7 @@ A `clock` MUST define:
 - `unit` (enum): `days | hours | turns | milestones`
 
 A `clock` MAY define:
+- `description` (string; explains the clock's purpose)
 - `rules` (list of refs to `ruleRef.*`)
 
 ### 19.3 Tracks

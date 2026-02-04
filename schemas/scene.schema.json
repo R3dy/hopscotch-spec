@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/hopscotch/0.4/scene.schema.json",
-  "title": "Hopscotch v0.4 Scene",
+  "$id": "https://example.invalid/hopscotch/0.5/scene.schema.json",
+  "title": "Hopscotch v0.5 Scene",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -212,12 +212,28 @@
           "enum": [
             "read_aloud",
             "dm_guidance",
-            "conditional"
+            "conditional",
+            "likely_actions",
+            "mechanics"
           ]
         },
         "text": {
           "type": "string",
           "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "response": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subItems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "conditions": {
           "type": "array",
@@ -266,6 +282,35 @@
           "then": {
             "required": [
               "conditions"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "likely_actions"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "action",
+              "response"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "mechanics"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "text"
             ]
           }
         }
