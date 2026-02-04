@@ -26,7 +26,7 @@ python -m pytest tests/test_validate_hopscotch.py -v
 - `SPEC.md` - Normative specification with RFC-style keywords (MUST/SHOULD/MAY)
 - `schemas/` - 27 JSON Schema files for all block types
 - `scripts/validate_hopscotch.py` - Python validator (~800 lines)
-- `examples/frozen-sick.hopscotch` - Complete v0.4 reference adventure
+- `examples/frozen-sick.hopscotch` - Complete v0.5 reference adventure
 - `tests/` - Python unittest tests with fixtures in `tests/fixtures/`
 
 ## Architecture
@@ -60,10 +60,10 @@ Independent blocks with a `scope` linking them to locations:
 - **clock** - Progress trackers (disease, time pressure)
 - **travel** - Journey segments between destinations
 - **link** - Explicit narrative/mechanical connections
-- **gate** - Discovery/access gates (v0.4)
-- **device** - Multi-stage traps/locks (v0.4)
-- **table** - Lightweight encounter tables (v0.4)
-- **ruleRef**, **asset** - External references and media (v0.4)
+- **gate** - Discovery/access gates (v0.5)
+- **device** - Multi-stage traps/locks (v0.5)
+- **table** - Lightweight encounter tables (v0.5)
+- **ruleRef**, **asset** - External references and media (v0.5)
 
 ### Validator Key Functions
 

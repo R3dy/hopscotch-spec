@@ -35,7 +35,7 @@ A `.hopscotch` file is Markdown text that MAY include YAML frontmatter. Structur
 If present, frontmatter MUST be the first content in the file and delimited by `---` lines.
 
 Recommended fields:
-- `hopscotchVersion` (string, e.g. `0.4.0`)
+- `hopscotchVersion` (string, e.g. `0.5.0`)
 - `title` (string)
 - `license` (string)
 - `system` (string)
