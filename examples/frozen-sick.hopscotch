@@ -1541,6 +1541,120 @@ dialogue:
     text: "The Buyer pays out a 200 gp reward on Elro's behalf once the antidote is delivered."
 ```
 
+```hopscotch:transition id=transition.funeral-to-urgon
+from: scene.palebank.funeral
+to: scene.palebank.urgon-cabin
+label: "Investigate Urgon's cabin"
+condition: "Party agrees to help Elro"
+```
+
+```hopscotch:transition id=transition.funeral-to-tulgi
+from: scene.palebank.funeral
+to: scene.palebank.tulgi-cabin
+label: "Visit Tulgi Lutan"
+condition: "Party agrees to help Elro"
+```
+
+```hopscotch:transition id=transition.funeral-to-pelc
+from: scene.palebank.funeral
+to: scene.palebank.pelc-curiosities
+label: "Check Pelc's Curiosities"
+condition: "Party agrees to help Elro"
+```
+
+```hopscotch:transition id=transition.urgon-to-pelc
+from: scene.palebank.urgon-cabin
+to: scene.palebank.pelc-curiosities
+label: "Follow the receipt to Pelc's Curiosities"
+condition: "Party finds the receipt"
+```
+
+```hopscotch:transition id=transition.urgon-to-tulgi
+from: scene.palebank.urgon-cabin
+to: scene.palebank.tulgi-cabin
+label: "Follow the footprints to Tulgi's cabin"
+condition: "Party finds intruder's footprints"
+```
+
+```hopscotch:transition id=transition.tulgi-to-croaker
+from: scene.palebank.tulgi-cabin
+to: scene.croaker.approach
+label: "Head to Croaker Cave to find Hulil"
+condition: "Tulgi reveals Hulil's location"
+```
+
+```hopscotch:transition id=transition.pelc-to-croaker
+from: scene.palebank.pelc-curiosities
+to: scene.croaker.approach
+label: "Head to Croaker Cave to find Hulil"
+condition: "Captured bandits reveal Hulil's location"
+```
+
+```hopscotch:transition id=transition.approach-to-hideout
+from: scene.croaker.approach
+to: scene.croaker.hideout
+label: "Enter Croaker Cave"
+```
+
+```hopscotch:transition id=transition.hideout-to-irven
+from: scene.croaker.hideout
+to: scene.palebank.irven-infected
+label: "Return to Palebank Village"
+condition: "Party recovers the relics"
+```
+
+```hopscotch:transition id=transition.irven-to-voyage
+from: scene.palebank.irven-infected
+to: scene.travel.to-syrinlya
+label: "Sail north to Eiselcross to find a cure"
+condition: "Party learns a cure is needed"
+```
+
+```hopscotch:transition id=transition.voyage-to-syrinlya
+from: scene.travel.to-syrinlya
+to: scene.syrinlya.arrival
+label: "Arrive at Syrinlya outpost"
+```
+
+```hopscotch:transition id=transition.syrinlya-to-ice
+from: scene.syrinlya.arrival
+to: scene.travel.to-salsvault
+label: "Trek across the ice to Salsvault"
+condition: "The Buyer reveals Salsvault's location"
+```
+
+```hopscotch:transition id=transition.ice-to-salsvault
+from: scene.travel.to-salsvault
+to: scene.salsvault.entry
+label: "Reach the Salsvault ruins"
+```
+
+```hopscotch:transition id=transition.entry-to-ferol
+from: scene.salsvault.entry
+to: scene.salsvault.ferol
+label: "Explore deeper into Salsvault"
+```
+
+```hopscotch:transition id=transition.ferol-to-curative
+from: scene.salsvault.ferol
+to: scene.salsvault.curative-lab
+label: "Find the curative laboratory"
+condition: "Ferol reveals or party discovers the lab"
+```
+
+```hopscotch:transition id=transition.curative-to-return
+from: scene.salsvault.curative-lab
+to: scene.return.to-syrinlya
+label: "Return to Syrinlya with the antidote"
+condition: "Party secures the antidote"
+```
+
+```hopscotch:transition id=transition.return-to-conclusion
+from: scene.return.to-syrinlya
+to: scene.conclusion
+label: "Deliver the antidote to Palebank Village"
+```
+
 ```hopscotch:milestone id=milestone.level-3
 type: milestone
 id: milestone.level-3
