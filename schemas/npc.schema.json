@@ -48,6 +48,9 @@
     "mannerisms": {
       "type": "string"
     },
+    "tell": {
+      "type": "string"
+    },
     "emotionalBaseline": {
       "type": "string"
     },

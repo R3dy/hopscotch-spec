@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hopscotch/0.5/puzzle.schema.json",
+  "title": "Hopscotch v0.5 Puzzle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "id", "name"],
+  "properties": {
+    "type": {
+      "const": "puzzle"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["logic", "spatial", "riddle", "cipher", "environmental"]
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["easy", "moderate", "hard"]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "setup": {
+      "type": "string"
+    },
+    "clues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "solution": {
+      "type": "string"
+    },
+    "onSolve": {
+      "type": "string"
+    },
+    "onFail": {
+      "type": "string"
+    },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skill", "dc"],
+      "properties": {
+        "skill": {
+          "type": "string"
+        },
+        "dc": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "hints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "imageUri": {
+      "type": "string"
+    },
+    "foundInScenes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

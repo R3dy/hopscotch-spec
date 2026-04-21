@@ -26,6 +26,8 @@ ENTITY_TYPES = {
     "table",
     "device",
     "asset",
+    "guide",
+    "puzzle",
 }
 ALL_TYPES = NODE_TYPES | ENTITY_TYPES
 
@@ -64,6 +66,12 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "summary",
         "location",
         "participants",
+        "linkedNPCs",
+        "linkedSecrets",
+        "linkedLoot",
+        "linkedChecks",
+        "linkedCreatures",
+        "linkedPuzzles",
         "tags",
         "timing",
         "tone",
@@ -124,6 +132,7 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
         "description",
         "voice",
         "mannerisms",
+        "tell",
         "emotionalBaseline",
         "breakingPoint",
         "personality",
@@ -142,6 +151,8 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
     "table": {"title", "headers", "rows", "notes"},
     "device": {"name", "scope", "stages"},
     "asset": {"kind", "uri", "title", "roles", "visibility", "alt", "credit"},
+    "guide": {"title", "category", "order", "content", "linkedEntityId", "scope"},
+    "puzzle": {"name", "scope", "kind", "difficulty", "summary", "setup", "clues", "solution", "onSolve", "onFail", "fallback", "hints", "tags", "imageUri"},
 }
 
 
