@@ -4,13 +4,7 @@
   "title": "Hopscotch v0.5 Milestone",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "when",
-    "effect"
-  ],
+  "required": ["type", "id", "name", "when", "effect"],
   "properties": {
     "type": {
       "const": "milestone"
@@ -24,10 +18,7 @@
       "minLength": 1
     },
     "when": {
-      "type": [
-        "string",
-        "object"
-      ]
+      "type": ["string", "object"]
     },
     "effect": {
       "type": "string",

@@ -4,16 +4,8 @@
   "title": "Hopscotch v0.5 Loot",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "scope"
-  ],
-  "anyOf": [
-    { "required": ["items"] },
-    { "required": ["text"] }
-  ],
+  "required": ["type", "id", "name", "scope"],
+  "anyOf": [{ "required": ["items"] }, { "required": ["text"] }],
   "properties": {
     "type": {
       "const": "loot"
@@ -45,9 +37,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string",

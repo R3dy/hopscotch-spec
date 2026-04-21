@@ -4,13 +4,7 @@
   "title": "Hopscotch v0.5 Location",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "parent",
-    "kind"
-  ],
+  "required": ["type", "id", "name", "parent", "kind"],
   "properties": {
     "type": {
       "const": "location"
@@ -30,14 +24,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "building",
-        "dwelling",
-        "landmark",
-        "camp",
-        "district",
-        "other"
-      ]
+      "enum": ["building", "dwelling", "landmark", "camp", "district", "other"]
     },
     "summary": {
       "type": "string"
@@ -65,9 +52,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",

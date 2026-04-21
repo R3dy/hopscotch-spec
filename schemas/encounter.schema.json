@@ -4,14 +4,7 @@
   "title": "Hopscotch v0.5 Encounter",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "scope",
-    "encounterType",
-    "trigger"
-  ],
+  "required": ["type", "id", "name", "scope", "encounterType", "trigger"],
   "properties": {
     "type": {
       "const": "encounter"
@@ -30,13 +23,7 @@
     },
     "encounterType": {
       "type": "string",
-      "enum": [
-        "combat",
-        "social",
-        "exploration",
-        "puzzle",
-        "mixed"
-      ]
+      "enum": ["combat", "social", "exploration", "puzzle", "mixed"]
     },
     "trigger": {
       "type": "string",
@@ -47,9 +34,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "ref"
-        ],
+        "required": ["ref"],
         "properties": {
           "ref": {
             "type": "string",
@@ -73,10 +58,7 @@
           {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "skill",
-              "dc"
-            ],
+            "required": ["skill", "dc"],
             "properties": {
               "skill": {
                 "type": "string",
@@ -90,16 +72,10 @@
                 "$ref": "#/$defs/checkResolution"
               },
               "onSuccess": {
-                "type": [
-                  "string",
-                  "object"
-                ]
+                "type": ["string", "object"]
               },
               "onFail": {
-                "type": [
-                  "string",
-                  "object"
-                ]
+                "type": ["string", "object"]
               }
             }
           }
@@ -161,10 +137,7 @@
         "advanceClock": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "id",
-            "amount"
-          ],
+          "required": ["id", "amount"],
           "properties": {
             "id": {
               "type": "string",
@@ -191,9 +164,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",
@@ -207,9 +178,7 @@
     "hasSecretCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "hasSecret"
-      ],
+      "required": ["hasSecret"],
       "properties": {
         "hasSecret": {
           "type": "string",
@@ -220,9 +189,7 @@
     "notCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "not"
-      ],
+      "required": ["not"],
       "properties": {
         "not": {
           "$ref": "#/$defs/hasSecretCondition"
@@ -232,18 +199,12 @@
     "clockAtLeastCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "clockAtLeast"
-      ],
+      "required": ["clockAtLeast"],
       "properties": {
         "clockAtLeast": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "id",
-            "track",
-            "days"
-          ],
+          "required": ["id", "track", "days"],
           "properties": {
             "id": {
               "type": "string",
@@ -276,17 +237,11 @@
     "checkResolution": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "type",
-        "skill"
-      ],
+      "required": ["type", "skill"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "dc",
-            "opposed"
-          ]
+          "enum": ["dc", "opposed"]
         },
         "skill": {
           "type": "string",
@@ -340,9 +295,7 @@
             }
           },
           "then": {
-            "required": [
-              "dc"
-            ]
+            "required": ["dc"]
           }
         }
       ]

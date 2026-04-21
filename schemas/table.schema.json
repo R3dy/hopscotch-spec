@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 Table",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "headers",
-    "rows"
-  ],
+  "required": ["type", "id", "headers", "rows"],
   "properties": {
     "type": {
       "const": "table"

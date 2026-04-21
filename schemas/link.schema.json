@@ -4,13 +4,7 @@
   "title": "Hopscotch v0.5 Link",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "from",
-    "to",
-    "linkType"
-  ],
+  "required": ["type", "id", "from", "to", "linkType"],
   "properties": {
     "type": {
       "const": "link"
@@ -33,11 +27,7 @@
     },
     "linkType": {
       "type": "string",
-      "enum": [
-        "narrative_branch",
-        "narrative_linear",
-        "mechanical"
-      ]
+      "enum": ["narrative_branch", "narrative_linear", "mechanical"]
     },
     "tags": {
       "type": "array",

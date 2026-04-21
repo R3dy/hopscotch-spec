@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 Gate",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "skill",
-    "threshold"
-  ],
+  "required": ["type", "id", "skill", "threshold"],
   "properties": {
     "id": {
       "type": "string",
@@ -18,10 +13,7 @@
     },
     "type": {
       "type": "string",
-      "enum": [
-        "passive",
-        "active"
-      ]
+      "enum": ["passive", "active"]
     },
     "skill": {
       "type": "string",

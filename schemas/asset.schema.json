@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 Asset",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "kind",
-    "uri"
-  ],
+  "required": ["type", "id", "kind", "uri"],
   "properties": {
     "type": {
       "const": "asset"
@@ -21,9 +16,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "image"
-      ]
+      "enum": ["image"]
     },
     "uri": {
       "type": "string",
@@ -41,11 +34,7 @@
     },
     "visibility": {
       "type": "string",
-      "enum": [
-        "player",
-        "dm",
-        "both"
-      ]
+      "enum": ["player", "dm", "both"]
     },
     "alt": {
       "type": "string"

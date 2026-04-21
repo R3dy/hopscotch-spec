@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 Scene",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "title",
-    "summary"
-  ],
+  "required": ["type", "id", "title", "summary"],
   "properties": {
     "type": {
       "const": "scene"
@@ -156,9 +151,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",
@@ -172,9 +165,7 @@
     "hasSecretCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "hasSecret"
-      ],
+      "required": ["hasSecret"],
       "properties": {
         "hasSecret": {
           "type": "string",
@@ -185,9 +176,7 @@
     "notCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "not"
-      ],
+      "required": ["not"],
       "properties": {
         "not": {
           "$ref": "#/$defs/hasSecretCondition"
@@ -197,18 +186,12 @@
     "clockAtLeastCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "clockAtLeast"
-      ],
+      "required": ["clockAtLeast"],
       "properties": {
         "clockAtLeast": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "id",
-            "track",
-            "days"
-          ],
+          "required": ["id", "track", "days"],
           "properties": {
             "id": {
               "type": "string",
@@ -241,9 +224,7 @@
     "dialogueBlock": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "properties": {
         "speaker": {
           "type": "string",
@@ -251,13 +232,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "read_aloud",
-            "dm_guidance",
-            "conditional",
-            "likely_actions",
-            "mechanics"
-          ]
+          "enum": ["read_aloud", "dm_guidance", "conditional", "likely_actions", "mechanics"]
         },
         "text": {
           "type": "string",
@@ -294,9 +269,7 @@
             }
           },
           "then": {
-            "required": [
-              "text"
-            ]
+            "required": ["text"]
           }
         },
         {
@@ -308,9 +281,7 @@
             }
           },
           "then": {
-            "required": [
-              "text"
-            ]
+            "required": ["text"]
           }
         },
         {
@@ -322,9 +293,7 @@
             }
           },
           "then": {
-            "required": [
-              "conditions"
-            ]
+            "required": ["conditions"]
           }
         },
         {
@@ -336,10 +305,7 @@
             }
           },
           "then": {
-            "required": [
-              "action",
-              "response"
-            ]
+            "required": ["action", "response"]
           }
         },
         {
@@ -351,9 +317,7 @@
             }
           },
           "then": {
-            "required": [
-              "text"
-            ]
+            "required": ["text"]
           }
         }
       ]
@@ -361,10 +325,7 @@
     "condition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "if",
-        "says"
-      ],
+      "required": ["if", "says"],
       "properties": {
         "if": {
           "type": "string",
@@ -379,10 +340,7 @@
     "sceneOutcome": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "id",
-        "description"
-      ],
+      "required": ["id", "description"],
       "properties": {
         "id": {
           "type": "string",

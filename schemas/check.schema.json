@@ -4,14 +4,7 @@
   "title": "Hopscotch v0.5 Check",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "skill",
-    "dc",
-    "onSuccess",
-    "onFail"
-  ],
+  "required": ["type", "id", "skill", "dc", "onSuccess", "onFail"],
   "properties": {
     "type": {
       "const": "check"
@@ -36,25 +29,17 @@
       "$ref": "#/$defs/checkResolution"
     },
     "onSuccess": {
-      "type": [
-        "string",
-        "object"
-      ]
+      "type": ["string", "object"]
     },
     "onFail": {
-      "type": [
-        "string",
-        "object"
-      ]
+      "type": ["string", "object"]
     }
   },
   "$defs": {
     "hasSecretCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "hasSecret"
-      ],
+      "required": ["hasSecret"],
       "properties": {
         "hasSecret": {
           "type": "string",
@@ -65,9 +50,7 @@
     "notCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "not"
-      ],
+      "required": ["not"],
       "properties": {
         "not": {
           "$ref": "#/$defs/hasSecretCondition"
@@ -77,18 +60,12 @@
     "clockAtLeastCondition": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "clockAtLeast"
-      ],
+      "required": ["clockAtLeast"],
       "properties": {
         "clockAtLeast": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "id",
-            "track",
-            "days"
-          ],
+          "required": ["id", "track", "days"],
           "properties": {
             "id": {
               "type": "string",
@@ -121,17 +98,11 @@
     "checkResolution": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "type",
-        "skill"
-      ],
+      "required": ["type", "skill"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "dc",
-            "opposed"
-          ]
+          "enum": ["dc", "opposed"]
         },
         "skill": {
           "type": "string",
@@ -185,9 +156,7 @@
             }
           },
           "then": {
-            "required": [
-              "dc"
-            ]
+            "required": ["dc"]
           }
         }
       ]

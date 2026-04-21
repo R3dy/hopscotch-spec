@@ -4,14 +4,7 @@
   "title": "Hopscotch v0.5 Travel",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "from",
-    "to",
-    "distanceOrDuration"
-  ],
+  "required": ["type", "id", "name", "from", "to", "distanceOrDuration"],
   "properties": {
     "type": {
       "const": "travel"
@@ -44,10 +37,7 @@
       "minLength": 1
     },
     "randomEncountersRef": {
-      "type": [
-        "string",
-        "object"
-      ]
+      "type": ["string", "object"]
     },
     "environmentRules": {
       "type": "string"
@@ -69,9 +59,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",

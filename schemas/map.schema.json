@@ -4,13 +4,7 @@
   "title": "Hopscotch v0.5 Map",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "scope",
-    "keys"
-  ],
+  "required": ["type", "id", "name", "scope", "keys"],
   "properties": {
     "type": {
       "const": "map"

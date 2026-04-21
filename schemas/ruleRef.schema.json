@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 Rule Reference",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "source",
-    "name"
-  ],
+  "required": ["type", "id", "source", "name"],
   "properties": {
     "type": {
       "const": "ruleRef"
@@ -21,13 +16,7 @@
     },
     "source": {
       "type": "string",
-      "enum": [
-        "srd",
-        "phb",
-        "dmg",
-        "custom",
-        "other"
-      ]
+      "enum": ["srd", "phb", "dmg", "custom", "other"]
     },
     "name": {
       "type": "string",

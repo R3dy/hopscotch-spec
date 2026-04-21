@@ -4,11 +4,7 @@
   "title": "Hopscotch v0.5 World",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name"
-  ],
+  "required": ["type", "id", "name"],
   "properties": {
     "type": {
       "const": "world"

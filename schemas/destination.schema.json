@@ -4,13 +4,7 @@
   "title": "Hopscotch v0.5 Destination",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "parent",
-    "kind"
-  ],
+  "required": ["type", "id", "name", "parent", "kind"],
   "properties": {
     "type": {
       "const": "destination"
@@ -30,15 +24,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "settlement",
-        "dungeon",
-        "outpost",
-        "wilderness",
-        "ruin",
-        "ship",
-        "other"
-      ]
+      "enum": ["settlement", "dungeon", "outpost", "wilderness", "ruin", "ship", "other"]
     },
     "summary": {
       "type": "string"
@@ -66,9 +52,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",

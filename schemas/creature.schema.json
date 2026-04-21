@@ -4,13 +4,7 @@
   "title": "Hopscotch v0.5 Creature (baseRef + overlay)",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "scope",
-    "baseRef"
-  ],
+  "required": ["type", "id", "name", "scope", "baseRef"],
   "properties": {
     "type": {
       "const": "creature"
@@ -38,16 +32,11 @@
         "hp": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "mode"
-          ],
+          "required": ["mode"],
           "properties": {
             "mode": {
               "type": "string",
-              "enum": [
-                "add",
-                "set"
-              ]
+              "enum": ["add", "set"]
             },
             "value": {
               "type": "number"
@@ -63,10 +52,7 @@
         "ac": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "mode",
-            "value"
-          ],
+          "required": ["mode", "value"],
           "properties": {
             "mode": {
               "const": "set"
@@ -83,17 +69,11 @@
             "walk": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "mode",
-                "value"
-              ],
+              "required": ["mode", "value"],
               "properties": {
                 "mode": {
                   "type": "string",
-                  "enum": [
-                    "set",
-                    "add"
-                  ]
+                  "enum": ["set", "add"]
                 },
                 "value": {
                   "type": "number"
@@ -175,9 +155,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",
@@ -191,17 +169,11 @@
     "numPatch": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "mode",
-        "value"
-      ],
+      "required": ["mode", "value"],
       "properties": {
         "mode": {
           "type": "string",
-          "enum": [
-            "set",
-            "add"
-          ]
+          "enum": ["set", "add"]
         },
         "value": {
           "type": "number"
@@ -235,10 +207,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "name",
-              "text"
-            ],
+            "required": ["name", "text"],
             "properties": {
               "name": {
                 "type": "string"
@@ -266,10 +235,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "name",
-              "text"
-            ],
+            "required": ["name", "text"],
             "properties": {
               "name": {
                 "type": "string"

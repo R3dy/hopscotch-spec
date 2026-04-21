@@ -4,11 +4,7 @@
   "title": "Hopscotch v0.5 Device",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name"
-  ],
+  "required": ["type", "id", "name"],
   "properties": {
     "type": {
       "const": "device"
@@ -37,9 +33,7 @@
     "deviceStage": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "id"
-      ],
+      "required": ["id"],
       "properties": {
         "id": {
           "type": "string",

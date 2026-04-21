@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 Region",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "parent"
-  ],
+  "required": ["type", "id", "name", "parent"],
   "properties": {
     "type": {
       "const": "region"

@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 Area",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "parent"
-  ],
+  "required": ["type", "id", "name", "parent"],
   "properties": {
     "type": {
       "const": "area"
@@ -86,9 +81,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",

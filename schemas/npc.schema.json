@@ -4,12 +4,7 @@
   "title": "Hopscotch v0.5 NPC",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "scope"
-  ],
+  "required": ["type", "id", "name", "scope"],
   "properties": {
     "type": {
       "const": "npc"
@@ -129,9 +124,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",

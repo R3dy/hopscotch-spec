@@ -4,14 +4,7 @@
   "title": "Hopscotch v0.5 Hazard",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "scope",
-    "trigger",
-    "effect"
-  ],
+  "required": ["type", "id", "name", "scope", "trigger", "effect"],
   "properties": {
     "type": {
       "const": "hazard"
@@ -61,9 +54,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",

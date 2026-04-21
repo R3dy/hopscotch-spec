@@ -4,13 +4,7 @@
   "title": "Hopscotch v0.5 Clock",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "type",
-    "id",
-    "name",
-    "scope",
-    "unit"
-  ],
+  "required": ["type", "id", "name", "scope", "unit"],
   "properties": {
     "type": {
       "const": "clock"
@@ -32,22 +26,14 @@
     },
     "unit": {
       "type": "string",
-      "enum": [
-        "days",
-        "hours",
-        "turns",
-        "milestones"
-      ]
+      "enum": ["days", "hours", "turns", "milestones"]
     },
     "tracks": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "subject",
-          "max"
-        ],
+        "required": ["subject", "max"],
         "properties": {
           "subject": {
             "type": "string",
@@ -61,10 +47,7 @@
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "at",
-                "effect"
-              ],
+              "required": ["at", "effect"],
               "properties": {
                 "at": {
                   "type": "number"
@@ -99,10 +82,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "at",
-          "trigger"
-        ],
+        "required": ["at", "trigger"],
         "properties": {
           "at": {
             "type": "number"
@@ -118,9 +98,7 @@
     "refObject": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "properties": {
         "ref": {
           "type": "string",
