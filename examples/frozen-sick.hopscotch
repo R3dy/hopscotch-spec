@@ -12,23 +12,17 @@ license: "WotC - Explorer's Guide to Wildemount (summary conversion)"
 ---
 
 ```hopscotch:world id=world.exandria
-type: world
-id: world.exandria
 name: Exandria
 summary: A high-fantasy world with ancient ruins, divine conflicts, and perilous frontiers.
 ```
 
 ```hopscotch:continent id=continent.wildemount
-type: continent
-id: continent.wildemount
 name: Wildemount
 parent: world.exandria
 summary: A war-torn continent of empires, frontiers, and hidden dangers.
 ```
 
 ```hopscotch:region id=region.biting-north
-type: region
-id: region.biting-north
 name: Biting North
 parent: continent.wildemount
 summary: The arctic reaches of the Greying Wildlands and Eiselcross.
@@ -38,8 +32,6 @@ tags:
 ```
 
 ```hopscotch:destination id=destination.palebank-village
-type: destination
-id: destination.palebank-village
 name: Palebank Village
 parent: region.biting-north
 kind: settlement
@@ -50,8 +42,6 @@ tags:
 ```
 
 ```hopscotch:destination id=destination.croaker-cave
-type: destination
-id: destination.croaker-cave
 name: Croaker Cave
 parent: region.biting-north
 kind: dungeon
@@ -62,8 +52,6 @@ tags:
 ```
 
 ```hopscotch:destination id=destination.syrinlya
-type: destination
-id: destination.syrinlya
 name: Syrinlya
 parent: region.biting-north
 kind: outpost
@@ -73,8 +61,6 @@ tags:
 ```
 
 ```hopscotch:destination id=destination.salsvault
-type: destination
-id: destination.salsvault
 name: Salsvault
 parent: region.biting-north
 kind: ruin
@@ -85,8 +71,6 @@ tags:
 ```
 
 ```hopscotch:destination id=destination.eiselcross-wilds
-type: destination
-id: destination.eiselcross-wilds
 name: Eiselcross Wilds
 parent: region.biting-north
 kind: wilderness
@@ -96,8 +80,6 @@ tags:
 ```
 
 ```hopscotch:location id=location.palebank.graveyard
-type: location
-id: location.palebank.graveyard
 name: Palebank Graveyard
 parent: destination.palebank-village
 kind: landmark
@@ -105,8 +87,6 @@ summary: A snow-covered burial ground where Urgon Wenth is laid to rest.
 ```
 
 ```hopscotch:location id=location.palebank.urgon-cabin
-type: location
-id: location.palebank.urgon-cabin
 name: Urgon's Cabin
 parent: destination.palebank-village
 kind: dwelling
@@ -114,8 +94,6 @@ summary: A cramped cabin recently searched for clues about Urgon's illness.
 ```
 
 ```hopscotch:location id=location.palebank.tulgi-cabin
-type: location
-id: location.palebank.tulgi-cabin
 name: Tulgi's Cabin
 parent: destination.palebank-village
 kind: dwelling
@@ -123,8 +101,6 @@ summary: A smoky cabin where Tulgi Lutan hides her sickness and secrets.
 ```
 
 ```hopscotch:location id=location.palebank.pelc-curiosities
-type: location
-id: location.palebank.pelc-curiosities
 name: Pelc's Curiosities
 parent: destination.palebank-village
 kind: building
@@ -132,8 +108,6 @@ summary: A ransacked antique shop tied to stolen Aeorian relics.
 ```
 
 ```hopscotch:location id=location.palebank.commonhouse
-type: location
-id: location.palebank.commonhouse
 name: Palebank Commonhouse
 parent: destination.palebank-village
 kind: building
@@ -141,8 +115,6 @@ summary: A communal hall where villagers gather for news and aid.
 ```
 
 ```hopscotch:location id=location.croaker-cave.entrance
-type: location
-id: location.croaker-cave.entrance
 name: Croaker Cave Entrance
 parent: destination.croaker-cave
 kind: landmark
@@ -150,8 +122,6 @@ summary: A smoke-vented cave mouth on the Frigid Depths shoreline.
 ```
 
 ```hopscotch:location id=location.croaker-cave.main
-type: location
-id: location.croaker-cave.main
 name: Croaker Cave Hideout
 parent: destination.croaker-cave
 kind: other
@@ -159,8 +129,6 @@ summary: The bandit hideout ruled by Hulil Lutan and guarded by ice frogs.
 ```
 
 ```hopscotch:location id=location.syrinlya.outpost
-type: location
-id: location.syrinlya.outpost
 name: Syrinlya Outpost
 parent: destination.syrinlya
 kind: district
@@ -168,8 +136,6 @@ summary: A wind-scoured outpost with explorers, docks, and a resident Buyer.
 ```
 
 ```hopscotch:location id=location.salsvault.entry
-type: location
-id: location.salsvault.entry
 name: Salsvault Entry
 parent: destination.salsvault
 kind: landmark
@@ -177,8 +143,6 @@ summary: The breached entrance to the submerged Aeorian ruin.
 ```
 
 ```hopscotch:location id=location.eiselcross.sea-route
-type: location
-id: location.eiselcross.sea-route
 name: Sea Route to Syrinlya
 parent: destination.eiselcross-wilds
 kind: landmark
@@ -186,8 +150,6 @@ summary: A bitter voyage across the frigid seas to Foren.
 ```
 
 ```hopscotch:location id=location.eiselcross.ice-trek
-type: location
-id: location.eiselcross.ice-trek
 name: Ice Trek to Salsvault
 parent: destination.eiselcross-wilds
 kind: landmark
@@ -195,8 +157,6 @@ summary: A wind-lashed trek across Eiselcross toward the ruin.
 ```
 
 ```hopscotch:area id=area.croaker.c1
-type: area
-id: area.croaker.c1
 name: Cave Mouth
 parent: destination.croaker-cave
 key: C1
@@ -207,8 +167,6 @@ features:
 ```
 
 ```hopscotch:area id=area.croaker.c2
-type: area
-id: area.croaker.c2
 name: Frog Pools
 parent: destination.croaker-cave
 key: C2
@@ -219,8 +177,6 @@ features:
 ```
 
 ```hopscotch:area id=area.croaker.c3
-type: area
-id: area.croaker.c3
 name: Bandit Camp
 parent: destination.croaker-cave
 key: C3
@@ -231,8 +187,6 @@ features:
 ```
 
 ```hopscotch:area id=area.croaker.c4
-type: area
-id: area.croaker.c4
 name: Old Croaker's Den
 parent: destination.croaker-cave
 key: C4
@@ -243,8 +197,6 @@ features:
 ```
 
 ```hopscotch:area id=area.croaker.c5
-type: area
-id: area.croaker.c5
 name: Hulil's Shrine
 parent: destination.croaker-cave
 key: C5
@@ -255,8 +207,6 @@ features:
 ```
 
 ```hopscotch:area id=area.croaker.c6
-type: area
-id: area.croaker.c6
 name: Storage Niche
 parent: destination.croaker-cave
 key: C6
@@ -267,8 +217,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s1
-type: area
-id: area.salsvault.s1
 name: Entry Hall
 parent: destination.salsvault
 key: S1
@@ -277,8 +225,6 @@ readAloud: "Frost coats broken stone tiles. Ancient runes glimmer faintly in the
 ```
 
 ```hopscotch:area id=area.salsvault.s2
-type: area
-id: area.salsvault.s2
 name: Shattered Antechamber
 parent: destination.salsvault
 key: S2
@@ -287,8 +233,6 @@ readAloud: "Broken tables and shattered glass crunch underfoot, half-buried in d
 ```
 
 ```hopscotch:area id=area.salsvault.s3
-type: area
-id: area.salsvault.s3
 name: Rune Door
 parent: destination.salsvault
 key: S3
@@ -297,8 +241,6 @@ readAloud: "A stone door bears faded Draconic script: 'Authorized personnel only
 ```
 
 ```hopscotch:area id=area.salsvault.s4
-type: area
-id: area.salsvault.s4
 name: Frigid Woe Laboratory
 parent: destination.salsvault
 key: S4
@@ -310,8 +252,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s5
-type: area
-id: area.salsvault.s5
 name: Disease Storage
 parent: destination.salsvault
 key: S5
@@ -323,8 +263,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s6
-type: area
-id: area.salsvault.s6
 name: North Hall
 parent: destination.salsvault
 key: S6
@@ -335,8 +273,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s7
-type: area
-id: area.salsvault.s7
 name: Unoccupied Dorm
 parent: destination.salsvault
 key: S7
@@ -345,8 +281,6 @@ readAloud: "Four built-in beds line the walls, each with a footlocker beneath."
 ```
 
 ```hopscotch:area id=area.salsvault.s8
-type: area
-id: area.salsvault.s8
 name: Ruined Dorm
 parent: destination.salsvault
 key: S8
@@ -357,8 +291,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s9
-type: area
-id: area.salsvault.s9
 name: Zombie Dorm
 parent: destination.salsvault
 key: S9
@@ -369,8 +301,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s10
-type: area
-id: area.salsvault.s10
 name: Ferol Sal's Chamber
 parent: destination.salsvault
 key: S10
@@ -382,8 +312,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s11
-type: area
-id: area.salsvault.s11
 name: Kitchen
 parent: destination.salsvault
 key: S11
@@ -394,8 +322,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s12
-type: area
-id: area.salsvault.s12
 name: Dining Hall
 parent: destination.salsvault
 key: S12
@@ -406,8 +332,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s13
-type: area
-id: area.salsvault.s13
 name: Drowned Library
 parent: destination.salsvault
 key: S13
@@ -420,8 +344,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s14
-type: area
-id: area.salsvault.s14
 name: South Hall
 parent: destination.salsvault
 key: S14
@@ -432,8 +354,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s15
-type: area
-id: area.salsvault.s15
 name: Animated Weapon Storage
 parent: destination.salsvault
 key: S15
@@ -444,8 +364,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s16
-type: area
-id: area.salsvault.s16
 name: Golem Laboratory
 parent: destination.salsvault
 key: S16
@@ -456,8 +374,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s17
-type: area
-id: area.salsvault.s17
 name: Ferol's Laboratory
 parent: destination.salsvault
 key: S17
@@ -468,8 +384,6 @@ features:
 ```
 
 ```hopscotch:area id=area.salsvault.s18
-type: area
-id: area.salsvault.s18
 name: Curative Laboratory
 parent: destination.salsvault
 key: S18
@@ -482,8 +396,6 @@ features:
 ```
 
 ```hopscotch:npc id=npc.elro-aldataur
-type: npc
-id: npc.elro-aldataur
 name: Elro Aldataur
 scope: destination.palebank-village
 alignment: neutral good
@@ -495,8 +407,6 @@ hooks:
 ```
 
 ```hopscotch:npc id=npc.urgon-wenth
-type: npc
-id: npc.urgon-wenth
 name: Urgon Wenth
 scope: destination.palebank-village
 alignment: neutral
@@ -507,8 +417,6 @@ hooks:
 ```
 
 ```hopscotch:npc id=npc.mila-teno
-type: npc
-id: npc.mila-teno
 name: Mila Teno
 scope: destination.palebank-village
 alignment: lawful good
@@ -518,8 +426,6 @@ statblock: scout
 ```
 
 ```hopscotch:npc id=npc.tulgi-lutan
-type: npc
-id: npc.tulgi-lutan
 name: Tulgi Lutan
 scope: destination.palebank-village
 alignment: neutral evil
@@ -531,8 +437,6 @@ hooks:
 ```
 
 ```hopscotch:npc id=npc.hulil-lutan
-type: npc
-id: npc.hulil-lutan
 name: Hulil Lutan
 scope: destination.croaker-cave
 alignment: lawful evil
@@ -543,8 +447,6 @@ hooks:
 ```
 
 ```hopscotch:npc id=npc.verla-pelc
-type: npc
-id: npc.verla-pelc
 name: Verla Pelc
 scope: destination.palebank-village
 alignment: neutral
@@ -555,8 +457,6 @@ hooks:
 ```
 
 ```hopscotch:npc id=npc.irven-liel
-type: npc
-id: npc.irven-liel
 name: Irven Liel
 scope: destination.palebank-village
 alignment: neutral
@@ -567,8 +467,6 @@ hooks:
 ```
 
 ```hopscotch:npc id=npc.ferol-sal
-type: npc
-id: npc.ferol-sal
 name: Ferol Sal
 scope: destination.salsvault
 alignment: neutral evil
@@ -580,8 +478,6 @@ hooks:
 ```
 
 ```hopscotch:creature id=creature.bandit
-type: creature
-id: creature.bandit
 name: Bandit
 scope: region.biting-north
 baseRef: srd:bandit
@@ -589,8 +485,6 @@ notes: "Uttolot thugs in Palebank and Croaker Cave."
 ```
 
 ```hopscotch:creature id=creature.wolf
-type: creature
-id: creature.wolf
 name: Wolf
 scope: destination.palebank-village
 baseRef: srd:wolf
@@ -598,8 +492,6 @@ notes: "Tulgi's pets, Iro and Jira."
 ```
 
 ```hopscotch:creature id=creature.giant-ice-frog
-type: creature
-id: creature.giant-ice-frog
 name: Giant Ice Frog
 scope: destination.croaker-cave
 baseRef: srd:giant-frog
@@ -611,8 +503,6 @@ notes: "Croaker Cave frogs are immune to cold damage."
 ```
 
 ```hopscotch:creature id=creature.zombie
-type: creature
-id: creature.zombie
 name: Zombie
 scope: destination.salsvault
 baseRef: srd:zombie
@@ -620,8 +510,6 @@ notes: "Tattered Aeorian undead roaming the halls."
 ```
 
 ```hopscotch:creature id=creature.flying-sword
-type: creature
-id: creature.flying-sword
 name: Flying Sword
 scope: destination.salsvault
 baseRef: srd:flying-sword
@@ -629,8 +517,6 @@ notes: "Animated weapons left in Salsvault."
 ```
 
 ```hopscotch:creature id=creature.flying-knife
-type: creature
-id: creature.flying-knife
 name: Animated Kitchen Knife
 scope: destination.salsvault
 baseRef: srd:flying-sword
@@ -642,8 +528,6 @@ notes: "Tiny animated knives; use flying sword statistics with reduced size."
 ```
 
 ```hopscotch:creature id=creature.flesh-golem-damaged
-type: creature
-id: creature.flesh-golem-damaged
 name: Damaged Flesh Golem
 scope: destination.salsvault
 baseRef: srd:flesh-golem
@@ -655,8 +539,6 @@ notes: "Berserk, missing an arm, cannot Multiattack."
 ```
 
 ```hopscotch:creature id=creature.giant-crab
-type: creature
-id: creature.giant-crab
 name: Giant Crab
 scope: destination.salsvault
 baseRef: srd:giant-crab
@@ -664,8 +546,6 @@ notes: "Lurks beneath kelp in the curative laboratory."
 ```
 
 ```hopscotch:creature id=creature.giant-octopus
-type: creature
-id: creature.giant-octopus
 name: Giant Octopus
 scope: destination.salsvault
 baseRef: srd:giant-octopus
@@ -673,16 +553,12 @@ notes: "Dwells in the drowned library."
 ```
 
 ```hopscotch:creature id=creature.rug-of-smothering
-type: creature
-id: creature.rug-of-smothering
 name: Rug of Smothering
 scope: destination.salsvault
 baseRef: srd:rug-of-smothering
 ```
 
 ```hopscotch:creature id=creature.undead-snake-swarm
-type: creature
-id: creature.undead-snake-swarm
 name: Swarm of Undead Snakes
 scope: destination.salsvault
 baseRef: srd:swarm-of-poisonous-snakes
@@ -698,8 +574,6 @@ notes: "Immune to poison damage and the poisoned condition."
 ```
 
 ```hopscotch:hazard id=hazard.tulgi.fire
-type: hazard
-id: hazard.tulgi.fire
 name: Cabin Fire Hazards
 scope: location.palebank.tulgi-cabin
 trigger: A creature touches the brazier or fireplace, or starts its turn adjacent.
@@ -708,8 +582,6 @@ damage: "2 (1d4) fire"
 ```
 
 ```hopscotch:hazard id=hazard.salsvault.flame-jet
-type: hazard
-id: hazard.salsvault.flame-jet
 name: Salsvault Flame Jets
 scope: area.salsvault.s5
 trigger: The lever in S4 is down and a creature enters or starts its turn in S5.
@@ -721,8 +593,6 @@ disarm: "Push the lever in S4 to the up position."
 ```
 
 ```hopscotch:hazard id=hazard.salsvault.trapped-chest
-type: hazard
-id: hazard.salsvault.trapped-chest
 name: Frigid Woe Chest Trap
 scope: area.salsvault.s4
 trigger: A creature fails to pick or force a disease chest in S4.
@@ -731,8 +601,6 @@ damage: "4 (1d8) cold"
 ```
 
 ```hopscotch:hazard id=hazard.salsvault.frigid-water
-type: hazard
-id: hazard.salsvault.frigid-water
 name: Frigid Seawater
 scope: destination.salsvault
 trigger: A creature enters flooded areas of Salsvault.
@@ -740,8 +608,6 @@ effect: The freezing water saps strength and slows movement.
 ```
 
 ```hopscotch:encounter id=encounter.palebank.tulgi
-type: encounter
-id: encounter.palebank.tulgi
 name: Tulgi's Desperation
 scope: location.palebank.tulgi-cabin
 encounterType: combat
@@ -755,8 +621,6 @@ hazards:
 ```
 
 ```hopscotch:encounter id=encounter.palebank.bandits
-type: encounter
-id: encounter.palebank.bandits
 name: Pelc's Curiosities Bandits
 scope: location.palebank.pelc-curiosities
 encounterType: combat
@@ -767,8 +631,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.croaker.ice-frogs
-type: encounter
-id: encounter.croaker.ice-frogs
 name: Croaker Cave Ice Frogs
 scope: destination.croaker-cave
 encounterType: combat
@@ -779,8 +641,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.croaker.old-croaker
-type: encounter
-id: encounter.croaker.old-croaker
 name: Old Croaker
 scope: destination.croaker-cave
 encounterType: combat
@@ -791,8 +651,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.croaker.bandits
-type: encounter
-id: encounter.croaker.bandits
 name: Uttolot Bandit Camp
 scope: destination.croaker-cave
 encounterType: combat
@@ -803,8 +661,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.croaker.hulil
-type: encounter
-id: encounter.croaker.hulil
 name: Hulil's Last Stand
 scope: destination.croaker-cave
 encounterType: combat
@@ -818,8 +674,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.zombies-north
-type: encounter
-id: encounter.salsvault.zombies-north
 name: North Hall Zombies
 scope: destination.salsvault
 encounterType: combat
@@ -830,8 +684,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.zombies-dorm
-type: encounter
-id: encounter.salsvault.zombies-dorm
 name: Zombie Dorm
 scope: destination.salsvault
 encounterType: combat
@@ -842,8 +694,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.zombies-dining
-type: encounter
-id: encounter.salsvault.zombies-dining
 name: Dining Hall Zombies
 scope: destination.salsvault
 encounterType: combat
@@ -854,8 +704,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.zombies-south
-type: encounter
-id: encounter.salsvault.zombies-south
 name: South Hall Zombies
 scope: destination.salsvault
 encounterType: combat
@@ -866,8 +714,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.rug-of-smothering
-type: encounter
-id: encounter.salsvault.rug-of-smothering
 name: Animated Rug
 scope: destination.salsvault
 encounterType: combat
@@ -878,8 +724,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.undead-snakes
-type: encounter
-id: encounter.salsvault.undead-snakes
 name: Chest of Undead Snakes
 scope: destination.salsvault
 encounterType: combat
@@ -890,8 +734,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.animated-knives
-type: encounter
-id: encounter.salsvault.animated-knives
 name: Animated Kitchen Knives
 scope: destination.salsvault
 encounterType: combat
@@ -902,8 +744,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.flying-swords
-type: encounter
-id: encounter.salsvault.flying-swords
 name: Animated Weapon Storage
 scope: destination.salsvault
 encounterType: combat
@@ -914,8 +754,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.flesh-golem
-type: encounter
-id: encounter.salsvault.flesh-golem
 name: Damaged Flesh Golem
 scope: destination.salsvault
 encounterType: combat
@@ -926,8 +764,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.giant-octopus
-type: encounter
-id: encounter.salsvault.giant-octopus
 name: Drowned Library Octopus
 scope: destination.salsvault
 encounterType: combat
@@ -938,8 +774,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.ferol
-type: encounter
-id: encounter.salsvault.ferol
 name: Ferol Sal's Bargain
 scope: area.salsvault.s17
 encounterType: mixed
@@ -949,8 +783,6 @@ participants:
 ```
 
 ```hopscotch:encounter id=encounter.salsvault.giant-crabs
-type: encounter
-id: encounter.salsvault.giant-crabs
 name: Curative Laboratory Crabs
 scope: destination.salsvault
 encounterType: combat
@@ -961,8 +793,6 @@ participants:
 ```
 
 ```hopscotch:loot id=loot.urgon-gear
-type: loot
-id: loot.urgon-gear
 name: Urgon's Adventuring Gear
 scope: location.palebank.urgon-cabin
 items:
@@ -979,8 +809,6 @@ items:
 ```
 
 ```hopscotch:loot id=loot.tulgi-dagger
-type: loot
-id: loot.tulgi-dagger
 name: Aeorian Dagger
 scope: location.palebank.tulgi-cabin
 items:
@@ -990,8 +818,6 @@ items:
 ```
 
 ```hopscotch:loot id=loot.croaker.relics
-type: loot
-id: loot.croaker.relics
 name: Stolen Aeorian Relics
 scope: destination.croaker-cave
 items:
@@ -1009,8 +835,6 @@ items:
 ```
 
 ```hopscotch:loot id=loot.salsvault.frigid-woe-vials-s4
-type: loot
-id: loot.salsvault.frigid-woe-vials-s4
 name: Frigid Woe Vials (S4)
 scope: area.salsvault.s4
 items:
@@ -1019,8 +843,6 @@ items:
 ```
 
 ```hopscotch:loot id=loot.salsvault.frigid-woe-vials-s5
-type: loot
-id: loot.salsvault.frigid-woe-vials-s5
 name: Frigid Woe Vials (S5)
 scope: area.salsvault.s5
 items:
@@ -1029,8 +851,6 @@ items:
 ```
 
 ```hopscotch:loot id=loot.salsvault.ferol-treasure
-type: loot
-id: loot.salsvault.ferol-treasure
 name: Ferol Sal's Coinage
 scope: area.salsvault.s10
 items:
@@ -1043,8 +863,6 @@ items:
 ```
 
 ```hopscotch:loot id=loot.salsvault.drowned-library
-type: loot
-id: loot.salsvault.drowned-library
 name: Drowned Library Scrolls
 scope: area.salsvault.s13
 items:
@@ -1053,8 +871,6 @@ items:
 ```
 
 ```hopscotch:loot id=loot.salsvault.antidote
-type: loot
-id: loot.salsvault.antidote
 name: Frigid Woe Antidote
 scope: area.salsvault.s18
 items:
@@ -1065,8 +881,6 @@ items:
 ```
 
 ```hopscotch:travel id=travel.palebank-to-syrinlya
-type: travel
-id: travel.palebank-to-syrinlya
 name: Palebank to Syrinlya
 from: destination.palebank-village
 to: destination.syrinlya
@@ -1075,8 +889,6 @@ environmentRules: "Arctic seas, biting winds, and limited visibility."
 ```
 
 ```hopscotch:travel id=travel.syrinlya-to-salsvault
-type: travel
-id: travel.syrinlya-to-salsvault
 name: Syrinlya to Salsvault
 from: destination.syrinlya
 to: destination.salsvault
@@ -1085,8 +897,6 @@ environmentRules: "Blizzards, crevasses, and shifting ice."
 ```
 
 ```hopscotch:travel id=travel.salsvault-to-syrinlya
-type: travel
-id: travel.salsvault-to-syrinlya
 name: Salsvault to Syrinlya
 from: destination.salsvault
 to: destination.syrinlya
@@ -1095,8 +905,6 @@ environmentRules: "Exhaustion and winter hazards increase on the way back."
 ```
 
 ```hopscotch:travel id=travel.syrinlya-to-palebank
-type: travel
-id: travel.syrinlya-to-palebank
 name: Syrinlya to Palebank
 from: destination.syrinlya
 to: destination.palebank-village
@@ -1105,8 +913,6 @@ environmentRules: "Ice floes and sudden storms threaten passage."
 ```
 
 ```hopscotch:clock id=clock.frigid-woe
-type: clock
-id: clock.frigid-woe
 name: Frigid Woe Countdown
 scope: destination.palebank-village
 unit: milestones
@@ -1123,8 +929,6 @@ advance:
 ```
 
 ```hopscotch:secret id=secret.frigid-woe-vials
-type: secret
-id: secret.frigid-woe-vials
 name: Frigid woe hides in the blue vials
 scope: destination.palebank-village
 text: The blue glass vials are contaminated with frigid woe spores.
@@ -1135,8 +939,6 @@ reveal:
 ```
 
 ```hopscotch:secret id=secret.pelc-receipt
-type: secret
-id: secret.pelc-receipt
 name: Urgon sold relics to Pelc's Curiosities
 scope: destination.palebank-village
 text: A receipt in Urgon's cabin lists relics sold to Pelc's Curiosities.
@@ -1147,8 +949,6 @@ reveal:
 ```
 
 ```hopscotch:secret id=secret.tulgi-uttolot
-type: secret
-id: secret.tulgi-uttolot
 name: Tulgi and Hulil work for the Uttolots
 scope: destination.palebank-village
 text: The sisters are Uttolot agents sent to steal Eiselcross relics.
@@ -1159,8 +959,6 @@ reveal:
 ```
 
 ```hopscotch:secret id=secret.hulil-croaker
-type: secret
-id: secret.hulil-croaker
 name: Hulil hides in Croaker Cave
 scope: destination.croaker-cave
 text: Hulil Lutan holds the stolen relics in Croaker Cave.
@@ -1171,8 +969,6 @@ reveal:
 ```
 
 ```hopscotch:secret id=secret.verla-dead
-type: secret
-id: secret.verla-dead
 name: Verla Pelc died of frigid woe
 scope: destination.palebank-village
 text: Verla Pelc is already frozen to death in her quarters.
@@ -1183,8 +979,6 @@ reveal:
 ```
 
 ```hopscotch:secret id=secret.irven-infected
-type: secret
-id: secret.irven-infected
 name: Irven Liel and family are infected
 scope: destination.palebank-village
 text: The merchant who bought the vials has infected his family.
@@ -1194,8 +988,6 @@ reveal:
 ```
 
 ```hopscotch:secret id=secret.salsvault-location
-type: secret
-id: secret.salsvault-location
 name: Salsvault lies on Foren in Eiselcross
 scope: destination.syrinlya
 text: Urgon's notes and Syrinlya scouts can point the party to Salsvault.
@@ -1205,8 +997,6 @@ reveal:
 ```
 
 ```hopscotch:secret id=secret.antidote-cache
-type: secret
-id: secret.antidote-cache
 name: The antidote is in the curative lab
 scope: destination.salsvault
 text: The frigid woe antidote is locked in a chest in the curative laboratory.
@@ -1217,8 +1007,6 @@ reveal:
 ```
 
 ```hopscotch:scene id=scene.palebank.funeral
-type: scene
-id: scene.palebank.funeral
 title: "Funeral in the Snow"
 summary: The party attends Urgon Wenth's funeral and meets Elro Aldataur.
 location: location.palebank.graveyard
@@ -1245,8 +1033,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.palebank.urgon-cabin
-type: scene
-id: scene.palebank.urgon-cabin
 title: "Urgon's Cabin"
 summary: The party searches Urgon's home and finds signs of a recent break-in.
 location: location.palebank.urgon-cabin
@@ -1273,8 +1059,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.palebank.tulgi-cabin
-type: scene
-id: scene.palebank.tulgi-cabin
 title: "Tulgi's Sickness"
 summary: The party confronts Tulgi Lutan, who resists but may reveal the theft.
 location: location.palebank.tulgi-cabin
@@ -1305,8 +1089,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.palebank.pelc-curiosities
-type: scene
-id: scene.palebank.pelc-curiosities
 title: "Pelc's Curiosities"
 summary: The party finds the shop ransacked by bandits and discovers Verla Pelc frozen.
 location: location.palebank.pelc-curiosities
@@ -1340,8 +1122,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.croaker.approach
-type: scene
-id: scene.croaker.approach
 title: "Approach to Croaker Cave"
 summary: Tracks and smoke mark a guarded cave on the Frigid Depths shoreline.
 location: location.croaker-cave.entrance
@@ -1355,8 +1135,6 @@ dialogue:
 ```
 
 ```hopscotch:scene id=scene.croaker.hideout
-type: scene
-id: scene.croaker.hideout
 title: "Hulil's Hideout"
 summary: The party confronts bandits and Hulil Lutan amid giant ice frogs.
 location: location.croaker-cave.main
@@ -1380,8 +1158,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.palebank.irven-infected
-type: scene
-id: scene.palebank.irven-infected
 title: "The Next Victims"
 summary: Irven Liel and his family are revealed to be infected.
 location: location.palebank.commonhouse
@@ -1401,8 +1177,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.travel.to-syrinlya
-type: scene
-id: scene.travel.to-syrinlya
 title: "Voyage to Eiselcross"
 summary: The party sails north toward Syrinlya to seek a cure.
 location: location.eiselcross.sea-route
@@ -1414,8 +1188,6 @@ dialogue:
 ```
 
 ```hopscotch:scene id=scene.syrinlya.arrival
-type: scene
-id: scene.syrinlya.arrival
 title: "Syrinlya's Buyer"
 summary: The party arrives at the outpost and learns how to reach Salsvault.
 location: location.syrinlya.outpost
@@ -1433,8 +1205,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.travel.to-salsvault
-type: scene
-id: scene.travel.to-salsvault
 title: "Across the Ice"
 summary: The party treks across Eiselcross toward the buried ruins.
 location: location.eiselcross.ice-trek
@@ -1446,8 +1216,6 @@ dialogue:
 ```
 
 ```hopscotch:scene id=scene.salsvault.entry
-type: scene
-id: scene.salsvault.entry
 title: "Enter Salsvault"
 summary: The party breaks into the Aeorian ruin.
 location: location.salsvault.entry
@@ -1462,8 +1230,6 @@ conditions:
 ```
 
 ```hopscotch:scene id=scene.salsvault.ferol
-type: scene
-id: scene.salsvault.ferol
 title: "Ferol Sal's Bargain"
 summary: The party confronts the undead mage and learns of the curative lab.
 location: area.salsvault.s17
@@ -1491,8 +1257,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.salsvault.curative-lab
-type: scene
-id: scene.salsvault.curative-lab
 title: "The Curative Laboratory"
 summary: The party retrieves the antidote from the flooded chamber.
 location: area.salsvault.s18
@@ -1512,8 +1276,6 @@ outcomes:
 ```
 
 ```hopscotch:scene id=scene.return.to-syrinlya
-type: scene
-id: scene.return.to-syrinlya
 title: "Return to Syrinlya"
 summary: The antidote is delivered to the Buyer for teleportation.
 location: location.syrinlya.outpost
@@ -1527,8 +1289,6 @@ dialogue:
 ```
 
 ```hopscotch:scene id=scene.conclusion
-type: scene
-id: scene.conclusion
 title: "A Cold Curse Lifted"
 summary: Palebank Village is saved if the antidote arrives in time.
 location: location.palebank.commonhouse
@@ -1541,123 +1301,143 @@ dialogue:
     text: "The Buyer pays out a 200 gp reward on Elro's behalf once the antidote is delivered."
 ```
 
-```hopscotch:transition id=transition.funeral-to-urgon
+```hopscotch:link id=transition.funeral-to-urgon
 from: scene.palebank.funeral
-to: scene.palebank.urgon-cabin
-label: "Investigate Urgon's cabin"
-condition: "Party agrees to help Elro"
+to:
+  - scene.palebank.urgon-cabin
+linkType: narrative_branch
+notes: Label: "Investigate Urgon's cabin"; Condition: "Party agrees to help Elro"
 ```
 
-```hopscotch:transition id=transition.funeral-to-tulgi
+```hopscotch:link id=transition.funeral-to-tulgi
 from: scene.palebank.funeral
-to: scene.palebank.tulgi-cabin
-label: "Visit Tulgi Lutan"
-condition: "Party agrees to help Elro"
+to:
+  - scene.palebank.tulgi-cabin
+linkType: narrative_branch
+notes: Label: "Visit Tulgi Lutan"; Condition: "Party agrees to help Elro"
 ```
 
-```hopscotch:transition id=transition.funeral-to-pelc
+```hopscotch:link id=transition.funeral-to-pelc
 from: scene.palebank.funeral
-to: scene.palebank.pelc-curiosities
-label: "Check Pelc's Curiosities"
-condition: "Party agrees to help Elro"
+to:
+  - scene.palebank.pelc-curiosities
+linkType: narrative_branch
+notes: Label: "Check Pelc's Curiosities"; Condition: "Party agrees to help Elro"
 ```
 
-```hopscotch:transition id=transition.urgon-to-pelc
+```hopscotch:link id=transition.urgon-to-pelc
 from: scene.palebank.urgon-cabin
-to: scene.palebank.pelc-curiosities
-label: "Follow the receipt to Pelc's Curiosities"
-condition: "Party finds the receipt"
+to:
+  - scene.palebank.pelc-curiosities
+linkType: narrative_branch
+notes: Label: "Follow the receipt to Pelc's Curiosities"; Condition: "Party finds the receipt"
 ```
 
-```hopscotch:transition id=transition.urgon-to-tulgi
+```hopscotch:link id=transition.urgon-to-tulgi
 from: scene.palebank.urgon-cabin
-to: scene.palebank.tulgi-cabin
-label: "Follow the footprints to Tulgi's cabin"
-condition: "Party finds intruder's footprints"
+to:
+  - scene.palebank.tulgi-cabin
+linkType: narrative_branch
+notes: Label: "Follow the footprints to Tulgi's cabin"; Condition: "Party finds intruder's footprints"
 ```
 
-```hopscotch:transition id=transition.tulgi-to-croaker
+```hopscotch:link id=transition.tulgi-to-croaker
 from: scene.palebank.tulgi-cabin
-to: scene.croaker.approach
-label: "Head to Croaker Cave to find Hulil"
-condition: "Tulgi reveals Hulil's location"
+to:
+  - scene.croaker.approach
+linkType: narrative_branch
+notes: Label: "Head to Croaker Cave to find Hulil"; Condition: "Tulgi reveals Hulil's location"
 ```
 
-```hopscotch:transition id=transition.pelc-to-croaker
+```hopscotch:link id=transition.pelc-to-croaker
 from: scene.palebank.pelc-curiosities
-to: scene.croaker.approach
-label: "Head to Croaker Cave to find Hulil"
-condition: "Captured bandits reveal Hulil's location"
+to:
+  - scene.croaker.approach
+linkType: narrative_branch
+notes: Label: "Head to Croaker Cave to find Hulil"; Condition: "Captured bandits reveal Hulil's location"
 ```
 
-```hopscotch:transition id=transition.approach-to-hideout
+```hopscotch:link id=transition.approach-to-hideout
 from: scene.croaker.approach
-to: scene.croaker.hideout
-label: "Enter Croaker Cave"
+to:
+  - scene.croaker.hideout
+linkType: narrative_branch
+notes: Label: "Enter Croaker Cave"
 ```
 
-```hopscotch:transition id=transition.hideout-to-irven
+```hopscotch:link id=transition.hideout-to-irven
 from: scene.croaker.hideout
-to: scene.palebank.irven-infected
-label: "Return to Palebank Village"
-condition: "Party recovers the relics"
+to:
+  - scene.palebank.irven-infected
+linkType: narrative_branch
+notes: Label: "Return to Palebank Village"; Condition: "Party recovers the relics"
 ```
 
-```hopscotch:transition id=transition.irven-to-voyage
+```hopscotch:link id=transition.irven-to-voyage
 from: scene.palebank.irven-infected
-to: scene.travel.to-syrinlya
-label: "Sail north to Eiselcross to find a cure"
-condition: "Party learns a cure is needed"
+to:
+  - scene.travel.to-syrinlya
+linkType: narrative_branch
+notes: Label: "Sail north to Eiselcross to find a cure"; Condition: "Party learns a cure is needed"
 ```
 
-```hopscotch:transition id=transition.voyage-to-syrinlya
+```hopscotch:link id=transition.voyage-to-syrinlya
 from: scene.travel.to-syrinlya
-to: scene.syrinlya.arrival
-label: "Arrive at Syrinlya outpost"
+to:
+  - scene.syrinlya.arrival
+linkType: narrative_branch
+notes: Label: "Arrive at Syrinlya outpost"
 ```
 
-```hopscotch:transition id=transition.syrinlya-to-ice
+```hopscotch:link id=transition.syrinlya-to-ice
 from: scene.syrinlya.arrival
-to: scene.travel.to-salsvault
-label: "Trek across the ice to Salsvault"
-condition: "The Buyer reveals Salsvault's location"
+to:
+  - scene.travel.to-salsvault
+linkType: narrative_branch
+notes: Label: "Trek across the ice to Salsvault"; Condition: "The Buyer reveals Salsvault's location"
 ```
 
-```hopscotch:transition id=transition.ice-to-salsvault
+```hopscotch:link id=transition.ice-to-salsvault
 from: scene.travel.to-salsvault
-to: scene.salsvault.entry
-label: "Reach the Salsvault ruins"
+to:
+  - scene.salsvault.entry
+linkType: narrative_branch
+notes: Label: "Reach the Salsvault ruins"
 ```
 
-```hopscotch:transition id=transition.entry-to-ferol
+```hopscotch:link id=transition.entry-to-ferol
 from: scene.salsvault.entry
-to: scene.salsvault.ferol
-label: "Explore deeper into Salsvault"
+to:
+  - scene.salsvault.ferol
+linkType: narrative_branch
+notes: Label: "Explore deeper into Salsvault"
 ```
 
-```hopscotch:transition id=transition.ferol-to-curative
+```hopscotch:link id=transition.ferol-to-curative
 from: scene.salsvault.ferol
-to: scene.salsvault.curative-lab
-label: "Find the curative laboratory"
-condition: "Ferol reveals or party discovers the lab"
+to:
+  - scene.salsvault.curative-lab
+linkType: narrative_branch
+notes: Label: "Find the curative laboratory"; Condition: "Ferol reveals or party discovers the lab"
 ```
 
-```hopscotch:transition id=transition.curative-to-return
+```hopscotch:link id=transition.curative-to-return
 from: scene.salsvault.curative-lab
-to: scene.return.to-syrinlya
-label: "Return to Syrinlya with the antidote"
-condition: "Party secures the antidote"
+to:
+  - scene.return.to-syrinlya
+linkType: narrative_branch
+notes: Label: "Return to Syrinlya with the antidote"; Condition: "Party secures the antidote"
 ```
 
-```hopscotch:transition id=transition.return-to-conclusion
+```hopscotch:link id=transition.return-to-conclusion
 from: scene.return.to-syrinlya
-to: scene.conclusion
-label: "Deliver the antidote to Palebank Village"
+to:
+  - scene.conclusion
+linkType: narrative_branch
+notes: Label: "Deliver the antidote to Palebank Village"
 ```
 
 ```hopscotch:milestone id=milestone.level-3
-type: milestone
-id: milestone.level-3
 name: Reach Level 3
 when: After delivering the antidote to Palebank Village.
 effect: The party advances to 3rd level.
