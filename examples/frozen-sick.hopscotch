@@ -607,6 +607,38 @@ trigger: A creature enters flooded areas of Salsvault.
 effect: The freezing water saps strength and slows movement.
 ```
 
+```hopscotch:ruleRef id=rule.frigid-woe-disease
+source: custom
+name: Frigid Woe Disease
+notes: |
+  Frigid woe is a fungal disease that turns victims to ice. Transmission: contact with contaminated vials or inhalation of spores. Onset: 1d4 days after exposure. Symptoms: chills, blue veins, speed reduced by 10 ft., eventual freezing (see clock.frigid-woe). Cure: antidote from Salsvault curative laboratory or Greater Restoration spell.
+tags:
+  - disease
+  - condition
+```
+
+```hopscotch:hazard id=hazard.frigid-woe-disease-palebank
+name: Frigid Woe Disease
+scope: destination.palebank-village
+trigger: A creature touches a contaminated vial or inhales frigid woe spores.
+effect: The creature must succeed on a DC 13 Constitution saving throw or contract Frigid Woe.
+save: Constitution
+dc: 13
+rules:
+  - ref: rule.frigid-woe-disease
+```
+
+```hopscotch:hazard id=hazard.frigid-woe-disease-salsvault
+name: Frigid Woe Disease
+scope: destination.salsvault
+trigger: A creature touches a contaminated vial or inhales frigid woe spores.
+effect: The creature must succeed on a DC 13 Constitution saving throw or contract Frigid Woe.
+save: Constitution
+dc: 13
+rules:
+  - ref: rule.frigid-woe-disease
+```
+
 ```hopscotch:encounter id=encounter.palebank.tulgi
 name: Tulgi's Desperation
 scope: location.palebank.tulgi-cabin
