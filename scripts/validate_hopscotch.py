@@ -152,7 +152,7 @@ ALLOWED_FIELDS: Dict[str, Set[str]] = {
     "device": {"name", "scope", "stages"},
     "asset": {"kind", "uri", "title", "roles", "visibility", "alt", "credit"},
     "guide": {"title", "category", "order", "content", "linkedEntityId", "scope"},
-    "puzzle": {"name", "scope", "kind", "difficulty", "summary", "setup", "clues", "solution", "onSolve", "onFail", "fallback", "hints", "tags", "imageUri"},
+    "puzzle": {"name", "scope", "kind", "difficulty", "summary", "setup", "trigger", "clues", "solution", "onSolve", "onFail", "fallback", "hints", "tags", "imageUri", "foundInScenes"},
 }
 
 
@@ -579,6 +579,12 @@ def validate_block(
             errors.append(
                 f"Line {block.line_start}: asset kind '{kind}' is not valid."
             )
+    if block.block_type == "puzzle":
+        for field in ("name", "scope"):
+            if field not in block.keys:
+                errors.append(
+                    f"Line {block.line_start}: puzzle missing required field '{field}'."
+                )
     return errors, warnings
 
 
