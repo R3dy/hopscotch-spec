@@ -232,7 +232,7 @@
         },
         "type": {
           "type": "string",
-          "enum": ["read_aloud", "dm_guidance", "conditional", "likely_actions", "mechanics"]
+          "enum": ["read_aloud", "dm_guidance", "guidance_note", "conditional", "likely_actions", "mechanics"]
         },
         "text": {
           "type": "string",
@@ -277,6 +277,18 @@
             "properties": {
               "type": {
                 "const": "dm_guidance"
+              }
+            }
+          },
+          "then": {
+            "required": ["text"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "guidance_note"
               }
             }
           },
